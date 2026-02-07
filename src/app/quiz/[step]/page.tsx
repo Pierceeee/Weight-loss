@@ -14,7 +14,7 @@ import {
 } from "@/components/quiz";
 import { getQuestionByStep, TOTAL_STEPS } from "@/lib/quiz-data";
 import { useQuizStore } from "@/hooks/useQuizState";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function QuizStepPage() {
   const router = useRouter();
@@ -22,7 +22,6 @@ export default function QuizStepPage() {
   const step = parseInt(params.step as string, 10);
 
   const {
-    responses,
     setResponse,
     setCurrentStep,
     getResponse,
@@ -39,8 +38,8 @@ export default function QuizStepPage() {
 
   if (!isClient) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      <div className="h-screen w-screen flex items-center justify-center bg-background">
+        <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -53,10 +52,8 @@ export default function QuizStepPage() {
   // Handle Analyzing Step (Step 20) with Animation
   if (question.type === "interstitial" && question.id === "processing") {
     return (
-      <div className="min-h-screen bg-background flex flex-col justify-center">
-        <div className="container max-w-2xl mx-auto px-4">
-          <AnalyzingAnimation />
-        </div>
+      <div className="h-screen w-screen bg-background flex items-center justify-center noise-texture">
+        <AnalyzingAnimation />
       </div>
     );
   }
@@ -65,9 +62,6 @@ export default function QuizStepPage() {
 
   const handleNext = () => {
     if (step === TOTAL_STEPS) {
-      // Step 20 is the final step in quiz data (processing)
-      // The AnalyzingAnimation component handles the redirect
-      // But if we clicked 'Continue' manually (fallback):
       router.push("/timeline");
     } else {
       router.push(`/quiz/${step + 1}`);
@@ -152,59 +146,74 @@ export default function QuizStepPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
-        <div className="container max-w-2xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleBack}
-              className="shrink-0"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <div className="flex-1">
-              <ProgressBar currentStep={step} />
+    <div className="h-screen w-screen flex flex-col bg-background overflow-hidden noise-texture">
+      {/* Header - minimal and integrated */}
+      <header className="flex-shrink-0 px-4 sm:px-8 pt-4 sm:pt-6 pb-2">
+        <div className="flex items-center gap-4 max-w-4xl mx-auto">
+          <button
+            onClick={handleBack}
+            className="p-2.5 rounded-xl hover:bg-muted transition-colors"
+            aria-label="Go back"
+          >
+            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
+          </button>
+          
+          <div className="flex-1 flex items-center gap-4">
+            <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-primary rounded-full progress-glow transition-all duration-500 ease-out"
+                style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
+              />
             </div>
+            <span className="text-sm font-medium text-muted-foreground tabular-nums min-w-[60px] text-right">
+              {step} / {TOTAL_STEPS}
+            </span>
           </div>
         </div>
       </header>
 
-      {/* Content */}
-      <main className="container max-w-2xl mx-auto px-4 py-8 pb-28">
-        <div className="space-y-8">
-          {/* Question Title */}
-          {question.type !== "interstitial" && question.question && (
-            <div className="text-center space-y-2">
-              <h1 className="text-2xl sm:text-3xl font-bold">
-                {question.question}
-              </h1>
-              {question.subtitle && (
-                <p className="text-muted-foreground">{question.subtitle}</p>
-              )}
+      {/* Main content - maximized */}
+      <main className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-6">
+          <div className="max-w-2xl mx-auto h-full flex flex-col">
+            {/* Question Title */}
+            {question.type !== "interstitial" && question.question && (
+              <div className="text-center mb-8 animate-fade-up">
+                <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">
+                  {question.question}
+                </h1>
+                {question.subtitle && (
+                  <p className="text-muted-foreground text-base sm:text-lg">
+                    {question.subtitle}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Question Content */}
+            <div className="flex-1 flex items-start justify-center animate-fade-up animate-delay-100">
+              <div className="w-full">
+                {renderQuestionContent()}
+              </div>
             </div>
-          )}
-
-          {/* Question Content */}
-          <div className="py-4">{renderQuestionContent()}</div>
+          </div>
         </div>
+
+        {/* Footer - integrated CTA */}
+        <footer className="flex-shrink-0 px-4 sm:px-8 pb-6 pt-4 glass border-t border-border/50">
+          <div className="max-w-2xl mx-auto">
+            <Button
+              onClick={handleNext}
+              disabled={!canContinue()}
+              size="lg"
+              className="w-full h-14 sm:h-16 text-base sm:text-lg font-semibold rounded-2xl shadow-lg shadow-primary/20 disabled:shadow-none transition-all duration-300 group"
+            >
+              Continue
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        </footer>
       </main>
-
-      {/* Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t">
-        <div className="container max-w-2xl mx-auto px-4 py-4">
-          <Button
-            onClick={handleNext}
-            disabled={!canContinue()}
-            className="w-full h-14 text-lg font-semibold"
-            size="lg"
-          >
-            Continue
-          </Button>
-        </div>
-      </footer>
     </div>
   );
 }
