@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function QuizPage() {
-  redirect("/quiz/female/1");
+  redirect("/quiz/female/0");
 }

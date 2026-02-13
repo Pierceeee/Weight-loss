@@ -50,7 +50,7 @@ export default function QuizStepPage() {
 
   // Create initial funnel submission when user starts the quiz (step 1)
   useEffect(() => {
-    if (urlStep === 1 && sessionId && !submissionCreated) {
+    if (urlStep === 0 && sessionId && !submissionCreated) {
       startFunnelSubmission(sessionId, { ...responses, gender })
         .then((result) => {
           if (result.success) {
@@ -71,8 +71,8 @@ export default function QuizStepPage() {
 
   const totalUrlSteps = totalSteps - 1;
 
-  if (!question || urlStep < 1 || urlStep > totalUrlSteps) {
-    router.push(`/quiz/${gender}/1`);
+  if (!question || urlStep < 0 || urlStep > totalUrlSteps) {
+    router.push(`/quiz/${gender}/0`);
     return null;
   }
 
@@ -87,7 +87,7 @@ export default function QuizStepPage() {
   };
 
   const handleBack = () => {
-    if (urlStep > 1) {
+    if (urlStep > 0) {
       router.push(`/quiz/${gender}/${urlStep - 1}`);
     }
   };
