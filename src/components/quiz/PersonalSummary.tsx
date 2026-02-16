@@ -33,49 +33,17 @@ function BMIGauge({ bmi }: { bmi: number }) {
   return (
     <svg viewBox="0 0 200 120" className="w-32 h-auto mx-auto mt-3 overflow-visible">
       {/* Background arc segments */}
-      <path
-        d="M 35 95 A 65 65 0 0 1 75 38"
-        fill="none"
-        stroke="#22c55e"
-        strokeWidth="12"
-        strokeLinecap="round"
-      />
-      <path
-        d="M 78 36 A 65 65 0 0 1 100 32"
-        fill="none"
-        stroke="#84cc16"
-        strokeWidth="12"
-        strokeLinecap="round"
-      />
-      <path
-        d="M 103 32 A 65 65 0 0 1 135 42"
-        fill="none"
-        stroke="#f97316"
-        strokeWidth="12"
-        strokeLinecap="round"
-      />
-      <path
-        d="M 138 45 A 65 65 0 0 1 165 95"
-        fill="none"
-        stroke="#ef4444"
-        strokeWidth="12"
-        strokeLinecap="round"
-      />
+      <path d="M 35 95 A 65 65 0 0 1 75 38" fill="none" stroke="#22c55e" strokeWidth="12" strokeLinecap="round" />
+      <path d="M 78 36 A 65 65 0 0 1 100 32" fill="none" stroke="#84cc16" strokeWidth="12" strokeLinecap="round" />
+      <path d="M 103 32 A 65 65 0 0 1 135 42" fill="none" stroke="#f97316" strokeWidth="12" strokeLinecap="round" />
+      <path d="M 138 45 A 65 65 0 0 1 165 95" fill="none" stroke="#ef4444" strokeWidth="12" strokeLinecap="round" />
       
       {/* Needle - animated */}
       <g 
         className="animate-gauge-sweep"
         style={{ transform: `rotate(${rotation}deg)` }}
       >
-        <line
-          x1="100"
-          y1="100"
-          x2="100"
-          y2="35"
-          stroke="#1f2937"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
+        <line x1="100" y1="100" x2="100" y2="35" stroke="#1f2937" strokeWidth="3" strokeLinecap="round" />
         <circle cx="100" cy="100" r="6" fill="#1f2937" />
         <circle cx="100" cy="100" r="2" fill="#9ca3af" />
       </g>
@@ -101,8 +69,8 @@ export function PersonalSummary() {
 
   return (
     <div className="max-w-sm mx-auto">
-      <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-sm relative animate-fade-up">
-        {/* BMI Section - Yellow background */}
+      <div className="rounded-2xl overflow-hidden bg-white border border-purple-100 shadow-sm relative animate-fade-up">
+        {/* BMI Section - Warm background */}
         <div className="bg-[#FFF8DC] px-5 pt-5 pb-6 text-center">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Body Mass Index (BMI)

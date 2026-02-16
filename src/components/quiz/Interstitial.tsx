@@ -80,9 +80,9 @@ export function Interstitial({
         )}
 
         {highlight && (
-          <div className="flex items-center gap-3 p-4 bg-pink-50 rounded-xl w-full border border-pink-100">
-            <div className="w-8 h-8 rounded-lg bg-pink-100 flex items-center justify-center flex-shrink-0">
-              <Heart className="w-4 h-4 text-pink-600" />
+          <div className="flex items-center gap-3 p-4 bg-purple-50 rounded-xl w-full border border-purple-100">
+            <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
+              <Heart className="w-4 h-4 text-purple-600" />
             </div>
             <p className="text-sm font-semibold text-gray-900 text-left">
               {highlight}

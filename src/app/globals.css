@@ -7,48 +7,48 @@ html {
 }
 
 :root {
-  --background: 30 25% 97%;
-  --foreground: 20 25% 10%;
-  --card: 30 20% 99%;
-  --card-foreground: 20 25% 10%;
-  --popover: 30 20% 99%;
-  --popover-foreground: 20 25% 10%;
-  --primary: 16 85% 55%;
+  --background: 270 30% 98%;
+  --foreground: 270 40% 10%;
+  --card: 270 20% 99%;
+  --card-foreground: 270 40% 10%;
+  --popover: 270 20% 99%;
+  --popover-foreground: 270 40% 10%;
+  --primary: 270 70% 60%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 30 15% 92%;
-  --secondary-foreground: 20 25% 15%;
-  --muted: 30 10% 94%;
-  --muted-foreground: 20 10% 45%;
-  --accent: 160 45% 45%;
+  --secondary: 270 20% 95%;
+  --secondary-foreground: 270 40% 15%;
+  --muted: 270 15% 94%;
+  --muted-foreground: 270 10% 45%;
+  --accent: 280 60% 55%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 98%;
-  --border: 30 15% 88%;
-  --input: 30 15% 88%;
-  --ring: 16 85% 55%;
+  --border: 270 15% 88%;
+  --input: 270 15% 88%;
+  --ring: 270 70% 60%;
   --radius: 1rem;
 }
 
 .dark {
-  --background: 20 20% 7%;
-  --foreground: 30 20% 95%;
-  --card: 20 18% 10%;
-  --card-foreground: 30 20% 95%;
-  --popover: 20 18% 10%;
-  --popover-foreground: 30 20% 95%;
-  --primary: 16 85% 58%;
+  --background: 270 25% 7%;
+  --foreground: 270 20% 95%;
+  --card: 270 20% 10%;
+  --card-foreground: 270 20% 95%;
+  --popover: 270 20% 10%;
+  --popover-foreground: 270 20% 95%;
+  --primary: 270 70% 65%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 20 15% 15%;
-  --secondary-foreground: 30 20% 90%;
-  --muted: 20 12% 18%;
-  --muted-foreground: 30 10% 55%;
-  --accent: 160 45% 50%;
+  --secondary: 270 15% 15%;
+  --secondary-foreground: 270 20% 90%;
+  --muted: 270 12% 18%;
+  --muted-foreground: 270 10% 55%;
+  --accent: 280 60% 60%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 62% 40%;
   --destructive-foreground: 0 0% 98%;
-  --border: 20 12% 20%;
-  --input: 20 12% 20%;
-  --ring: 16 85% 58%;
+  --border: 270 12% 20%;
+  --input: 270 12% 20%;
+  --ring: 270 70% 65%;
 }
 
 @theme inline {

@@ -23,7 +23,7 @@ export function VisualSelect({ options, value, onChange }: VisualSelectProps) {
             className={cn(
               "relative bg-white rounded-2xl overflow-hidden shadow-sm border-2 transition-all duration-300 group active:scale-[0.98]",
               isSelected 
-                ? "border-pink-500 shadow-md ring-4 ring-pink-50" 
+                ? "border-purple-500 shadow-md ring-4 ring-purple-50" 
                 : "border-gray-100 hover:border-gray-300 hover:shadow-md"
             )}
             style={{ animationDelay: `${index * 80}ms` }}
@@ -31,7 +31,7 @@ export function VisualSelect({ options, value, onChange }: VisualSelectProps) {
             {/* Selection Checkmark */}
             <div className={cn(
               "absolute top-2 right-2 z-10 w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center transition-all duration-300",
-              isSelected ? "bg-pink-500 scale-100 opacity-100" : "bg-gray-200 scale-0 opacity-0"
+              isSelected ? "bg-purple-500 scale-100 opacity-100" : "bg-gray-200 scale-0 opacity-0"
             )}>
               <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white stroke-[3]" />
             </div>
@@ -53,7 +53,7 @@ export function VisualSelect({ options, value, onChange }: VisualSelectProps) {
               )}
               {/* Overlay for better selected state */}
               <div className={cn(
-                "absolute inset-0 bg-pink-500/5 transition-opacity duration-300",
+                "absolute inset-0 bg-purple-500/5 transition-opacity duration-300",
                 isSelected ? "opacity-100" : "opacity-0"
               )} />
             </div>
@@ -61,11 +61,11 @@ export function VisualSelect({ options, value, onChange }: VisualSelectProps) {
             {/* Label Container */}
             <div className={cn(
               "py-2 px-0.5 sm:py-3 sm:px-1 md:p-4 text-center transition-colors duration-300",
-              isSelected ? "bg-pink-50/50" : "bg-white"
+              isSelected ? "bg-purple-50/50" : "bg-white"
             )}>
               <span className={cn(
                 "font-bold text-[9px] sm:text-sm md:text-base lg:text-lg block leading-tight tracking-tight uppercase",
-                isSelected ? "text-pink-600" : "text-gray-900"
+                isSelected ? "text-purple-600" : "text-gray-900"
               )}>
                 {option.label}
               </span>

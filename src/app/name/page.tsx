@@ -39,12 +39,12 @@ export default function NameCapturePage() {
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100">
-        <div className="h-1 bg-[#ffd4b3]">
-          <div className="h-full bg-[#F4A460]" style={{ width: "100%" }} />
+      <header className="bg-white border-b border-purple-100">
+        <div className="h-1 bg-[#E9D5FF]">
+          <div className="h-full bg-[#A855F7]" style={{ width: "100%" }} />
         </div>
         <div className="px-4 py-3 flex items-center justify-center gap-2">
-          <div className="bg-[#F4A460] p-1 rounded-md">
+          <div className="bg-[#9333EA] p-1 rounded-md">
             <Heart className="w-[18px] h-[18px] text-white fill-current" />
           </div>
           <span className="font-bold text-xl text-gray-800">PCOS Reset Method</span>

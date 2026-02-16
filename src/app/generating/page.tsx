@@ -167,7 +167,7 @@ export default function GeneratingPage() {
             {[...testimonialsRow1, ...testimonialsRow1].map((t, i) => (
               <div
                 key={i}
-                className="flex-shrink-0 w-64 rounded-xl bg-white p-4 border border-[#f0d7c3] shadow-sm"
+                className="flex-shrink-0 w-64 rounded-xl bg-white p-4 border border-purple-100 shadow-sm"
               >
                 <p className="text-xs text-gray-700 leading-relaxed line-clamp-4">
                   {t.text}
@@ -191,7 +191,7 @@ export default function GeneratingPage() {
             {[...testimonialsRow2, ...testimonialsRow2].map((t, i) => (
               <div
                 key={i}
-                className="flex-shrink-0 w-64 rounded-xl bg-white p-4 border border-[#f0d7c3] shadow-sm"
+                className="flex-shrink-0 w-64 rounded-xl bg-white p-4 border border-purple-100 shadow-sm"
               >
                 <p className="text-xs text-gray-700 leading-relaxed line-clamp-4">
                   {t.text}

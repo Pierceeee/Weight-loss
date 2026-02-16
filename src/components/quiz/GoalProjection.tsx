@@ -22,10 +22,10 @@ export function GoalProjection() {
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-center text-xl sm:text-2xl font-bold text-[#ff9933] mb-2">{targetLbs} lbs by {goalDate}</h2>
+      <h2 className="text-center text-xl sm:text-2xl font-bold text-[#A855F7] mb-2">{targetLbs} lbs by {goalDate}</h2>
       <p className="text-center text-sm text-gray-600 mb-4">Weight Now: {currentLbs} lbs • Goal: {targetLbs} lbs</p>
 
-      <div className="bg-white border border-gray-200 rounded-xl p-4">
+      <div className="bg-white border border-purple-100 rounded-xl p-4">
         <svg viewBox="0 0 520 300" className="w-full h-auto">
           {/* WEIGHT label */}
           <text x="20" y="30" fill="#9ca3af" fontSize="11" fontWeight="600" letterSpacing="1">WEIGHT</text>
@@ -45,45 +45,45 @@ export function GoalProjection() {
             className="opacity-40"
           />
 
-          {/* PCOS Reset Method line (orange solid) */}
+          {/* PCOS Reset Method line (purple solid) */}
           <path 
             d="M 30 105 C 120 100, 160 170, 250 155 C 320 140, 360 210, 500 200" 
             fill="none" 
-            stroke="#ff9933" 
+            stroke="#A855F7" 
             strokeWidth="5" 
             strokeDasharray="1000"
             strokeDashoffset="1000"
             className="animate-draw"
           />
 
-          {/* Arrowhead at the end of the orange line */}
+          {/* Arrowhead at the end of the purple line */}
           <path 
             d="M 490 190 L 505 200 L 490 210 Z" 
-            fill="#ff9933"
-            className="animate-fade-up animate-delay-500"
+            fill="#A855F7"
+            className="animate-fade-up"
             style={{ animationDelay: '2s', opacity: 0 }}
           />
 
           {/* Dots on the line */}
-          <circle cx="95" cy="108" r="8" fill="#ff9933" className="animate-fade-up" style={{ animationDelay: '0.4s', opacity: 0 }} />
-          <circle cx="250" cy="155" r="8" fill="#ff9933" className="animate-fade-up" style={{ animationDelay: '1s', opacity: 0 }} />
-          <circle cx="410" cy="190" r="8" fill="#ff9933" className="animate-fade-up" style={{ animationDelay: '1.6s', opacity: 0 }} />
+          <circle cx="95" cy="108" r="8" fill="#A855F7" className="animate-fade-up" style={{ animationDelay: '0.4s', opacity: 0 }} />
+          <circle cx="250" cy="155" r="8" fill="#A855F7" className="animate-fade-up" style={{ animationDelay: '1s', opacity: 0 }} />
+          <circle cx="410" cy="190" r="8" fill="#A855F7" className="animate-fade-up" style={{ animationDelay: '1.6s', opacity: 0 }} />
 
           {/* Now label */}
           <g className="animate-fade-up">
-            <rect x="45" y="68" width="98" height="32" rx="8" fill="#ff9933" />
+            <rect x="45" y="68" width="98" height="32" rx="8" fill="#A855F7" />
             <text x="94" y="89" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Now: {currentLbs} lbs</text>
           </g>
 
           {/* Goal label */}
           <g className="animate-fade-up" style={{ animationDelay: '2s', opacity: 0 }}>
-            <rect x="360" y="148" width="98" height="32" rx="8" fill="#ff9933" />
+            <rect x="360" y="148" width="98" height="32" rx="8" fill="#A855F7" />
             <text x="409" y="169" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Goal: {targetLbs} lbs</text>
             {/* Animated pointing arrow */}
             <path 
               d="M 409 140 L 409 125 M 404 130 L 409 125 L 414 130" 
               fill="none" 
-              stroke="#ff9933" 
+              stroke="#A855F7" 
               strokeWidth="3" 
               strokeLinecap="round" 
               strokeLinejoin="round"
@@ -97,7 +97,7 @@ export function GoalProjection() {
 
         <div className="space-y-2 mt-2 text-xs">
           <div className="flex items-center gap-2">
-            <span className="w-10 h-[3px] bg-[#ff9933] inline-block rounded-full" />
+            <span className="w-10 h-[3px] bg-[#A855F7] inline-block rounded-full" />
             <span className="font-medium text-gray-700">Estimated Timeline With PCOS Reset Method</span>
           </div>
           <div className="flex items-center gap-2">

@@ -9,7 +9,7 @@ const categoryConfig: Record<string, { icon: string; borderColor: string; lineCo
   greens: { icon: "/images/icons/emoji-broccoli.avif", borderColor: "border-green-500", lineColor: "bg-green-500" },
   "fiber-grains": { icon: "/images/icons/emoji-sheaf-of-rice.avif", borderColor: "border-yellow-400", lineColor: "bg-yellow-400" },
   protein: { icon: "/images/icons/emoji-cut-of-meat.avif", borderColor: "border-red-500", lineColor: "bg-red-500" },
-  seafood: { icon: "/images/icons/emoji-fish.avif", borderColor: "border-orange-400", lineColor: "bg-orange-400" },
+  seafood: { icon: "/images/icons/emoji-fish.avif", borderColor: "border-blue-400", lineColor: "bg-blue-400" },
   dairy: { icon: "/images/icons/emoji-cheese-wedge.avif", borderColor: "border-purple-400", lineColor: "bg-purple-400" },
   "fresh-fruits": { icon: "/images/icons/emoji-banana.avif", borderColor: "border-red-500", lineColor: "bg-red-500" },
 };

@@ -18,7 +18,7 @@ export default function SummaryPage() {
 
   if (!isClient) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8]">
+      <div className="min-h-screen flex items-center justify-center bg-[#FAF5FF]">
         <div className="w-10 h-10 border-4 border-slate-300 border-t-slate-900 rounded-full animate-spin" />
       </div>
     );
@@ -75,13 +75,13 @@ export default function SummaryPage() {
   const exercise = getExerciseLabel(profile.exercisePreference);
 
   return (
-    <div className="min-h-screen bg-[#f0f4f8]">
+    <div className="min-h-screen bg-[#FDFBFF]">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/50">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-100">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center justify-center gap-2">
-            <span className="text-xl font-black tracking-tight text-slate-900">PERFECT</span>
-            <span className="text-xl font-black tracking-tight text-sky-500">BODY</span>
+            <span className="text-xl font-black tracking-tight text-slate-900">PCOS</span>
+            <span className="text-xl font-black tracking-tight text-purple-600">PLAN</span>
           </div>
         </div>
       </header>
@@ -98,7 +98,7 @@ export default function SummaryPage() {
         </div>
 
         {/* BMI Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-6">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-purple-100 shadow-sm mb-6">
           <h2 className="text-lg font-bold text-slate-900 mb-6">Body Mass Index</h2>
           
           {/* BMI Gauge */}
@@ -114,14 +114,14 @@ export default function SummaryPage() {
             {/* Gauge bar */}
             <div className="relative h-3 rounded-full overflow-hidden mb-6">
               <div className="absolute inset-0 flex">
-                <div className="flex-1 bg-blue-400" />
-                <div className="flex-1 bg-emerald-400" />
-                <div className="flex-1 bg-amber-400" />
-                <div className="flex-1 bg-red-400" />
+                <div className="flex-1 bg-purple-200" />
+                <div className="flex-1 bg-purple-400" />
+                <div className="flex-1 bg-purple-600" />
+                <div className="flex-1 bg-purple-800" />
               </div>
               {/* Indicator */}
               <div
-                className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-slate-900 rounded-full border-3 border-white shadow-lg transition-all duration-500"
+                className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-purple-900 rounded-full border-3 border-white shadow-lg transition-all duration-500"
                 style={{ left: `calc(${gaugePosition}% - 10px)` }}
               />
             </div>
@@ -148,15 +148,15 @@ export default function SummaryPage() {
 
           {/* Health Risks */}
           {healthRisks.length > 0 && (
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
+            <div className="bg-purple-50 border border-purple-200 rounded-2xl p-4">
               <div className="flex items-center gap-2 mb-3">
-                <AlertTriangle className="w-5 h-5 text-amber-600" />
-                <span className="font-bold text-amber-800">Potential Health Risks</span>
+                <AlertTriangle className="w-5 h-5 text-purple-600" />
+                <span className="font-bold text-purple-800">Potential Health Risks</span>
               </div>
               <ul className="space-y-2">
                 {healthRisks.slice(0, 4).map((risk, index) => (
-                  <li key={index} className="flex items-center gap-2 text-sm text-amber-700">
-                    <span className="w-1.5 h-1.5 bg-amber-500 rounded-full flex-shrink-0" />
+                  <li key={index} className="flex items-center gap-2 text-sm text-purple-700">
+                    <span className="w-1.5 h-1.5 bg-purple-500 rounded-full flex-shrink-0" />
                     {risk}
                   </li>
                 ))}
@@ -166,41 +166,41 @@ export default function SummaryPage() {
         </div>
 
         {/* Lifestyle Insights */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm mb-6">
+        <div className="bg-white rounded-3xl p-6 border border-purple-100 shadow-sm mb-6">
           <h2 className="text-lg font-bold text-slate-900 mb-4">Your Lifestyle</h2>
           
           <div className="grid grid-cols-2 gap-3">
             {/* Activity Level */}
-            <div className="bg-slate-50 rounded-2xl p-4">
+            <div className="bg-purple-50 rounded-2xl p-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 bg-sky-100 rounded-xl flex items-center justify-center">
-                  <Activity className="w-5 h-5 text-sky-600" />
+                <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <Activity className="w-5 h-5 text-purple-600" />
                 </div>
-                <span className="text-sm font-bold text-slate-700">Activity</span>
+                <span className="text-sm font-bold text-purple-700">Activity</span>
               </div>
               <div className="text-xl font-black text-slate-900">{activity.label}</div>
               <div className="text-xs text-slate-500">{activity.desc}</div>
             </div>
             
             {/* Exercise */}
-            <div className="bg-slate-50 rounded-2xl p-4">
+            <div className="bg-purple-50 rounded-2xl p-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-lg">
+                <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-lg">
                   {exercise.icon}
                 </div>
-                <span className="text-sm font-bold text-slate-700">Exercise</span>
+                <span className="text-sm font-bold text-purple-700">Exercise</span>
               </div>
               <div className="text-xl font-black text-slate-900">{exercise.label}</div>
               <div className="text-xs text-slate-500">Workout frequency</div>
             </div>
             
             {/* Hydration */}
-            <div className="bg-slate-50 rounded-2xl p-4">
+            <div className="bg-purple-50 rounded-2xl p-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                  <Droplets className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <Droplets className="w-5 h-5 text-purple-600" />
                 </div>
-                <span className="text-sm font-bold text-slate-700">Hydration</span>
+                <span className="text-sm font-bold text-purple-700">Hydration</span>
               </div>
               <div className="text-xl font-black text-slate-900">
                 {profile.hydration === "7-10-glasses" ? "Good" :
@@ -210,12 +210,12 @@ export default function SummaryPage() {
             </div>
             
             {/* Energy */}
-            <div className="bg-slate-50 rounded-2xl p-4">
+            <div className="bg-purple-50 rounded-2xl p-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
-                  <Flame className="w-5 h-5 text-amber-600" />
+                <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <Flame className="w-5 h-5 text-purple-600" />
                 </div>
-                <span className="text-sm font-bold text-slate-700">Energy</span>
+                <span className="text-sm font-bold text-purple-700">Energy</span>
               </div>
               <div className="text-xl font-black text-slate-900">
                 {profile.energyLevels === "fine" ? "Good" :
@@ -227,13 +227,13 @@ export default function SummaryPage() {
         </div>
 
         {/* Goals Summary */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm mb-8">
+        <div className="bg-white rounded-3xl p-6 border border-purple-100 shadow-sm mb-8">
           <h2 className="text-lg font-bold text-slate-900 mb-4">Your Goals</h2>
           <div className="flex flex-wrap gap-2">
             {profile.goals.map((goal, index) => (
               <span 
                 key={index}
-                className="px-4 py-2 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+                className="px-4 py-2 bg-purple-50 text-purple-700 rounded-full text-sm font-medium"
               >
                 {goal.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
               </span>
@@ -245,8 +245,8 @@ export default function SummaryPage() {
         <Link
           href="/email"
           className="flex items-center justify-center gap-2 w-full h-14 sm:h-16 text-base sm:text-lg font-bold rounded-full
-                   bg-slate-900 text-white
-                   hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 hover:-translate-y-0.5
+                   bg-purple-600 text-white
+                   hover:bg-purple-700 hover:shadow-xl hover:shadow-purple-900/20 hover:-translate-y-0.5
                    transition-all duration-200 group"
         >
           Continue

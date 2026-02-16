@@ -375,8 +375,8 @@ export default function DashboardPage() {
 
   if (!isClient) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8]">
-        <div className="w-10 h-10 border-4 border-slate-300 border-t-slate-900 rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-[#FAF5FF]">
+        <div className="w-10 h-10 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     );
   }
@@ -400,19 +400,19 @@ export default function DashboardPage() {
     : { calories: 0, protein: 0 };
 
   return (
-    <div className="min-h-screen bg-[#f0f4f8]">
+    <div className="min-h-screen bg-[#FDFBFF]">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/50 sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-100 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-xl font-black tracking-tight text-slate-900">PERFECT</span>
-              <span className="text-xl font-black tracking-tight text-sky-500">BODY</span>
+              <span className="text-xl font-black tracking-tight text-slate-900">PCOS</span>
+              <span className="text-xl font-black tracking-tight text-purple-600">PLAN</span>
             </div>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-100 rounded-full">
-                <Crown className="w-4 h-4 text-amber-600" />
-                <span className="text-sm font-bold text-amber-700">Premium</span>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-100 rounded-full">
+                <Crown className="w-4 h-4 text-purple-600" />
+                <span className="text-sm font-bold text-purple-700">Premium</span>
               </div>
               <button className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors">
                 <LogOut className="w-5 h-5 text-slate-600" />
@@ -438,34 +438,34 @@ export default function DashboardPage() {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+          <div className="bg-white rounded-2xl p-4 border border-purple-100 shadow-sm">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
-                <Flame className="w-5 h-5 text-amber-600" />
+              <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center">
+                <Flame className="w-5 h-5 text-purple-600" />
               </div>
             </div>
             <div className="text-2xl font-black text-slate-900">{dailyTotals.calories}</div>
             <div className="text-xs text-slate-500 font-medium">Daily Calories</div>
           </div>
-          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+          <div className="bg-white rounded-2xl p-4 border border-purple-100 shadow-sm">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-sky-100 rounded-xl flex items-center justify-center">
-                <Dumbbell className="w-5 h-5 text-sky-600" />
+              <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center">
+                <Dumbbell className="w-5 h-5 text-purple-600" />
               </div>
             </div>
             <div className="text-2xl font-black text-slate-900">{dailyTotals.protein}g</div>
             <div className="text-xs text-slate-500 font-medium">Daily Protein</div>
           </div>
-          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+          <div className="bg-white rounded-2xl p-4 border border-purple-100 shadow-sm">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center">
                 <Apple className="w-5 h-5 text-emerald-600" />
               </div>
             </div>
             <div className="text-2xl font-black text-slate-900">4</div>
             <div className="text-xs text-slate-500 font-medium">Meals Today</div>
           </div>
-          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
+          <div className="bg-white rounded-2xl p-4 border border-purple-100 shadow-sm">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
                 <Calendar className="w-5 h-5 text-purple-600" />
@@ -478,10 +478,10 @@ export default function DashboardPage() {
 
         {/* Quick Actions */}
         <div className="grid sm:grid-cols-3 gap-4 mb-8">
-          <button className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all text-left group">
+          <button className="bg-white rounded-2xl p-5 border border-purple-100 shadow-sm hover:shadow-md hover:border-purple-200 transition-all text-left group">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-sky-100 to-emerald-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <ChefHat className="w-6 h-6 text-slate-700" />
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <ChefHat className="w-6 h-6 text-purple-700" />
               </div>
               <div>
                 <h3 className="font-bold text-slate-900">Today's Meals</h3>
@@ -489,10 +489,10 @@ export default function DashboardPage() {
               </div>
             </div>
           </button>
-          <button className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all text-left group">
+          <button className="bg-white rounded-2xl p-5 border border-purple-100 shadow-sm hover:shadow-md hover:border-purple-200 transition-all text-left group">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <ShoppingCart className="w-6 h-6 text-slate-700" />
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <ShoppingCart className="w-6 h-6 text-purple-700" />
               </div>
               <div>
                 <h3 className="font-bold text-slate-900">Shopping List</h3>
@@ -503,11 +503,11 @@ export default function DashboardPage() {
           <button
             onClick={generateNewPlan}
             disabled={isGenerating}
-            className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all text-left group disabled:opacity-50"
+            className="bg-white rounded-2xl p-5 border border-purple-100 shadow-sm hover:shadow-md hover:border-purple-200 transition-all text-left group disabled:opacity-50"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <RefreshCw className={`w-6 h-6 text-slate-700 ${isGenerating ? "animate-spin" : ""}`} />
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <RefreshCw className={`w-6 h-6 text-purple-700 ${isGenerating ? "animate-spin" : ""}`} />
               </div>
               <div>
                 <h3 className="font-bold text-slate-900">New Plan</h3>
@@ -541,14 +541,14 @@ export default function DashboardPage() {
         {currentDay ? (
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-sky-500" />
+              <Calendar className="w-5 h-5 text-purple-500" />
               <h2 className="text-xl font-black text-slate-900">{currentDay.day}</h2>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Breakfast */}
-              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                <div className="h-2 bg-gradient-to-r from-amber-400 to-orange-400" />
+              <div className="bg-white rounded-3xl border border-purple-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div className="h-2 bg-gradient-to-r from-purple-200 to-purple-400" />
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-3xl">🌅</span>
@@ -560,7 +560,7 @@ export default function DashboardPage() {
                     <span className="px-3 py-1.5 bg-slate-100 rounded-full text-xs font-bold text-slate-600">
                       {currentDay.breakfast.calories} cal
                     </span>
-                    <span className="px-3 py-1.5 bg-sky-100 rounded-full text-xs font-bold text-sky-600">
+                    <span className="px-3 py-1.5 bg-purple-100 rounded-full text-xs font-bold text-purple-600">
                       {currentDay.breakfast.protein}g protein
                     </span>
                   </div>
@@ -568,8 +568,8 @@ export default function DashboardPage() {
               </div>
 
               {/* Lunch */}
-              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                <div className="h-2 bg-gradient-to-r from-sky-400 to-cyan-400" />
+              <div className="bg-white rounded-3xl border border-purple-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div className="h-2 bg-gradient-to-r from-purple-300 to-purple-500" />
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-3xl">☀️</span>
@@ -581,7 +581,7 @@ export default function DashboardPage() {
                     <span className="px-3 py-1.5 bg-slate-100 rounded-full text-xs font-bold text-slate-600">
                       {currentDay.lunch.calories} cal
                     </span>
-                    <span className="px-3 py-1.5 bg-sky-100 rounded-full text-xs font-bold text-sky-600">
+                    <span className="px-3 py-1.5 bg-purple-100 rounded-full text-xs font-bold text-purple-600">
                       {currentDay.lunch.protein}g protein
                     </span>
                   </div>
@@ -589,8 +589,8 @@ export default function DashboardPage() {
               </div>
 
               {/* Dinner */}
-              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                <div className="h-2 bg-gradient-to-r from-indigo-400 to-purple-400" />
+              <div className="bg-white rounded-3xl border border-purple-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div className="h-2 bg-gradient-to-r from-purple-400 to-purple-600" />
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-3xl">🌙</span>
@@ -602,7 +602,7 @@ export default function DashboardPage() {
                     <span className="px-3 py-1.5 bg-slate-100 rounded-full text-xs font-bold text-slate-600">
                       {currentDay.dinner.calories} cal
                     </span>
-                    <span className="px-3 py-1.5 bg-sky-100 rounded-full text-xs font-bold text-sky-600">
+                    <span className="px-3 py-1.5 bg-purple-100 rounded-full text-xs font-bold text-purple-600">
                       {currentDay.dinner.protein}g protein
                     </span>
                   </div>
@@ -652,11 +652,11 @@ export default function DashboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white py-6 mt-8">
+      <footer className="border-t border-purple-100 bg-white py-6 mt-8">
         <div className="max-w-6xl mx-auto px-4 text-center text-sm text-slate-500">
           <p>
             Need help?{" "}
-            <Link href="#" className="text-sky-600 font-medium hover:underline">
+            <Link href="#" className="text-purple-600 font-medium hover:underline">
               Contact support
             </Link>
           </p>

@@ -18,8 +18,8 @@ export default function TimelinePage() {
 
   if (!isClient) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8]">
-        <div className="w-10 h-10 border-4 border-slate-300 border-t-slate-900 rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-[#FAF5FF]">
+        <div className="w-10 h-10 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
       </div>
     );
   }
@@ -40,13 +40,13 @@ export default function TimelinePage() {
   const planName = gender === "male" ? "Perfect Body" : "Perfect Body";
 
   return (
-    <div className="min-h-screen bg-[#f0f4f8]">
+    <div className="min-h-screen bg-[#FDFBFF]">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/50">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-purple-100">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center justify-center gap-2">
-            <span className="text-xl font-black tracking-tight text-slate-900">PERFECT</span>
-            <span className="text-xl font-black tracking-tight text-sky-500">BODY</span>
+            <span className="text-xl font-black tracking-tight text-slate-900">PCOS</span>
+            <span className="text-xl font-black tracking-tight text-purple-600">PLAN</span>
           </div>
         </div>
       </header>
@@ -62,7 +62,7 @@ export default function TimelinePage() {
           
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mb-4">
             It only takes{" "}
-            <span className="text-sky-500">{weeksToGoal} weeks</span>
+            <span className="text-purple-600">{weeksToGoal} weeks</span>
             <br />
             to transform your life
           </h1>
@@ -78,8 +78,8 @@ export default function TimelinePage() {
             <div className="text-2xl sm:text-3xl font-black text-slate-900">{profile.currentWeight}</div>
             <div className="text-xs sm:text-sm text-slate-500 font-medium">Current (kg)</div>
           </div>
-          <div className="bg-white rounded-2xl p-4 text-center border border-slate-200 shadow-sm">
-            <div className="text-2xl sm:text-3xl font-black text-sky-500">-{weightToLose}</div>
+          <div className="bg-white rounded-2xl p-4 text-center border border-purple-100 shadow-sm">
+            <div className="text-2xl sm:text-3xl font-black text-purple-600">-{weightToLose}</div>
             <div className="text-xs sm:text-sm text-slate-500 font-medium">To Lose (kg)</div>
           </div>
           <div className="bg-white rounded-2xl p-4 text-center border border-slate-200 shadow-sm">
@@ -160,7 +160,7 @@ export default function TimelinePage() {
             </svg>
 
             {/* Floating labels */}
-            <div className="absolute top-2 left-8 sm:left-12 px-3 py-1.5 bg-sky-500 text-white text-xs font-bold rounded-full shadow-lg">
+            <div className="absolute top-2 left-8 sm:left-12 px-3 py-1.5 bg-purple-600 text-white text-xs font-bold rounded-full shadow-lg">
               {profile.currentWeight} kg
             </div>
             <div className="absolute bottom-8 right-4 sm:right-8 px-3 py-1.5 bg-emerald-500 text-white text-xs font-bold rounded-full shadow-lg">
@@ -171,8 +171,8 @@ export default function TimelinePage() {
           {/* Legend */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-1 bg-gradient-to-r from-sky-500 to-emerald-500 rounded-full" />
-              <span className="text-slate-700 font-medium">With Perfect Body</span>
+              <div className="w-8 h-1 bg-gradient-to-r from-purple-600 to-emerald-500 rounded-full" />
+              <span className="text-slate-700 font-medium">With PCOS Plan</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-8 h-1 bg-red-400 rounded-full" style={{ 
@@ -184,7 +184,7 @@ export default function TimelinePage() {
         </div>
 
         {/* Milestones */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm mb-8">
+        <div className="bg-white rounded-3xl p-6 border border-purple-100 shadow-sm mb-8">
           <h3 className="text-lg font-bold text-slate-900 mb-4">Your Milestones</h3>
           <div className="space-y-4">
             {[
@@ -194,7 +194,7 @@ export default function TimelinePage() {
               { week: weeksToGoal, text: "Reach your target weight!", icon: "🏆" },
             ].map((milestone, index) => (
               <div key={index} className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-xl flex-shrink-0">
+                <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-xl flex-shrink-0">
                   {milestone.icon}
                 </div>
                 <div className="flex-1">
@@ -211,8 +211,8 @@ export default function TimelinePage() {
         <Link
           href="/summary"
           className="flex items-center justify-center gap-2 w-full h-14 sm:h-16 text-base sm:text-lg font-bold rounded-full
-                   bg-slate-900 text-white
-                   hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 hover:-translate-y-0.5
+                   bg-purple-600 text-white
+                   hover:bg-purple-700 hover:shadow-xl hover:shadow-purple-900/20 hover:-translate-y-0.5
                    transition-all duration-200 group"
         >
           Continue

@@ -221,31 +221,31 @@ export default function QuizStepPage() {
     question.type === "visual-select";
 
   return (
-    <div className={`min-h-screen flex flex-col ${question.id === "age-range" ? "bg-[#FFF0E0]" : "bg-[#F5F5F5]"}`}>
+    <div className={`min-h-screen flex flex-col ${question.id === "age-range" ? "bg-[#FAF5FF]" : "bg-[#FDFBFF]"}`}>
       {/* Header - only show for non-age-range questions */}
       {question.id !== "age-range" && (
         <header className="flex-shrink-0">
-          <div className="h-1 bg-[#ffd4b3]">
+          <div className="h-1 bg-[#E9D5FF]">
             <div
-              className="h-full bg-[#ff9933] transition-all duration-500"
+              className="h-full bg-[#A855F7] transition-all duration-500"
               style={{ width: `${(urlStep / totalUrlSteps) * 100}%` }}
             />
           </div>
-          <div className="relative px-4 py-3 bg-white border-b border-gray-100">
+          <div className="relative px-4 py-3 bg-white border-b border-purple-100">
             <button
               onClick={handleBack}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-50"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-lg border border-purple-200 bg-white hover:bg-purple-50"
               aria-label="Go back"
             >
-              <ArrowLeft className="w-4 h-4 text-gray-700" />
+              <ArrowLeft className="w-4 h-4 text-purple-700" />
             </button>
             <div className="text-center flex items-center justify-center gap-2">
-              <div className="bg-[#F4A460] p-1 rounded-md">
+              <div className="bg-[#9333EA] p-1 rounded-md">
                 <Heart className="w-[18px] h-[18px] text-white fill-current" />
               </div>
               <p className="font-bold text-xl text-gray-800">PCOS Plan</p>
             </div>
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-gray-600">
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-purple-600">
               {urlStep}/{totalUrlSteps}
             </span>
           </div>
@@ -254,9 +254,9 @@ export default function QuizStepPage() {
 
       {/* Special header for age-range question */}
       {question.id === "age-range" && (
-        <header className="w-full py-4 flex justify-center items-center bg-white border-b border-gray-100">
+        <header className="w-full py-4 flex justify-center items-center bg-white border-b border-purple-100">
           <div className="flex items-center gap-2">
-            <div className="bg-[#F4A460] p-1 rounded-md">
+            <div className="bg-[#9333EA] p-1 rounded-md">
               <Heart className="w-[18px] h-[18px] text-white fill-current" />
             </div>
             <span className="font-bold text-xl text-gray-800">PCOS Plan</span>
