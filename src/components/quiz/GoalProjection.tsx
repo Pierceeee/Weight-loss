@@ -22,7 +22,7 @@ export function GoalProjection() {
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-center text-2xl font-bold text-[#ff9933] mb-2">{targetLbs} lbs by {goalDate}</h2>
+      <h2 className="text-center text-xl sm:text-2xl font-bold text-[#ff9933] mb-2">{targetLbs} lbs by {goalDate}</h2>
       <p className="text-center text-sm text-gray-600 mb-4">Weight Now: {currentLbs} lbs • Goal: {targetLbs} lbs</p>
 
       <div className="bg-white border border-gray-200 rounded-xl p-4">
@@ -36,23 +36,60 @@ export function GoalProjection() {
           <line x1="20" y1="220" x2="500" y2="220" stroke="#e5e7eb" strokeDasharray="4 4" />
 
           {/* Typical weight-loss journey (red dashed) */}
-          <path d="M 30 95 C 140 100, 220 70, 500 65" fill="none" stroke="#ef4444" strokeWidth="4" strokeDasharray="10 8" />
+          <path 
+            d="M 30 95 C 140 100, 220 70, 500 65" 
+            fill="none" 
+            stroke="#ef4444" 
+            strokeWidth="4" 
+            strokeDasharray="10 8" 
+            className="opacity-40"
+          />
 
           {/* PCOS Reset Method line (orange solid) */}
-          <path d="M 30 105 C 120 100, 160 170, 250 155 C 320 140, 360 210, 500 200" fill="none" stroke="#ff9933" strokeWidth="5" />
+          <path 
+            d="M 30 105 C 120 100, 160 170, 250 155 C 320 140, 360 210, 500 200" 
+            fill="none" 
+            stroke="#ff9933" 
+            strokeWidth="5" 
+            strokeDasharray="1000"
+            strokeDashoffset="1000"
+            className="animate-draw"
+          />
+
+          {/* Arrowhead at the end of the orange line */}
+          <path 
+            d="M 490 190 L 505 200 L 490 210 Z" 
+            fill="#ff9933"
+            className="animate-fade-up animate-delay-500"
+            style={{ animationDelay: '2s', opacity: 0 }}
+          />
 
           {/* Dots on the line */}
-          <circle cx="95" cy="108" r="8" fill="#ff9933" />
-          <circle cx="250" cy="155" r="8" fill="#ff9933" />
-          <circle cx="410" cy="190" r="8" fill="#ff9933" />
+          <circle cx="95" cy="108" r="8" fill="#ff9933" className="animate-fade-up" style={{ animationDelay: '0.4s', opacity: 0 }} />
+          <circle cx="250" cy="155" r="8" fill="#ff9933" className="animate-fade-up" style={{ animationDelay: '1s', opacity: 0 }} />
+          <circle cx="410" cy="190" r="8" fill="#ff9933" className="animate-fade-up" style={{ animationDelay: '1.6s', opacity: 0 }} />
 
           {/* Now label */}
-          <rect x="45" y="68" width="98" height="32" rx="8" fill="#ff9933" />
-          <text x="94" y="89" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Now: {currentLbs} lbs</text>
+          <g className="animate-fade-up">
+            <rect x="45" y="68" width="98" height="32" rx="8" fill="#ff9933" />
+            <text x="94" y="89" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Now: {currentLbs} lbs</text>
+          </g>
 
           {/* Goal label */}
-          <rect x="360" y="148" width="98" height="32" rx="8" fill="#ff9933" />
-          <text x="409" y="169" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Goal: {targetLbs} lbs</text>
+          <g className="animate-fade-up" style={{ animationDelay: '2s', opacity: 0 }}>
+            <rect x="360" y="148" width="98" height="32" rx="8" fill="#ff9933" />
+            <text x="409" y="169" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Goal: {targetLbs} lbs</text>
+            {/* Animated pointing arrow */}
+            <path 
+              d="M 409 140 L 409 125 M 404 130 L 409 125 L 414 130" 
+              fill="none" 
+              stroke="#ff9933" 
+              strokeWidth="3" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="animate-bounce-subtle"
+            />
+          </g>
 
           {/* TIME label */}
           <text x="480" y="250" fill="#9ca3af" fontSize="11" fontWeight="600" letterSpacing="1" textAnchor="end">TIME</text>

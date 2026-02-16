@@ -47,12 +47,12 @@ export function Interstitial({
         )}
 
         {image && !isCircular && (
-          <div className="relative w-full h-48 mb-4 rounded-xl overflow-hidden">
+          <div className="relative w-full h-52 sm:h-64 mb-4 rounded-xl overflow-hidden bg-gray-50/50">
             <Image
               src={image}
               alt={title}
               fill
-              className="object-cover"
+              className="object-contain p-2"
             />
           </div>
         )}

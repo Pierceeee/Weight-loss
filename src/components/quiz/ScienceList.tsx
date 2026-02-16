@@ -19,8 +19,8 @@ export function ScienceList() {
       </p>
       <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
         {sources.map((source) => (
-          <div key={source.name} className="flex items-center justify-between px-5 py-4 border-b border-gray-100 last:border-b-0">
-            <span className="text-sm font-medium text-gray-800">{source.name}</span>
+          <div key={source.name} className="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 border-b border-gray-100 last:border-b-0">
+            <span className="text-xs sm:text-sm font-medium text-gray-800">{source.name}</span>
             <div className="relative w-12 h-10 flex-shrink-0 ml-4">
               <Image
                 src={source.logo}

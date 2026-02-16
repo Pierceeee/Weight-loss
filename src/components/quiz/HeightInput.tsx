@@ -12,7 +12,7 @@ interface HeightInputProps {
 type HeightUnit = "ft" | "cm";
 
 export function HeightInput({ valueCm, onChange }: HeightInputProps) {
-  const [unit, setUnit] = useState<HeightUnit>("ft");
+  const [unit, setUnit] = useState<HeightUnit>("cm");
   const [feet, setFeet] = useState<number | "">(0);
   const [inches, setInches] = useState<number | "">(0);
   const [cm, setCm] = useState<number | "">(0);
@@ -40,21 +40,21 @@ export function HeightInput({ valueCm, onChange }: HeightInputProps) {
       <div className="w-fit mx-auto p-0.5 rounded-lg border border-gray-300 bg-white mb-6">
         <button
           className={cn(
-            "px-10 py-2 text-sm font-semibold rounded-lg transition-all",
-            unit === "ft" ? "bg-black text-white" : "text-gray-700 hover:bg-gray-50"
-          )}
-          onClick={() => setUnit("ft")}
-        >
-          ft
-        </button>
-        <button
-          className={cn(
-            "px-10 py-2 text-sm font-semibold rounded-lg transition-all",
+            "px-6 sm:px-10 py-2 text-sm font-semibold rounded-lg transition-all",
             unit === "cm" ? "bg-black text-white" : "text-gray-700 hover:bg-gray-50"
           )}
           onClick={() => setUnit("cm")}
         >
           cm
+        </button>
+        <button
+          className={cn(
+            "px-6 sm:px-10 py-2 text-sm font-semibold rounded-lg transition-all",
+            unit === "ft" ? "bg-black text-white" : "text-gray-700 hover:bg-gray-50"
+          )}
+          onClick={() => setUnit("ft")}
+        >
+          ft
         </button>
       </div>
 

@@ -45,7 +45,7 @@ export function VisualSelect({ options, value, onChange }: VisualSelectProps) {
                   fill
                   sizes="(max-width: 768px) 33vw, 25vw"
                   className={cn(
-                    "object-cover transition-transform duration-700",
+                    "object-contain p-2 transition-transform duration-700",
                     isSelected ? "scale-105" : "group-hover:scale-105"
                   )}
                   priority={index < 3}
@@ -60,11 +60,11 @@ export function VisualSelect({ options, value, onChange }: VisualSelectProps) {
 
             {/* Label Container */}
             <div className={cn(
-              "py-3 px-1 sm:p-4 text-center transition-colors duration-300",
+              "py-2 px-0.5 sm:py-3 sm:px-1 md:p-4 text-center transition-colors duration-300",
               isSelected ? "bg-pink-50/50" : "bg-white"
             )}>
               <span className={cn(
-                "font-bold text-[10px] sm:text-sm md:text-base lg:text-lg block leading-tight tracking-tight uppercase",
+                "font-bold text-[9px] sm:text-sm md:text-base lg:text-lg block leading-tight tracking-tight uppercase",
                 isSelected ? "text-pink-600" : "text-gray-900"
               )}>
                 {option.label}

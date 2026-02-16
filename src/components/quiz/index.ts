@@ -3,6 +3,7 @@ export { SingleSelect } from "./SingleSelect";
 export { MultiSelect } from "./MultiSelect";
 export { NumericInput } from "./NumericInput";
 export { HeightInput } from "./HeightInput";
+export { WeightInput } from "./WeightInput";
 export { VisualSelect } from "./VisualSelect";
 export { Interstitial } from "./Interstitial";
 export { IngredientSelect } from "./IngredientSelect";

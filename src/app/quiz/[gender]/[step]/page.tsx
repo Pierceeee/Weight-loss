@@ -7,6 +7,7 @@ import {
   MultiSelect,
   NumericInput,
   HeightInput,
+  WeightInput,
   VisualSelect,
   Interstitial,
   IngredientSelect,
@@ -93,11 +94,12 @@ export default function QuizStepPage() {
   };
 
   const handleValueChange = (value: string | string[] | number) => {
-    if (question.id === "current-weight" || question.id === "target-weight") {
-      const lbsValue = Number(value);
-      if (!Number.isNaN(lbsValue)) {
-        setResponse(question.id, lbsToKg(lbsValue));
-        setResponse(`${question.id}-lbs`, lbsValue);
+    if (question.type === "weight-input") {
+      const kgValue = Number(value);
+      if (!Number.isNaN(kgValue)) {
+        setResponse(question.id, kgValue);
+        // Also store the lbs version for legacy support in some components
+        setResponse(`${question.id}-lbs`, Math.round(kgToLbs(kgValue)));
       }
     } else {
       setResponse(question.id, value);
@@ -159,6 +161,14 @@ export default function QuizStepPage() {
           />
         );
 
+      case "weight-input":
+        return (
+          <WeightInput
+            valueKg={currentValue as number | undefined}
+            onChange={(v) => handleValueChange(v)}
+          />
+        );
+
       case "visual-select":
         return (
           <VisualSelect
@@ -203,8 +213,12 @@ export default function QuizStepPage() {
   };
 
   const showFooterButton = question.type !== "single-select" && question.type !== "visual-select";
-  // For compact input types (height, numeric, visual-select), show the button inline below the content
-  const inlineButton = question.type === "height-input" || question.type === "numeric-input" || question.type === "visual-select";
+  // For compact input types (height, weight, numeric, visual-select), show the button inline below the content
+  const inlineButton = 
+    question.type === "height-input" || 
+    question.type === "weight-input" ||
+    question.type === "numeric-input" || 
+    question.type === "visual-select";
 
   return (
     <div className={`min-h-screen flex flex-col ${question.id === "age-range" ? "bg-[#FFF0E0]" : "bg-[#F5F5F5]"}`}>
@@ -252,29 +266,29 @@ export default function QuizStepPage() {
 
       {/* Main content */}
       <main className="flex-1 flex flex-col">
-        <div className="flex-1 overflow-y-auto px-4 pt-8 pb-4">
+        <div className="flex-1 overflow-y-auto px-4 pt-4 sm:pt-8 pb-4">
           <div className={cn(
             "mx-auto flex flex-col min-h-full justify-center w-full",
-            question.type === "visual-select" ? "max-w-2xl" : "max-w-md"
+            question.type === "visual-select" ? "max-w-2xl" : "max-w-[400px] sm:max-w-md"
           )}>
             {question.question && question.id === "age-range" ? (
-              <div className="text-center mb-10">
-                <h1 className="text-5xl font-bold text-gray-900 mb-4">
+              <div className="text-center mb-8 sm:mb-10 px-2">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
                   {question.question}
                 </h1>
                 {question.subtitle && (
-                  <p className="text-lg text-gray-600 font-medium">
+                  <p className="text-[15px] sm:text-lg text-gray-600 font-medium">
                     {question.subtitle}
                   </p>
                 )}
               </div>
             ) : question.question ? (
-              <div className="text-center mb-8">
-                <h1 className="text-2xl leading-snug font-bold text-gray-900 mb-2">
+              <div className="text-center mb-6 sm:mb-8 px-2">
+                <h1 className="text-lg sm:text-2xl leading-snug font-bold text-gray-900 mb-2">
                   {question.question}
                 </h1>
                 {question.subtitle && (
-                  <p className="text-gray-600 text-sm font-normal">
+                  <p className="text-gray-600 text-[13px] sm:text-sm font-normal">
                     {question.subtitle}
                   </p>
                 )}
@@ -302,7 +316,7 @@ export default function QuizStepPage() {
 
         {/* Bottom-pinned continue button for other question types (multi-select, ingredient-select, etc.) */}
         {showFooterButton && !inlineButton && (
-          <footer className="px-4 pb-6 pt-8">
+          <footer className="px-4 pb-6 pt-4 sm:pt-8">
             <div className="max-w-md mx-auto">
               <button
                 onClick={handleNext}

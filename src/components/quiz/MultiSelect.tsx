@@ -29,19 +29,19 @@ export function MultiSelect({ options, value = [], onChange }: MultiSelectProps)
   };
 
   return (
-    <div className="grid grid-cols-1 gap-3 w-full">
+    <div className="grid grid-cols-1 gap-2.5 w-full">
       {options.map((option, index) => {
         const isSelected = value.includes(option.id);
         const isNoneOption = option.id === "none";
         return (
           <div key={option.id}>
             {isNoneOption && (
-              <div className="h-px bg-gray-200 my-3" />
+              <div className="h-px bg-gray-200 my-2.5" />
             )}
             <button
               onClick={() => handleToggle(option.id)}
               className={cn(
-                "flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 text-left active:scale-[0.98] w-full",
+                "flex items-center gap-3 p-3.5 sm:p-4 rounded-xl border transition-all duration-200 text-left active:scale-[0.98] w-full",
                 "hover:border-gray-300 hover:shadow-sm",
                 isSelected
                   ? "border-gray-300 bg-white shadow-sm"
@@ -50,7 +50,7 @@ export function MultiSelect({ options, value = [], onChange }: MultiSelectProps)
               style={{ animationDelay: `${index * 30}ms` }}
             >
               {option.image ? (
-                <div className="w-8 h-8 relative flex-shrink-0">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 relative flex-shrink-0">
                   <Image
                     src={option.image}
                     alt={option.label}
@@ -59,9 +59,9 @@ export function MultiSelect({ options, value = [], onChange }: MultiSelectProps)
                   />
                 </div>
               ) : option.icon ? (
-                <span className="text-xl flex-shrink-0">{option.icon}</span>
+                <span className="text-lg sm:text-xl flex-shrink-0">{option.icon}</span>
               ) : null}
-              <span className="flex-1 font-medium text-[15px] text-gray-900">{option.label}</span>
+              <span className="flex-1 font-medium text-[15px] text-gray-900 leading-snug">{option.label}</span>
               <div
                 className={cn(
                   "w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0",
