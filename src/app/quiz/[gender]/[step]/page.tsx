@@ -302,7 +302,7 @@ export default function QuizStepPage() {
                 <button
                   onClick={handleNext}
                   disabled={!canContinue()}
-                  className="w-full py-3 font-semibold text-base rounded-xl bg-black text-white hover:bg-gray-900 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
+                  className="w-full py-3 font-semibold text-base rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:bg-purple-200 disabled:text-purple-400 disabled:cursor-not-allowed transition-colors shadow-lg shadow-purple-200"
                 >
                   Continue
                 </button>
@@ -318,7 +318,7 @@ export default function QuizStepPage() {
               <button
                 onClick={handleNext}
                 disabled={!canContinue()}
-                className="w-full py-3 font-semibold text-base rounded-xl bg-black text-white hover:bg-gray-900 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors"
+                className="w-full py-3 font-semibold text-base rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:bg-purple-200 disabled:text-purple-400 disabled:cursor-not-allowed transition-colors shadow-lg shadow-purple-200"
               >
                 Continue
               </button>

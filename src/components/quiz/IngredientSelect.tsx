@@ -2,16 +2,15 @@
 
 import { QuizQuestion } from "@/types/quiz";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { useMemo } from "react";
 
 const categoryConfig: Record<string, { icon: string; borderColor: string; lineColor: string }> = {
-  greens: { icon: "/images/icons/emoji-broccoli.avif", borderColor: "border-green-500", lineColor: "bg-green-500" },
-  "fiber-grains": { icon: "/images/icons/emoji-sheaf-of-rice.avif", borderColor: "border-yellow-400", lineColor: "bg-yellow-400" },
-  protein: { icon: "/images/icons/emoji-cut-of-meat.avif", borderColor: "border-red-500", lineColor: "bg-red-500" },
-  seafood: { icon: "/images/icons/emoji-fish.avif", borderColor: "border-blue-400", lineColor: "bg-blue-400" },
-  dairy: { icon: "/images/icons/emoji-cheese-wedge.avif", borderColor: "border-purple-400", lineColor: "bg-purple-400" },
-  "fresh-fruits": { icon: "/images/icons/emoji-banana.avif", borderColor: "border-red-500", lineColor: "bg-red-500" },
+  greens: { icon: "🥦", borderColor: "border-green-500", lineColor: "bg-green-500" },
+  "fiber-grains": { icon: "🌾", borderColor: "border-yellow-400", lineColor: "bg-yellow-400" },
+  protein: { icon: "🍗", borderColor: "border-red-500", lineColor: "bg-red-500" },
+  seafood: { icon: "🐟", borderColor: "border-blue-400", lineColor: "bg-blue-400" },
+  dairy: { icon: "🧀", borderColor: "border-purple-400", lineColor: "bg-purple-400" },
+  "fresh-fruits": { icon: "🍎", borderColor: "border-red-500", lineColor: "bg-red-500" },
 };
 
 interface IngredientSelectProps {
@@ -56,7 +55,7 @@ export function IngredientSelect({ question, value = [], onChange }: IngredientS
           className={cn(
             "w-5 h-5 rounded border-2 flex items-center justify-center transition-all",
             allSelected
-              ? "bg-black border-black"
+              ? "bg-purple-600 border-purple-600 shadow-sm"
               : "border-gray-300 bg-white"
           )}
         >
@@ -76,9 +75,9 @@ export function IngredientSelect({ question, value = [], onChange }: IngredientS
             <div className="px-4 py-3 flex items-center justify-between">
               <p className="text-sm font-semibold text-gray-900">{category.title}</p>
               {config && (
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Image src={config.icon} alt={category.title} fill className="object-contain" />
-                </div>
+                <span className="text-xl flex-shrink-0">
+                  {config.icon}
+                </span>
               )}
             </div>
             <div className={cn("h-0.5 mx-4", config?.lineColor)} />
@@ -94,8 +93,8 @@ export function IngredientSelect({ question, value = [], onChange }: IngredientS
                     className={cn(
                       "px-3 py-2 rounded-lg border text-xs font-medium transition-all duration-200 active:scale-95",
                       selected
-                        ? "bg-gray-900 text-white border-gray-900 shadow-sm"
-                        : "bg-white text-gray-700 border-gray-300 hover:border-gray-400"
+                        ? "bg-purple-600 text-white border-purple-600 shadow-sm"
+                        : "bg-white text-gray-700 border-gray-300 hover:border-purple-200 hover:bg-purple-50/50"
                     )}
                   >
                     {option.label}

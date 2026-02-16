@@ -176,7 +176,7 @@ export default function PlansPage() {
                   Join the PCOS Reset Method today.
                 </p>
                 <p className="text-sm text-purple-600 font-medium">
-                  ✓ Promotional discount applied
+                  ✅ Promotional discount applied
                 </p>
               </div>
 
@@ -333,7 +333,7 @@ function TestimonialCard({ date, title, text, author }: { date: string, title: s
       <p className="text-sm text-slate-600 leading-relaxed mb-3">{text}</p>
       <div className="flex items-center justify-between">
         <p className="text-sm font-semibold text-slate-900">{author}</p>
-        <span className="text-xs text-purple-600 font-medium">✓ Verified Customer</span>
+        <span className="text-xs text-purple-600 font-medium">✅ Verified Customer</span>
       </div>
     </div>
   );

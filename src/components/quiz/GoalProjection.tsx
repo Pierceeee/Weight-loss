@@ -16,14 +16,14 @@ function getGoalDate() {
 
 export function GoalProjection() {
   const { responses } = useQuizStore();
-  const targetLbs = (responses["target-weight-lbs"] as number | undefined) || (responses["target-weight"] ? Math.round(kgToLbs(responses["target-weight"] as number)) : 120);
-  const currentLbs = (responses["current-weight-lbs"] as number | undefined) || (responses["current-weight"] ? Math.round(kgToLbs(responses["current-weight"] as number)) : 150);
+  const targetKg = (responses["target-weight"] as number | undefined) || 55;
+  const currentKg = (responses["current-weight"] as number | undefined) || 68;
   const goalDate = useMemo(() => getGoalDate(), []);
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-center text-xl sm:text-2xl font-bold text-[#A855F7] mb-2">{targetLbs} lbs by {goalDate}</h2>
-      <p className="text-center text-sm text-gray-600 mb-4">Weight Now: {currentLbs} lbs • Goal: {targetLbs} lbs</p>
+      <h2 className="text-center text-xl sm:text-2xl font-bold text-[#A855F7] mb-2">{Math.round(targetKg)} kg by {goalDate}</h2>
+      <p className="text-center text-sm text-gray-600 mb-4">Weight Now: {Math.round(currentKg)} kg • Goal: {Math.round(targetKg)} kg</p>
 
       <div className="bg-white border border-purple-100 rounded-xl p-4">
         <svg viewBox="0 0 520 300" className="w-full h-auto">
@@ -72,13 +72,13 @@ export function GoalProjection() {
           {/* Now label */}
           <g className="animate-fade-up">
             <rect x="45" y="68" width="98" height="32" rx="8" fill="#A855F7" />
-            <text x="94" y="89" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Now: {currentLbs} lbs</text>
+            <text x="94" y="89" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Now: {Math.round(currentKg)} kg</text>
           </g>
 
           {/* Goal label */}
           <g className="animate-fade-up" style={{ animationDelay: '2s', opacity: 0 }}>
             <rect x="360" y="148" width="98" height="32" rx="8" fill="#A855F7" />
-            <text x="409" y="169" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Goal: {targetLbs} lbs</text>
+            <text x="409" y="169" textAnchor="middle" fill="white" fontSize="14" fontWeight="700">Goal: {Math.round(targetKg)} kg</text>
             {/* Animated pointing arrow */}
             <path 
               d="M 409 140 L 409 125 M 404 130 L 409 125 L 414 130" 

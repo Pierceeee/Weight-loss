@@ -427,7 +427,7 @@ export default function DashboardPage() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">
-            Welcome back! 👋
+            Welcome back! ✨
           </h1>
           <p className="text-slate-500">
             {gender === "male" 
@@ -551,7 +551,7 @@ export default function DashboardPage() {
                 <div className="h-2 bg-gradient-to-r from-purple-200 to-purple-400" />
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-3xl">🌅</span>
+                    <span className="text-3xl">🌄</span>
                     <h3 className="text-lg font-bold text-slate-900">Breakfast</h3>
                   </div>
                   <h4 className="font-bold text-slate-800 mb-2">{currentDay.breakfast.name}</h4>
@@ -572,7 +572,7 @@ export default function DashboardPage() {
                 <div className="h-2 bg-gradient-to-r from-purple-300 to-purple-500" />
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-3xl">☀️</span>
+                    <span className="text-3xl">🌤️</span>
                     <h3 className="text-lg font-bold text-slate-900">Lunch</h3>
                   </div>
                   <h4 className="font-bold text-slate-800 mb-2">{currentDay.lunch.name}</h4>
@@ -593,7 +593,7 @@ export default function DashboardPage() {
                 <div className="h-2 bg-gradient-to-r from-purple-400 to-purple-600" />
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-3xl">🌙</span>
+                    <span className="text-3xl">🌃</span>
                     <h3 className="text-lg font-bold text-slate-900">Dinner</h3>
                   </div>
                   <h4 className="font-bold text-slate-800 mb-2">{currentDay.dinner.name}</h4>
@@ -621,7 +621,7 @@ export default function DashboardPage() {
                   {currentDay.snacks.map((snack, index) => (
                     <div key={index} className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
                       <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-xl">
-                        🥜
+                        🍓
                       </div>
                       <div>
                         <h4 className="font-bold text-slate-800">{snack.name}</h4>

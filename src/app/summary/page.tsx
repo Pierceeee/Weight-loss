@@ -64,10 +64,10 @@ export default function SummaryPage() {
 
   const getExerciseLabel = (pref: string) => {
     switch (pref) {
-      case "regularly": return { label: "Regular", icon: "💪" };
-      case "occasionally": return { label: "Occasional", icon: "🏃" };
-      case "try-to-stay-active": return { label: "Light", icon: "🚶" };
-      default: return { label: "Getting Started", icon: "🌱" };
+      case "regularly": return { label: "Regular", icon: "⚡" };
+      case "occasionally": return { label: "Occasional", icon: "👟" };
+      case "try-to-stay-active": return { label: "Light", icon: "👣" };
+      default: return { label: "Getting Started", icon: "🌿" };
     }
   };
 

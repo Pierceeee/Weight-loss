@@ -69,19 +69,19 @@ export function PersonalSummary() {
 
   return (
     <div className="max-w-sm mx-auto">
-      <div className="rounded-2xl overflow-hidden bg-white border border-purple-100 shadow-sm relative animate-fade-up">
+      <div className="rounded-2xl overflow-hidden bg-white border border-purple-100 shadow-sm relative">
         {/* BMI Section - Warm background */}
         <div className="bg-[#FFF8DC] px-5 pt-5 pb-6 text-center">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
             Body Mass Index (BMI)
           </p>
-          <p className="text-2xl font-bold text-gray-900 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-2xl font-bold text-gray-900">
             {bmiResult.category}
           </p>
 
           <BMIGauge bmi={bmiValue} />
 
-          <p className="text-[10px] text-gray-600 mt-3 leading-relaxed px-2 animate-fade-up" style={{ animationDelay: '0.8s' }}>
+          <p className="text-[10px] text-gray-600 mt-3 leading-relaxed px-2">
             A healthy BMI provides a strong foundation for improving body composition and reaching your desired shape.
           </p>
         </div>
@@ -90,9 +90,9 @@ export function PersonalSummary() {
         <div className="flex items-end">
           {/* Left side - info items */}
           <div className="flex-1 p-3 sm:p-5 space-y-3 sm:space-y-4">
-            <div className="flex items-center gap-2 sm:gap-3 animate-fade-up" style={{ animationDelay: '0.4s' }}>
+            <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-pink-50 flex items-center justify-center flex-shrink-0">
-                <span className="text-base sm:text-lg">💗</span>
+                <span className="text-base sm:text-lg">🌸</span>
               </div>
               <div>
                 <p className="text-[9px] sm:text-[10px] font-semibold text-gray-400 uppercase tracking-wide">
@@ -105,9 +105,9 @@ export function PersonalSummary() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3 animate-fade-up" style={{ animationDelay: '0.5s' }}>
+            <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
-                <span className="text-base sm:text-lg">🏋️</span>
+                <span className="text-base sm:text-lg">💪</span>
               </div>
               <div>
                 <p className="text-[9px] sm:text-[10px] font-semibold text-gray-400 uppercase tracking-wide">
@@ -117,9 +117,9 @@ export function PersonalSummary() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3 animate-fade-up" style={{ animationDelay: '0.6s' }}>
+            <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                <span className="text-base sm:text-lg">📊</span>
+                <span className="text-base sm:text-lg">⚡</span>
               </div>
               <div>
                 <p className="text-[9px] sm:text-[10px] font-semibold text-gray-400 uppercase tracking-wide">
@@ -131,7 +131,7 @@ export function PersonalSummary() {
           </div>
 
           {/* Right side - person image */}
-          <div className="relative w-24 sm:w-36 flex-shrink-0 animate-fade-up" style={{ animationDelay: '0.7s' }}>
+          <div className="relative w-24 sm:w-36 flex-shrink-0">
             <Image
               src="/images/personal-summary.png"
               alt="Personal summary"

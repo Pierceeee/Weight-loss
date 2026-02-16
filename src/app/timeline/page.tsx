@@ -164,7 +164,7 @@ export default function TimelinePage() {
               {profile.currentWeight} kg
             </div>
             <div className="absolute bottom-8 right-4 sm:right-8 px-3 py-1.5 bg-emerald-500 text-white text-xs font-bold rounded-full shadow-lg">
-              {profile.targetWeight} kg ✓
+              {profile.targetWeight} kg ✅
             </div>
           </div>
 
@@ -188,10 +188,10 @@ export default function TimelinePage() {
           <h3 className="text-lg font-bold text-slate-900 mb-4">Your Milestones</h3>
           <div className="space-y-4">
             {[
-              { week: 1, text: "Establish healthy eating habits", icon: "🌱" },
-              { week: Math.ceil(weeksToGoal / 3), text: "First visible results", icon: "✨" },
-              { week: Math.ceil(weeksToGoal * 2 / 3), text: "Halfway to your goal", icon: "🎯" },
-              { week: weeksToGoal, text: "Reach your target weight!", icon: "🏆" },
+              { week: 1, text: "Establish healthy eating habits", icon: "🍃" },
+              { week: Math.ceil(weeksToGoal / 3), text: "First visible results", icon: "🌟" },
+              { week: Math.ceil(weeksToGoal * 2 / 3), text: "Halfway to your goal", icon: "🔥" },
+              { week: weeksToGoal, text: "Reach your target weight!", icon: "🥇" },
             ].map((milestone, index) => (
               <div key={index} className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-xl flex-shrink-0">

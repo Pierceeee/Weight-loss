@@ -16,7 +16,7 @@ const testimonialsRow1 = [
     stars: 5,
   },
   {
-    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😊😊🎉🙏",
+    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😃😃🎊🙌",
     name: "Caroline N.",
     stars: 5,
   },
@@ -31,7 +31,7 @@ const testimonialsRow1 = [
     stars: 5,
   },
   {
-    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😊😊🎉🙏",
+    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😃😃🎊🙌",
     name: "Caroline N.",
     stars: 5,
   },
@@ -39,12 +39,12 @@ const testimonialsRow1 = [
 
 const testimonialsRow2 = [
   {
-    text: "Healthy diets are a real thing! I quite literally lost over 40 lbs and I've never felt more beautiful 😊❤️ Love this thing!",
+    text: "Healthy diets are a real thing! I quite literally lost over 40 lbs and I've never felt more beautiful 😃💖 Love this thing!",
     name: "Nicholas H.",
     stars: 5,
   },
   {
-    text: "Honestly idk where id be if not for this. I quite literally lost over 40 lbs and I've never felt more beautiful 😊❤️ Love this thing!",
+    text: "Honestly idk where id be if not for this. I quite literally lost over 40 lbs and I've never felt more beautiful 😃💖 Love this thing!",
     name: "Megan W.",
     stars: 5,
   },
@@ -69,7 +69,7 @@ const testimonialsRow2 = [
     stars: 5,
   },
   {
-    text: "I was skeptical because diets come and go, but this 😊🎉 plus it's cheap, can't complain.",
+    text: "I was skeptical because diets come and go, but this 😃🎊 plus it's cheap, can't complain.",
     name: "",
     stars: 5,
   },
@@ -176,7 +176,7 @@ export default function GeneratingPage() {
                   <span className="text-xs font-semibold text-gray-800">{t.name}</span>
                   <div className="flex gap-0.5">
                     {Array.from({ length: t.stars }).map((_, j) => (
-                      <span key={j} className="text-purple-400 text-xs">★</span>
+                      <span key={j} className="text-purple-400 text-xs">⭐</span>
                     ))}
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export default function GeneratingPage() {
                   )}
                   <div className="flex gap-0.5 ml-auto">
                     {Array.from({ length: t.stars }).map((_, j) => (
-                      <span key={j} className="text-purple-400 text-xs">★</span>
+                      <span key={j} className="text-purple-400 text-xs">⭐</span>
                     ))}
                   </div>
                 </div>
