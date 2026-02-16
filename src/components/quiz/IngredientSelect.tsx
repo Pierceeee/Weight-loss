@@ -4,13 +4,13 @@ import { QuizQuestion } from "@/types/quiz";
 import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 
-const categoryConfig: Record<string, { icon: string; borderColor: string; lineColor: string }> = {
-  greens: { icon: "🥦", borderColor: "border-green-500", lineColor: "bg-green-500" },
-  "fiber-grains": { icon: "🌾", borderColor: "border-yellow-400", lineColor: "bg-yellow-400" },
-  protein: { icon: "🍗", borderColor: "border-red-500", lineColor: "bg-red-500" },
-  seafood: { icon: "🐟", borderColor: "border-blue-400", lineColor: "bg-blue-400" },
-  dairy: { icon: "🧀", borderColor: "border-purple-400", lineColor: "bg-purple-400" },
-  "fresh-fruits": { icon: "🍎", borderColor: "border-red-500", lineColor: "bg-red-500" },
+const categoryConfig: Record<string, { icon: string; borderColor: string; lineColor: string; selectedBg: string; selectedBorder: string }> = {
+  greens: { icon: "🥦", borderColor: "border-green-500", lineColor: "bg-green-500", selectedBg: "bg-green-600", selectedBorder: "border-green-600" },
+  "fiber-grains": { icon: "🌾", borderColor: "border-yellow-400", lineColor: "bg-yellow-400", selectedBg: "bg-yellow-600", selectedBorder: "border-yellow-600" },
+  protein: { icon: "🍗", borderColor: "border-red-500", lineColor: "bg-red-500", selectedBg: "bg-red-600", selectedBorder: "border-red-600" },
+  seafood: { icon: "🐟", borderColor: "border-blue-400", lineColor: "bg-blue-400", selectedBg: "bg-blue-600", selectedBorder: "border-blue-600" },
+  dairy: { icon: "🧀", borderColor: "border-purple-400", lineColor: "bg-purple-400", selectedBg: "bg-purple-600", selectedBorder: "border-purple-600" },
+  "fresh-fruits": { icon: "🍎", borderColor: "border-red-500", lineColor: "bg-red-500", selectedBg: "bg-red-600", selectedBorder: "border-red-600" },
 };
 
 interface IngredientSelectProps {
@@ -93,7 +93,7 @@ export function IngredientSelect({ question, value = [], onChange }: IngredientS
                     className={cn(
                       "px-3 py-2 rounded-lg border text-xs font-medium transition-all duration-200 active:scale-95",
                       selected
-                        ? "bg-purple-600 text-white border-purple-600 shadow-sm"
+                        ? `${config?.selectedBg || "bg-purple-600"} text-white ${config?.selectedBorder || "border-purple-600"} shadow-sm`
                         : "bg-white text-gray-700 border-gray-300 hover:border-purple-200 hover:bg-purple-50/50"
                     )}
                   >

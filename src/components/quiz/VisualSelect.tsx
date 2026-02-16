@@ -61,7 +61,7 @@ export function VisualSelect({ options, value, onChange }: VisualSelectProps) {
             {/* Label Container */}
             <div className={cn(
               "py-2 px-0.5 sm:py-3 sm:px-1 md:p-4 text-center transition-colors duration-300",
-              isSelected ? "bg-purple-50/50" : "bg-white"
+              isSelected ? "bg-purple-100" : "bg-white"
             )}>
               <span className={cn(
                 "font-bold text-[9px] sm:text-sm md:text-base lg:text-lg block leading-tight tracking-tight uppercase",

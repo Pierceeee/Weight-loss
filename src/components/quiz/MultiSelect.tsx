@@ -45,7 +45,7 @@ export function MultiSelect({ options, value = [], onChange }: MultiSelectProps)
                 "flex items-center gap-3 p-3.5 sm:p-4 rounded-xl border transition-all duration-200 text-left active:scale-[0.98] w-full",
                 "hover:shadow-sm",
                 isSelected
-                  ? "border-purple-500 bg-purple-50/50 shadow-sm"
+                  ? "border-purple-500 bg-purple-100 shadow-sm"
                   : "border-gray-200 bg-white hover:border-purple-200 hover:bg-purple-50/30"
               )}
               style={{ animationDelay: `${index * 30}ms` }}

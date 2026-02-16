@@ -23,7 +23,7 @@ export function SingleSelect({ options, value, onChange }: SingleSelectProps) {
             className={cn(
               "w-full transition-all duration-200 rounded-xl p-3.5 sm:p-5 flex items-center justify-between shadow-sm border active:scale-[0.98]",
               isSelected
-                ? "bg-purple-50 border-purple-500 ring-2 ring-purple-100"
+                ? "bg-purple-100 border-purple-500 ring-4 ring-purple-50"
                 : "bg-white hover:bg-purple-50/50 border-transparent hover:border-purple-200"
             )}
             style={{ animationDelay: `${index * 50}ms` }}
