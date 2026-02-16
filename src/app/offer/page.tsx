@@ -8,7 +8,7 @@ import { CheckCircle2, Timer, ChevronRight, TrendingDown, Star } from "lucide-re
 
 // --- Configuration ---
 const INITIAL_TIMER_SECONDS = 15 * 60;
-const CONSERVATIVE_WEEKLY_LOSS_LBS = 1.5;
+const CONSERVATIVE_WEEKLY_LOSS_KG = 0.7;
 const DEFAULT_NAME = "Guest";
 
 const PLANS = [
@@ -31,13 +31,12 @@ export default function OfferPage() {
                  (mounted && typeof window !== 'undefined' ? localStorage.getItem("pcos-user-name") : null) || 
                  DEFAULT_NAME;
 
-    const rawWeight = responses["current-weight-lbs"] as number || 
-                     (responses["current-weight"] ? Math.round(kgToLbs(responses["current-weight"] as number)) : 150);
+    const rawWeight = responses["current-weight"] as number || 68;
     
     return {
       userName: name,
-      currentWeightLbs: rawWeight,
-      targetWeight: rawWeight - (CONSERVATIVE_WEEKLY_LOSS_LBS * 4),
+      currentWeightKg: rawWeight,
+      targetWeight: rawWeight - (CONSERVATIVE_WEEKLY_LOSS_KG * 4),
     };
   }, [responses, mounted]);
 
@@ -80,8 +79,8 @@ export default function OfferPage() {
             <p className="mt-3 text-slate-600 text-lg">Your personalized PCOS Reset Method is ready.</p>
             
             <div className="mt-8 grid grid-cols-2 gap-4">
-              <WeightCard label="Starting" value={`${userData.currentWeightLbs} lbs`} />
-              <WeightCard label="Goal (4 Weeks)" value={`${userData.targetWeight} lbs`} highlight />
+              <WeightCard label="Starting" value={`${Math.round(userData.currentWeightKg)} kg`} />
+              <WeightCard label="Goal (4 Weeks)" value={`${Math.round(userData.targetWeight)} kg`} highlight />
             </div>
           </div>
 
