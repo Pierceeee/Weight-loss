@@ -1,6 +1,6 @@
-# Required Images for PCOS Plan Web App
-
-This document lists all images required for the PCOS Plan web application. All images should be placed in the `/public/images/` directory.
+# Required Images for PCOS Reset Method Web App
+  
+This document lists all images required for the PCOS Reset Method web application. All images should be placed in the `/public/images/` directory.
 
 ---
 

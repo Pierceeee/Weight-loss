@@ -243,7 +243,7 @@ export default function QuizStepPage() {
               <div className="bg-[#9333EA] p-1 rounded-md">
                 <Heart className="w-[18px] h-[18px] text-white fill-current" />
               </div>
-              <p className="font-bold text-xl text-gray-800">PCOS Plan</p>
+              <p className="font-bold text-xl text-gray-800">PCOS Reset Method</p>
             </div>
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-purple-600">
               {urlStep}/{totalUrlSteps}
@@ -256,10 +256,7 @@ export default function QuizStepPage() {
       {question.id === "age-range" && (
         <header className="w-full py-4 flex justify-center items-center bg-white border-b border-purple-100">
           <div className="flex items-center gap-2">
-            <div className="bg-[#9333EA] p-1 rounded-md">
-              <Heart className="w-[18px] h-[18px] text-white fill-current" />
-            </div>
-            <span className="font-bold text-xl text-gray-800">PCOS Plan</span>
+            <span className="font-bold text-xl text-gray-800">PCOS Reset Method</span>
           </div>
         </header>
       )}

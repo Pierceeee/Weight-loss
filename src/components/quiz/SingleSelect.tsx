@@ -21,7 +21,10 @@ export function SingleSelect({ options, value, onChange }: SingleSelectProps) {
             key={option.id}
             onClick={() => onChange(option.id)}
             className={cn(
-              "w-full bg-white hover:bg-gray-50 transition-colors duration-200 rounded-xl p-3.5 sm:p-5 flex items-center justify-between shadow-sm border border-transparent active:scale-[0.98]"
+              "w-full transition-all duration-200 rounded-xl p-3.5 sm:p-5 flex items-center justify-between shadow-sm border active:scale-[0.98]",
+              isSelected
+                ? "bg-purple-50 border-purple-500 ring-2 ring-purple-100"
+                : "bg-white hover:bg-purple-50/50 border-transparent hover:border-purple-200"
             )}
             style={{ animationDelay: `${index * 50}ms` }}
           >
@@ -38,9 +41,15 @@ export function SingleSelect({ options, value, onChange }: SingleSelectProps) {
               ) : option.icon ? (
                 <span className="text-xl sm:text-2xl">{option.icon}</span>
               ) : null}
-              <span className="text-gray-900 font-semibold text-[15px] sm:text-lg leading-snug text-left">{option.label}</span>
+              <span className={cn(
+                "font-semibold text-[15px] sm:text-lg leading-snug text-left transition-colors",
+                isSelected ? "text-purple-900" : "text-gray-900"
+              )}>{option.label}</span>
             </div>
-            <ArrowRight className="text-gray-400 flex-shrink-0 ml-2" size={18} />
+            <ArrowRight className={cn(
+              "flex-shrink-0 ml-2 transition-all",
+              isSelected ? "text-purple-600 translate-x-1" : "text-gray-400"
+            )} size={18} />
           </button>
         );
       })}

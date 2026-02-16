@@ -37,11 +37,11 @@ export function HeightInput({ valueCm, onChange }: HeightInputProps) {
 
   return (
     <div className="max-w-md mx-auto">
-      <div className="w-fit mx-auto p-0.5 rounded-lg border border-gray-300 bg-white mb-6">
+      <div className="w-fit mx-auto p-0.5 rounded-lg border border-purple-200 bg-white mb-6">
         <button
           className={cn(
             "px-6 sm:px-10 py-2 text-sm font-semibold rounded-lg transition-all",
-            unit === "cm" ? "bg-black text-white" : "text-gray-700 hover:bg-gray-50"
+            unit === "cm" ? "bg-purple-600 text-white" : "text-purple-600 hover:bg-purple-50"
           )}
           onClick={() => setUnit("cm")}
         >
@@ -50,7 +50,7 @@ export function HeightInput({ valueCm, onChange }: HeightInputProps) {
         <button
           className={cn(
             "px-6 sm:px-10 py-2 text-sm font-semibold rounded-lg transition-all",
-            unit === "ft" ? "bg-black text-white" : "text-gray-700 hover:bg-gray-50"
+            unit === "ft" ? "bg-purple-600 text-white" : "text-purple-600 hover:bg-purple-50"
           )}
           onClick={() => setUnit("ft")}
         >
@@ -60,40 +60,40 @@ export function HeightInput({ valueCm, onChange }: HeightInputProps) {
 
       {unit === "ft" ? (
         <div className="grid grid-cols-2 gap-3">
-          <div className="relative h-14 rounded-xl border border-gray-300 bg-white">
+          <div className="relative h-14 rounded-xl border border-purple-200 bg-white focus-within:border-purple-500 focus-within:ring-4 focus-within:ring-purple-50 transition-all">
             <input
               type="number"
               min={0}
               value={feet === 0 ? "" : feet}
               onChange={(event) => applyFeetInches(event.target.value === "" ? "" : Number(event.target.value), inches)}
-              className="w-full h-full px-3 pr-10 text-center text-3xl font-medium text-gray-700 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="w-full h-full px-3 pr-10 text-center text-3xl font-medium text-purple-900 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-700">ft</span>
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-purple-400">ft</span>
           </div>
 
-          <div className="relative h-14 rounded-xl border border-gray-300 bg-white">
+          <div className="relative h-14 rounded-xl border border-purple-200 bg-white focus-within:border-purple-500 focus-within:ring-4 focus-within:ring-purple-50 transition-all">
             <input
               type="number"
               min={0}
               max={11}
               value={inches === 0 ? "" : inches}
               onChange={(event) => applyFeetInches(feet, event.target.value === "" ? "" : Number(event.target.value))}
-              className="w-full h-full px-3 pr-10 text-center text-3xl font-medium text-gray-700 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="w-full h-full px-3 pr-10 text-center text-3xl font-medium text-purple-900 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-700">in</span>
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-purple-400">in</span>
           </div>
         </div>
       ) : (
-        <div className="relative h-14 rounded-xl border border-gray-300 bg-white">
+        <div className="relative h-14 rounded-xl border border-purple-200 bg-white focus-within:border-purple-500 focus-within:ring-4 focus-within:ring-purple-50 transition-all">
           <input
             type="number"
             min={80}
             max={250}
             value={cm === 0 ? "" : cm}
             onChange={(event) => applyCm(event.target.value === "" ? "" : Number(event.target.value))}
-            className="w-full h-full px-3 pr-12 text-center text-3xl font-medium text-gray-700 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            className="w-full h-full px-3 pr-12 text-center text-3xl font-medium text-purple-900 bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           />
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-700">cm</span>
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-purple-400">cm</span>
         </div>
       )}
     </div>

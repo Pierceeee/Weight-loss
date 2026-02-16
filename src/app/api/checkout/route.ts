@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
             currency: plan.currency,
             product_data: {
               name: plan.name,
-              description: "PCOS Plan - Personalized weight loss and wellness program",
+              description: "PCOS Reset Method - Personalized weight loss and wellness program",
               images: [`${origin}/images/product-image.png`],
             },
             unit_amount: plan.amount,
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({
-    message: "PCOS Plan API - Create Checkout Session",
+    message: "PCOS Reset Method API - Create Checkout Session",
     method: "POST",
     description: "Create a Stripe checkout session for a plan",
     configured: !!process.env.STRIPE_SECRET_KEY,

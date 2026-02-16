@@ -80,8 +80,8 @@ export default function SummaryPage() {
       <header className="bg-white/80 backdrop-blur-sm border-b border-purple-100">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center justify-center gap-2">
-            <span className="text-xl font-black tracking-tight text-slate-900">PCOS</span>
-            <span className="text-xl font-black tracking-tight text-purple-600">PLAN</span>
+            <span className="text-xl font-black tracking-tight text-slate-900">PCOS RESET</span>
+            <span className="text-xl font-black tracking-tight text-purple-600">METHOD</span>
           </div>
         </div>
       </header>

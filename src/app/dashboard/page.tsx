@@ -406,8 +406,8 @@ export default function DashboardPage() {
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-xl font-black tracking-tight text-slate-900">PCOS</span>
-              <span className="text-xl font-black tracking-tight text-purple-600">PLAN</span>
+              <span className="text-xl font-black tracking-tight text-slate-900">PCOS RESET</span>
+              <span className="text-xl font-black tracking-tight text-purple-600">METHOD</span>
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 px-3 py-1.5 bg-purple-100 rounded-full">

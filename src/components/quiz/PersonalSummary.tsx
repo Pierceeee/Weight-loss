@@ -100,7 +100,7 @@ export function PersonalSummary() {
                 </p>
                 <div className="flex items-center gap-1.5">
                   <p className="font-bold text-xs sm:text-sm text-gray-900">Detected</p>
-                  <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
+                  <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
                 </div>
               </div>
             </div>

@@ -32,10 +32,10 @@ export function Interstitial({
 
   return (
     <div className="max-w-sm mx-auto py-2">
-      <div className="bg-white rounded-xl border border-gray-200 p-6 text-center">
+      <div className="bg-white rounded-2xl border border-purple-100 p-6 text-center shadow-sm shadow-purple-50">
         {image && isCircular && (
           <div className="flex justify-center mb-6">
-            <div className="relative w-48 h-48 rounded-full overflow-hidden bg-gray-200">
+            <div className="relative w-48 h-48 rounded-full overflow-hidden bg-purple-50">
               <Image
                 src={image}
                 alt={title}
@@ -47,7 +47,7 @@ export function Interstitial({
         )}
 
         {image && !isCircular && (
-          <div className="relative w-full h-52 sm:h-64 mb-4 rounded-xl overflow-hidden bg-gray-50/50">
+          <div className="relative w-full h-52 sm:h-64 mb-4 rounded-xl overflow-hidden bg-purple-50/50">
             <Image
               src={image}
               alt={title}
@@ -72,7 +72,7 @@ export function Interstitial({
                 key={index}
                 className="flex items-center gap-2 py-1"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-gray-900 flex-shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-purple-600 flex-shrink-0" />
                 <span className="text-sm font-medium text-gray-700 text-left">{benefit}</span>
               </div>
             ))}

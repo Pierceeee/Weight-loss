@@ -6,7 +6,7 @@ import { Heart } from "lucide-react";
 
 const testimonialsRow1 = [
   {
-    text: "PCOS Plan is worth it. Straight forward, clean eating meal plans and shopping lists. Blood results confirm I'm doing better.",
+    text: "PCOS Reset Method is worth it. Straight forward, clean eating meal plans and shopping lists. Blood results confirm I'm doing better.",
     name: "Lucy T.",
     stars: 5,
   },
@@ -16,12 +16,12 @@ const testimonialsRow1 = [
     stars: 5,
   },
   {
-    text: "I've been using PCOS Plan for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😊😊🎉🙏",
+    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😊😊🎉🙏",
     name: "Caroline N.",
     stars: 5,
   },
   {
-    text: "PCOS Plan is worth it. Straight forward, clean eating meal plans and shopping lists. Blood results confirm I'm doing better.",
+    text: "PCOS Reset Method is worth it. Straight forward, clean eating meal plans and shopping lists. Blood results confirm I'm doing better.",
     name: "Lucy T.",
     stars: 5,
   },
@@ -31,7 +31,7 @@ const testimonialsRow1 = [
     stars: 5,
   },
   {
-    text: "I've been using PCOS Plan for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😊😊🎉🙏",
+    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😊😊🎉🙏",
     name: "Caroline N.",
     stars: 5,
   },
@@ -109,14 +109,14 @@ export default function GeneratingPage() {
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="min-h-screen bg-[#FDDCB5] overflow-hidden">
+    <div className="min-h-screen bg-[#FAF5FF] overflow-hidden">
       {/* Header */}
-      <header className="bg-white px-4 py-3 border-b border-gray-100">
+      <header className="bg-white px-4 py-3 border-b border-purple-100">
         <div className="flex items-center justify-center gap-2">
-          <div className="bg-[#F4A460] p-1 rounded-md">
+          <div className="bg-[#9333EA] p-1 rounded-md">
             <Heart className="w-[18px] h-[18px] text-white fill-current" />
           </div>
-          <span className="font-bold text-xl text-gray-800">PCOS Plan</span>
+          <span className="font-bold text-xl text-gray-800">PCOS Reset Method</span>
         </div>
       </header>
 
@@ -130,7 +130,7 @@ export default function GeneratingPage() {
                 cy="60"
                 r="54"
                 fill="none"
-                stroke="rgba(255,255,255,0.4)"
+                stroke="rgba(147,51,234,0.1)"
                 strokeWidth="6"
               />
               <circle
@@ -138,7 +138,7 @@ export default function GeneratingPage() {
                 cy="60"
                 r="54"
                 fill="none"
-                stroke="#E8924D"
+                stroke="#9333EA"
                 strokeWidth="6"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
@@ -151,7 +151,7 @@ export default function GeneratingPage() {
             </div>
           </div>
 
-          <p className="text-center mt-4 text-sm font-medium text-gray-700">
+          <p className="text-center mt-4 text-sm font-medium text-purple-700">
             Calculating your results
           </p>
         </div>
@@ -176,7 +176,7 @@ export default function GeneratingPage() {
                   <span className="text-xs font-semibold text-gray-800">{t.name}</span>
                   <div className="flex gap-0.5">
                     {Array.from({ length: t.stars }).map((_, j) => (
-                      <span key={j} className="text-amber-400 text-xs">★</span>
+                      <span key={j} className="text-purple-400 text-xs">★</span>
                     ))}
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export default function GeneratingPage() {
                   )}
                   <div className="flex gap-0.5 ml-auto">
                     {Array.from({ length: t.stars }).map((_, j) => (
-                      <span key={j} className="text-amber-400 text-xs">★</span>
+                      <span key={j} className="text-purple-400 text-xs">★</span>
                     ))}
                   </div>
                 </div>

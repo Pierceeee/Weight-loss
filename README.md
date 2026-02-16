@@ -1,4 +1,4 @@
-# PCOS Plan - Personalized Weight Loss Web App
+# PCOS Reset Method - Personalized Weight Loss Web App
 
 A modern web application for women with PCOS (Polycystic Ovary Syndrome) to get personalized diet and lifestyle plans. Built with Next.js 16, TypeScript, Tailwind CSS, and AI-powered analysis and meal plan generation.
 

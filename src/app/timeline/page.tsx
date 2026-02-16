@@ -37,7 +37,7 @@ export default function TimelinePage() {
   );
   
   const weightToLose = profile.currentWeight - profile.targetWeight;
-  const planName = gender === "male" ? "Perfect Body" : "Perfect Body";
+  const planName = gender === "male" ? "PCOS Reset Method" : "PCOS Reset Method";
 
   return (
     <div className="min-h-screen bg-[#FDFBFF]">
@@ -45,8 +45,8 @@ export default function TimelinePage() {
       <header className="bg-white/80 backdrop-blur-sm border-b border-purple-100">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <div className="flex items-center justify-center gap-2">
-            <span className="text-xl font-black tracking-tight text-slate-900">PCOS</span>
-            <span className="text-xl font-black tracking-tight text-purple-600">PLAN</span>
+            <span className="text-xl font-black tracking-tight text-slate-900">PCOS RESET</span>
+            <span className="text-xl font-black tracking-tight text-purple-600">METHOD</span>
           </div>
         </div>
       </header>
@@ -119,7 +119,7 @@ export default function TimelinePage() {
                 opacity="0.7"
               />
               
-              {/* Perfect Body journey (solid gradient) */}
+              {/* PCOS Reset Method journey (solid gradient) */}
               <defs>
                 <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#0ea5e9" />
@@ -172,7 +172,7 @@ export default function TimelinePage() {
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-8 h-1 bg-gradient-to-r from-purple-600 to-emerald-500 rounded-full" />
-              <span className="text-slate-700 font-medium">With PCOS Plan</span>
+              <span className="text-slate-700 font-medium">With PCOS Reset Method</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-8 h-1 bg-red-400 rounded-full" style={{ 

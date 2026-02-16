@@ -83,7 +83,7 @@ export function AnalyzingAnimation() {
     <div className="flex flex-col items-center justify-center px-6 py-12 text-center max-w-md mx-auto">
       {/* Animated rings */}
       <div className="relative mb-12">
-        <div className="w-32 h-32 rounded-full border-4 border-slate-200 flex items-center justify-center bg-white shadow-xl">
+        <div className="w-32 h-32 rounded-full border-4 border-purple-100 flex items-center justify-center bg-white shadow-xl">
           <div 
             className="absolute inset-0 rounded-full border-4 border-purple-600 border-t-transparent animate-spin"
             style={{ animationDuration: "1.5s" }}
@@ -92,7 +92,7 @@ export function AnalyzingAnimation() {
             className="absolute inset-2 rounded-full border-4 border-purple-300 border-b-transparent animate-spin"
             style={{ animationDuration: "2s", animationDirection: "reverse" }}
           />
-          <span className="text-3xl font-black tabular-nums text-slate-900">
+          <span className="text-3xl font-black tabular-nums text-purple-900">
             {Math.round(progress)}%
           </span>
         </div>
@@ -104,7 +104,7 @@ export function AnalyzingAnimation() {
       <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">
         Analyzing your answers
       </h2>
-      <p className="text-slate-500 mb-10">
+      <p className="text-purple-600/70 mb-10 font-medium">
         Creating your personalized plan...
       </p>
 
@@ -122,7 +122,7 @@ export function AnalyzingAnimation() {
                   ? "bg-purple-50 border border-purple-200"
                   : isActive
                   ? "bg-white border border-purple-200 shadow-md"
-                  : "bg-slate-100 border border-transparent"
+                  : "bg-purple-50/30 border border-transparent"
               }`}
             >
               <div
@@ -130,8 +130,8 @@ export function AnalyzingAnimation() {
                   isComplete
                     ? "bg-purple-600 text-white"
                     : isActive
-                    ? "bg-purple-900 text-white"
-                    : "bg-slate-200 text-slate-400"
+                    ? "bg-purple-700 text-white"
+                    : "bg-purple-100 text-purple-400"
                 }`}
               >
                 {isComplete ? (
@@ -142,16 +142,16 @@ export function AnalyzingAnimation() {
               </div>
               <span
                 className={`font-bold transition-colors duration-300 ${
-                  isComplete ? "text-purple-700" : isActive ? "text-slate-900" : "text-slate-400"
+                  isComplete ? "text-purple-700" : isActive ? "text-slate-900" : "text-purple-300"
                 }`}
               >
                 {step.label}
               </span>
               {isActive && !isComplete && (
                 <div className="ml-auto flex gap-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-purple-900 animate-pulse" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-purple-900 animate-pulse" style={{ animationDelay: "0.2s" }} />
-                  <div className="w-1.5 h-1.5 rounded-full bg-purple-900 animate-pulse" style={{ animationDelay: "0.4s" }} />
+                  <div className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse" style={{ animationDelay: "0.2s" }} />
+                  <div className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse" style={{ animationDelay: "0.4s" }} />
                 </div>
               )}
             </div>

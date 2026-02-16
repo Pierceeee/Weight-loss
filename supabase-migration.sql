@@ -1,4 +1,4 @@
--- PCOS Plan Database Migration
+-- PCOS Reset Method Database Migration
 -- This file creates the required tables for the funnel tracking system
 -- Run this in your Supabase SQL Editor
 

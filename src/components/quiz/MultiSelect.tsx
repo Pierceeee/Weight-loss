@@ -3,6 +3,7 @@
 import { QuizOption } from "@/types/quiz";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Check } from "lucide-react";
 
 interface MultiSelectProps {
   options: QuizOption[];
@@ -42,10 +43,10 @@ export function MultiSelect({ options, value = [], onChange }: MultiSelectProps)
               onClick={() => handleToggle(option.id)}
               className={cn(
                 "flex items-center gap-3 p-3.5 sm:p-4 rounded-xl border transition-all duration-200 text-left active:scale-[0.98] w-full",
-                "hover:border-gray-300 hover:shadow-sm",
+                "hover:shadow-sm",
                 isSelected
-                  ? "border-gray-300 bg-white shadow-sm"
-                  : "border-gray-200 bg-white"
+                  ? "border-purple-500 bg-purple-50/50 shadow-sm"
+                  : "border-gray-200 bg-white hover:border-purple-200 hover:bg-purple-50/30"
               )}
               style={{ animationDelay: `${index * 30}ms` }}
             >
@@ -61,16 +62,21 @@ export function MultiSelect({ options, value = [], onChange }: MultiSelectProps)
               ) : option.icon ? (
                 <span className="text-lg sm:text-xl flex-shrink-0">{option.icon}</span>
               ) : null}
-              <span className="flex-1 font-medium text-[15px] text-gray-900 leading-snug">{option.label}</span>
+              <span className={cn(
+                "flex-1 font-medium text-[15px] leading-snug transition-colors",
+                isSelected ? "text-purple-900 font-semibold" : "text-gray-900"
+              )}>{option.label}</span>
               <div
                 className={cn(
                   "w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0",
                   isSelected
-                    ? "border-gray-400 bg-white"
+                    ? "border-purple-600 bg-purple-600"
                     : "border-gray-300 bg-white"
                 )}
               >
-                {isSelected && <span className="block w-2.5 h-2.5 rounded-full bg-gray-800" />}
+                {isSelected && (
+                  <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                )}
               </div>
             </button>
           </div>

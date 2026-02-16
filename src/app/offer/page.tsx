@@ -183,7 +183,7 @@ export default function OfferPage() {
             </div>
 
             {/* Stats Banner */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100 text-center">
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 border border-purple-100 text-center">
               <p className="text-2xl font-bold text-slate-900 mb-2">9 out of 10 women</p>
               <p className="text-sm text-slate-600">reported improvements in PCOS-related symptoms</p>
               <p className="text-xs text-slate-400 mt-3 italic">Results are not typical. Individual results may vary.</p>
@@ -195,7 +195,7 @@ export default function OfferPage() {
                 <p className="text-lg font-semibold text-slate-900 mb-2">
                   Your personalized PCOS Reset Method is ready.
                 </p>
-                <p className="text-sm text-green-600 font-medium">
+                <p className="text-sm text-purple-600 font-medium">
                   ✓ Your promo code has been successfully applied
                 </p>
               </div>
@@ -228,7 +228,7 @@ export default function OfferPage() {
             {/* Trust Badges */}
             <div className="space-y-4">
               <div className="flex items-center justify-center gap-2 text-sm font-semibold text-slate-700">
-                <CheckCircle2 size={16} className="text-green-600" />
+                <CheckCircle2 size={16} className="text-purple-600" />
                 <span>Guaranteed Safe Checkout</span>
               </div>
               <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center">
@@ -257,9 +257,9 @@ export default function OfferPage() {
 
 function WeightCard({ label, value, highlight = false }: { label: string, value: string, highlight?: boolean }) {
   return (
-    <div className={`p-4 rounded-2xl border ${highlight ? 'border-green-200 bg-green-50/50' : 'border-slate-100 bg-slate-50/50'}`}>
+    <div className={`p-4 rounded-2xl border ${highlight ? 'border-purple-200 bg-purple-50/50' : 'border-slate-100 bg-slate-50/50'}`}>
       <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-1">{label}</p>
-      <p className={`text-2xl font-black ${highlight ? 'text-green-600' : 'text-slate-900'}`}>{value}</p>
+      <p className={`text-2xl font-black ${highlight ? 'text-purple-600' : 'text-slate-900'}`}>{value}</p>
     </div>
   );
 }
@@ -351,7 +351,7 @@ function TestimonialCard({ date, title, text, author }: { date: string, title: s
       <p className="text-sm text-slate-600 leading-relaxed mb-3">{text}</p>
       <div className="flex items-center justify-between">
         <p className="text-sm font-semibold text-slate-900">{author}</p>
-        <span className="text-xs text-green-600 font-medium">✓ Verified Customer</span>
+        <span className="text-xs text-purple-600 font-medium">✓ Verified Customer</span>
       </div>
     </div>
   );

@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   return NextResponse.json({
-    message: "Perfect Body API - Generate Meal Plan",
+    message: "PCOS Reset Method API - Generate Meal Plan",
     method: "POST",
     description: "Send a user profile to generate a personalized meal plan",
     configured: isAIConfigured(),

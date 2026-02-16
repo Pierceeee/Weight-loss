@@ -84,7 +84,7 @@ Building authority and presenting the solution.
 The sequence of pages after the quiz completes.
 
 1.  **Timeline Page (`/timeline`)**
-    *   **Content:** Graph showing projected weight loss with the PCOS Plan vs. usual journey.
+    *   **Content:** Graph showing projected weight loss with the PCOS Reset Method vs. usual journey.
     *   **CTA:** Continue -> Goes to Summary.
 2.  **Summary Page (`/summary`)**
     *   **Content:** Results dashboard showing BMI gauge (e.g., "Obese"), Health Risks, and confirmation of inputs.

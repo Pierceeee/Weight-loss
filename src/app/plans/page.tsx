@@ -87,7 +87,7 @@ export default function PlansPage() {
             </div>
 
             {/* Pricing */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 space-y-4">
+            <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100 space-y-4">
               <h2 className="text-2xl font-bold text-slate-900 text-center mb-2">Select Your Plan</h2>
               <div className="space-y-4">
                 {PLANS.map((plan) => (
@@ -114,7 +114,7 @@ export default function PlansPage() {
             </div>
 
             {/* App Preview & Ratings */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+            <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100">
               <h3 className="text-lg font-bold text-slate-900 mb-4 text-center">
                 Personal progress journal to monitor your results
               </h3>
@@ -163,19 +163,19 @@ export default function PlansPage() {
             </div>
 
             {/* Stats Banner */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100 text-center">
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 border border-purple-100 text-center">
               <p className="text-2xl font-bold text-slate-900 mb-2">9 out of 10 women</p>
               <p className="text-sm text-slate-600">reported improvements in PCOS-related symptoms</p>
               <p className="text-xs text-slate-400 mt-3 italic">Results are not typical. Individual results may vary.</p>
             </div>
 
             {/* Final CTA Section */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 space-y-4">
+            <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100 space-y-4">
               <div className="text-center">
                 <p className="text-lg font-semibold text-slate-900 mb-2">
                   Join the PCOS Reset Method today.
                 </p>
-                <p className="text-sm text-green-600 font-medium">
+                <p className="text-sm text-purple-600 font-medium">
                   ✓ Promotional discount applied
                 </p>
               </div>
@@ -194,7 +194,7 @@ export default function PlansPage() {
 
               <button 
                 onClick={handleCheckout}
-                className="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
+                className="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-purple-700 transition-all flex items-center justify-center gap-2"
               >
                 Join Now
                 <ChevronRight size={20} />
@@ -208,7 +208,7 @@ export default function PlansPage() {
             {/* Trust Badges */}
             <div className="space-y-4">
               <div className="flex items-center justify-center gap-2 text-sm font-semibold text-slate-700">
-                <CheckCircle2 size={16} className="text-green-600" />
+                <CheckCircle2 size={16} className="text-purple-600" />
                 <span>Guaranteed Safe Checkout</span>
               </div>
               <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center">
@@ -249,7 +249,7 @@ function FeatureIconCard({ icon, label }: { icon: React.ReactNode, label: string
 function IncludedItem({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3">
-      <CheckCircle2 size={18} className="text-green-500 shrink-0" />
+      <CheckCircle2 size={18} className="text-purple-600 shrink-0" />
       <span className="text-sm font-medium text-slate-700">{text}</span>
     </div>
   );
@@ -333,7 +333,7 @@ function TestimonialCard({ date, title, text, author }: { date: string, title: s
       <p className="text-sm text-slate-600 leading-relaxed mb-3">{text}</p>
       <div className="flex items-center justify-between">
         <p className="text-sm font-semibold text-slate-900">{author}</p>
-        <span className="text-xs text-green-600 font-medium">✓ Verified Customer</span>
+        <span className="text-xs text-purple-600 font-medium">✓ Verified Customer</span>
       </div>
     </div>
   );
