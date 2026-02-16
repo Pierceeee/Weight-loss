@@ -3,6 +3,7 @@ export type QuestionType =
   | "multi-select"
   | "numeric-input"
   | "height-input"
+  | "weight-input"
   | "ingredient-select"
   | "science-list"
   | "goal-projection"
