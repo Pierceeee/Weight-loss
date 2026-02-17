@@ -27,8 +27,8 @@ export default function NameCapturePage() {
       // Store in localStorage as well
       localStorage.setItem("pcos-user-name", name.trim());
 
-      // Navigate to offer page
-      router.push("/offer");
+      // Navigate to result offer page
+      router.push("/result-offer");
     } catch (err) {
       console.error("Error saving name:", err);
     } finally {

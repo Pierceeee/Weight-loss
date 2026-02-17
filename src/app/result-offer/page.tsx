@@ -1,77 +1,132 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle2, ChevronRight, Star, Heart, Activity, Apple, Zap, Shield, Sparkles } from "lucide-react";
+import { useQuizStore } from "@/hooks/useQuizState";
+import { kgToLbs } from "@/lib/bmi";
+import { CheckCircle2, Timer, ChevronRight, TrendingDown, Star } from "lucide-react";
 
 // --- Configuration ---
+const INITIAL_TIMER_SECONDS = 15 * 60;
+const CONSERVATIVE_WEEKLY_LOSS_KG = 0.7;
+const DEFAULT_NAME = "Guest";
+
 const PLANS = [
-  { id: "1month", title: "Monthly Transformation", original: 44.40, price: 15.19, daily: 0.50, featured: false },
-  { id: "3month", title: "90-Day Reset", original: 75.49, price: 25.99, daily: 0.28, featured: true, tag: "MOST POPULAR" },
-  { id: "6month", title: "Complete Lifestyle", original: 120.00, price: 39.99, daily: 0.22, featured: false },
+  { id: "7day", title: "7-day plan", original: 22.20, price: 6.93, daily: 0.99, featured: false },
+  { id: "1month", title: "1-month plan", original: 44.40, price: 15.19, daily: 0.50, featured: false },
+  { id: "3month", title: "3-month plan", original: 75.49, price: 25.99, daily: 0.28, featured: true, tag: "BEST VALUE" },
 ];
 
-export default function SpecialOfferPage() {
+export default function OfferPage() {
   const router = useRouter();
+  const { responses } = useQuizStore();
+  const [timeLeft, setTimeLeft] = useState(INITIAL_TIMER_SECONDS);
   const [mounted, setMounted] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("3month");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => { setMounted(true); }, []);
 
-  const handleCheckout = () => {
-    // TODO: Implement Stripe checkout or payment flow
-    console.log("Selected plan:", selectedPlan);
-    alert("Checkout functionality coming soon!");
+  const userData = useMemo(() => {
+    const name = (responses["name"] as string) || 
+                 (mounted && typeof window !== 'undefined' ? localStorage.getItem("pcos-user-name") : null) || 
+                 DEFAULT_NAME;
+
+    const rawWeight = responses["current-weight"] as number || 68;
+    
+    return {
+      userName: name,
+      currentWeightKg: rawWeight,
+      targetWeight: rawWeight - (CONSERVATIVE_WEEKLY_LOSS_KG * 4),
+    };
+  }, [responses, mounted]);
+
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  const handleCheckout = async () => {
+    setIsLoading(true);
+    try {
+      const email = mounted && typeof window !== 'undefined' ? localStorage.getItem("pcos-user-email") : null;
+      
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          planId: selectedPlan,
+          sessionId: responses.sessionId || "",
+          email: email || undefined,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || "Failed to create checkout session");
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Something went wrong with the checkout. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!mounted) return <SkeletonLoader />;
 
   return (
-    <div className="min-h-screen bg-[#FDFBFF] antialiased pb-20">
+    <div className="min-h-screen bg-slate-50 antialiased pb-20">
+      {/* Urgency Bar */}
+      <div className="sticky top-0 z-50 bg-black text-white py-2 px-4 flex justify-center items-center gap-3 text-sm font-medium">
+        <Timer size={16} className="text-purple-400" />
+        <span>Reserved discount expires in <span className="text-purple-400 font-mono">{formatTime(timeLeft)}</span></span>
+      </div>
+
       <main className="max-w-2xl mx-auto px-4 mt-8">
         <section className="bg-white rounded-3xl shadow-xl shadow-purple-200/20 overflow-hidden border border-purple-100">
           
           {/* Hero Section */}
-          <div className="p-10 text-center bg-gradient-to-b from-purple-50/50 to-white">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 rounded-full text-purple-700 text-xs font-bold uppercase mb-4">
-              <Sparkles size={14} />
-              Limited Time Special Offer
-            </div>
-            <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-              Unlock Your <span className="text-purple-600">PCOS Reset</span> Results
+          <div className="p-8 text-center bg-gradient-to-b from-purple-50/30 to-white">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Great progress, {userData.userName}!
             </h1>
-            <p className="mt-6 text-slate-600 text-lg max-w-lg mx-auto">
-              Join 28,000+ women who have transformed their hormonal health with our step-by-step method.
-            </p>
+            <p className="mt-3 text-slate-600 text-lg">Your personalized PCOS Reset Method is ready.</p>
             
-            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <FeatureIconCard icon={<Apple className="text-green-500" />} label="Meal Plans" />
-              <FeatureIconCard icon={<Activity className="text-blue-500" />} label="Tracking" />
-              <FeatureIconCard icon={<Zap className="text-yellow-500" />} label="Energy" />
-              <FeatureIconCard icon={<Heart className="text-red-500" />} label="Support" />
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              <WeightCard label="Starting" value={`${Math.round(userData.currentWeightKg)} kg`} />
+              <WeightCard label="Goal (4 Weeks)" value={`${Math.round(userData.targetWeight)} kg`} highlight />
             </div>
           </div>
 
           <div className="p-8 pt-0 space-y-10">
-            {/* What's Included */}
+            {/* Snapshot */}
             <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100">
               <h2 className="text-lg font-bold text-slate-900 mb-6 flex items-center justify-center gap-2">
                 <Star size={18} className="fill-purple-400 text-purple-400" />
-                What's Included
+                Goal Snapshot
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
-                <IncludedItem text="Personalized PCOS Meal Plans" />
-                <IncludedItem text="Daily Symptom Tracking" />
-                <IncludedItem text="Hormone Balancing Recipes" />
-                <IncludedItem text="Community Support Group" />
-                <IncludedItem text="Weight Loss Progress Tools" />
-                <IncludedItem text="Daily Educational Tips" />
+              <div className="grid grid-cols-2 gap-y-6 gap-x-4">
+                <SnapshotItem label="Body Fat" value="Lower" />
+                <SnapshotItem label="Symptoms" value="Reduced" />
+                <SnapshotItem label="Energy" value="Higher" />
+                <SnapshotItem label="Stress" value="Optimized" />
               </div>
             </div>
 
             {/* Pricing */}
             <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100 space-y-4">
-              <h2 className="text-2xl font-bold text-slate-900 text-center mb-2">Choose Your Transformation</h2>
+              <h2 className="text-2xl font-bold text-slate-900 text-center mb-2">Select Your Transformation</h2>
               <div className="space-y-4">
                 {PLANS.map((plan) => (
                   <PlanCard 
@@ -85,10 +140,17 @@ export default function SpecialOfferPage() {
               
               <button 
                 onClick={handleCheckout}
-                className="w-full bg-purple-600 text-white py-5 rounded-2xl font-black text-xl shadow-lg shadow-purple-200 hover:bg-purple-700 transition-all flex items-center justify-center gap-2"
+                disabled={isLoading}
+                className="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-purple-700 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                CLAIM MY RESULTS
-                <ChevronRight size={24} />
+                {isLoading ? (
+                  <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <>
+                    Get My Plan
+                    <ChevronRight size={20} />
+                  </>
+                )}
               </button>
 
               <p className="mt-2 text-center text-sm text-slate-500 italic">
@@ -104,7 +166,7 @@ export default function SpecialOfferPage() {
               <div className="relative max-w-sm mx-auto mb-6">
                 <img 
                   src="/images/progress-journal.png" 
-                  alt="App interface preview" 
+                  alt="Before and after transformation" 
                   className="w-full rounded-2xl shadow-md"
                 />
               </div>
@@ -142,6 +204,12 @@ export default function SpecialOfferPage() {
                   text="I first tried the program earlier this year and saw noticeable progress, so I decided to return to it again. During a stressful period I gained weight quickly, but following the structured plan again helped me regain control. Based on my previous experience, I expect to reach my goal within the next several weeks."
                   author="Nicole"
                 />
+                <TestimonialCard 
+                  date="02 Sep"
+                  title="Exactly the structure I needed"
+                  text="I love the reminders and tracking tools — they keep me consistent with meals, hydration, and daily habits. The personalized meal plans and shopping lists make everything easier, and I finally feel like I have a clear system instead of guessing what to eat. I would definitely recommend it to anyone trying to improve their nutrition and weight management."
+                  author="Laura"
+                />
               </div>
             </div>
 
@@ -156,10 +224,10 @@ export default function SpecialOfferPage() {
             <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100 space-y-4">
               <div className="text-center">
                 <p className="text-lg font-semibold text-slate-900 mb-2">
-                  Unlock your PCOS Reset Results today.
+                  Your personalized PCOS Reset Method is ready.
                 </p>
                 <p className="text-sm text-purple-600 font-medium">
-                  ✅ Special promotional offer applied
+                  ✅ Your promo code has been successfully applied
                 </p>
               </div>
 
@@ -177,14 +245,21 @@ export default function SpecialOfferPage() {
 
               <button 
                 onClick={handleCheckout}
-                className="w-full bg-purple-600 text-white py-5 rounded-2xl font-black text-xl shadow-lg shadow-purple-200 hover:bg-purple-700 transition-all flex items-center justify-center gap-2"
+                disabled={isLoading}
+                className="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-purple-700 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                CLAIM MY RESULTS
-                <ChevronRight size={24} />
+                {isLoading ? (
+                  <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <>
+                    Get My Plan
+                    <ChevronRight size={20} />
+                  </>
+                )}
               </button>
 
               <p className="text-xs text-slate-500 text-center leading-relaxed">
-                We've automatically applied your discount to the first subscription payment. Subscription renews automatically. Cancel anytime.
+                We've automatically applied your discount to the first subscription payment. Please note that your subscription will renew automatically at the standard price once the selected billing period ends. If you prefer not to continue, you can cancel your subscription anytime directly within the PCOS Reset Method app.
               </p>
             </div>
 
@@ -203,7 +278,7 @@ export default function SpecialOfferPage() {
             {/* Disclaimer */}
             <div className="text-center space-y-3 pt-4 border-t border-slate-100">
               <p className="text-xs text-slate-400 leading-relaxed">
-                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, app, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease.
+                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, app, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease and should not replace professional medical advice or treatment. Please consult a qualified healthcare professional before making medical decisions.
               </p>
               <p className="text-xs text-slate-400">
                 © 2026 PCOS Reset Method. All rights reserved.
@@ -218,52 +293,58 @@ export default function SpecialOfferPage() {
 
 // --- Sub-components ---
 
-function FeatureIconCard({ icon, label }: { icon: React.ReactNode, label: string }) {
+function WeightCard({ label, value, highlight = false }: { label: string, value: string, highlight?: boolean }) {
   return (
-    <div className="p-4 rounded-2xl border border-slate-100 bg-white shadow-sm flex flex-col items-center gap-2">
-      <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center">
-        {icon}
-      </div>
-      <p className="text-xs font-bold text-slate-700">{label}</p>
+    <div className={`p-4 rounded-2xl border ${highlight ? 'border-purple-200 bg-purple-50/50' : 'border-slate-100 bg-slate-50/50'}`}>
+      <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-1">{label}</p>
+      <p className={`text-2xl font-black ${highlight ? 'text-purple-600' : 'text-slate-900'}`}>{value}</p>
     </div>
   );
 }
 
-function IncludedItem({ text }: { text: string }) {
+function SnapshotItem({ label, value }: { label: string, value: string }) {
   return (
-    <div className="flex items-center gap-3">
-      <CheckCircle2 size={18} className="text-purple-600 shrink-0" />
-      <span className="text-sm font-medium text-slate-700">{text}</span>
+    <div className="flex flex-col items-center">
+      <span className="text-xs font-semibold text-slate-500 uppercase tracking-tighter">{label}</span>
+      <span className="text-lg font-extrabold text-slate-900">{value}</span>
     </div>
   );
 }
 
-function PlanCard({ title, original, price, daily, tag, isActive, onClick }: any) {
+function PlanCard({ title, original, price, daily, featured, tag, isActive, onClick }: any) {
   return (
     <div 
       onClick={onClick}
-      className={`relative p-6 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${
-        isActive ? 'border-purple-600 bg-purple-100/50 shadow-md' : 'border-slate-100 bg-white hover:border-purple-200'
+      className={`relative p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${
+        isActive ? 'border-purple-500 bg-purple-50/30' : 'border-slate-100 bg-white hover:border-slate-200'
       }`}
     >
       {tag && (
-        <span className="absolute -top-3 left-6 bg-purple-600 text-white text-[10px] font-black px-3 py-1 rounded-full ring-4 ring-white">
+        <span className="absolute -top-3 left-6 bg-purple-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full ring-4 ring-white">
           {tag}
         </span>
       )}
       <div className="flex items-center gap-4">
-        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${isActive ? 'border-purple-600' : 'border-slate-200'}`}>
-          {isActive && <div className="w-3 h-3 bg-purple-600 rounded-full" />}
+        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${isActive ? 'border-purple-500' : 'border-slate-200'}`}>
+          {isActive && <div className="w-3 h-3 bg-purple-500 rounded-full" />}
         </div>
         <div>
-          <h3 className={`font-bold transition-colors ${isActive ? 'text-purple-900' : 'text-slate-900'}`}>{title}</h3>
+          <h3 className="font-bold text-slate-900">{title}</h3>
           <p className="text-xs text-slate-500 font-medium">${daily} / day</p>
         </div>
       </div>
       <div className="text-right">
         <p className="text-xs text-slate-400 line-through">${original.toFixed(2)}</p>
-        <p className={`text-2xl font-black ${isActive ? 'text-purple-700' : 'text-slate-900'}`}>${price}</p>
+        <p className="text-2xl font-black text-slate-900">${price}</p>
       </div>
+    </div>
+  );
+}
+
+function SkeletonLoader() {
+  return (
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center p-8">
+      <div className="w-full max-w-2xl bg-white h-96 rounded-3xl animate-pulse" />
     </div>
   );
 }
@@ -310,14 +391,6 @@ function TestimonialCard({ date, title, text, author }: { date: string, title: s
         <p className="text-sm font-semibold text-slate-900">{author}</p>
         <span className="text-xs text-purple-600 font-medium">✅ Verified Customer</span>
       </div>
-    </div>
-  );
-}
-
-function SkeletonLoader() {
-  return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center p-8">
-      <div className="w-full max-w-2xl bg-white h-96 rounded-3xl animate-pulse" />
     </div>
   );
 }

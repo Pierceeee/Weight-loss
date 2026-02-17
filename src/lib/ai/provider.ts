@@ -12,7 +12,7 @@ export interface AIProvider {
   generateMealPlan(userProfile: UserProfile): Promise<WeeklyMealPlan>;
 
   /**
-   * Generate personalized analysis text for the offer page
+   * Generate personalized analysis text for the result offer page
    */
   generateAnalysis(userProfile: UserProfile): Promise<string>;
 
@@ -160,7 +160,7 @@ export function getAnalysisPrompt(profile: UserProfile): string {
 9. Use "you/your" language (second person)
 10. DO NOT mention prices, plans, or make it sound like a sales pitch`;
 
-  return `${expertRole} Based on the user's quiz responses, create a personalized, empathetic, and motivating analysis for the offer page.
+  return `${expertRole} Based on the user's quiz responses, create a personalized, empathetic, and motivating analysis for the result offer page.
 
 ## User Profile
 - Gender: ${isMale ? "Male" : "Female"}

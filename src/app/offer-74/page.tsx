@@ -23,6 +23,7 @@ export default function Offer74Page() {
   const { responses } = useQuizStore();
   const [mounted, setMounted] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("3month");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -40,9 +41,34 @@ export default function Offer74Page() {
     };
   }, [responses, mounted]);
 
-  const handleCheckout = () => {
-    console.log("Selected plan:", selectedPlan);
-    alert("Checkout functionality coming soon!");
+  const handleCheckout = async () => {
+    setIsLoading(true);
+    try {
+      const email = mounted && typeof window !== 'undefined' ? localStorage.getItem("pcos-user-email") : null;
+      
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          planId: `${selectedPlan}_74`,
+          sessionId: responses.sessionId || "",
+          email: email || undefined,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || "Failed to create checkout session");
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Something went wrong with the checkout. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!mounted) return <SkeletonLoader />;
@@ -94,10 +120,17 @@ export default function Offer74Page() {
               
               <button 
                 onClick={handleCheckout}
-                className="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-purple-700 transition-all flex items-center justify-center gap-2"
+                disabled={isLoading}
+                className="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-purple-700 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Claim {DISCOUNT_PERCENTAGE}% Discount
-                <ChevronRight size={20} />
+                {isLoading ? (
+                  <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <>
+                    Claim {DISCOUNT_PERCENTAGE}% Discount
+                    <ChevronRight size={20} />
+                  </>
+                )}
               </button>
 
               <p className="mt-2 text-center text-sm text-slate-500 italic">
@@ -186,10 +219,17 @@ export default function Offer74Page() {
 
               <button 
                 onClick={handleCheckout}
-                className="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-purple-700 transition-all flex items-center justify-center gap-2"
+                disabled={isLoading}
+                className="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-purple-700 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Get My Plan
-                <ChevronRight size={20} />
+                {isLoading ? (
+                  <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <>
+                    Get My Plan
+                    <ChevronRight size={20} />
+                  </>
+                )}
               </button>
 
               <p className="text-xs text-slate-500 text-center leading-relaxed">
