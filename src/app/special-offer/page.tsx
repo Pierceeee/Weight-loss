@@ -2,11 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle2, ChevronRight, Star, Heart, Zap, Shield, Sparkles } from "lucide-react";
+import { CheckCircle2, ChevronRight, Star, Heart, Activity, Apple, Zap, Shield, Sparkles } from "lucide-react";
 
 // --- Configuration ---
-const INITIAL_TIMER_SECONDS = 10 * 60; // 10 minutes for this variation
-
 const PLANS = [
   { id: "1month", title: "Monthly Transformation", original: 44.40, price: 15.19, daily: 0.50, featured: false },
   { id: "3month", title: "90-Day Reset", original: 75.49, price: 25.99, daily: 0.28, featured: true, tag: "MOST POPULAR" },
@@ -21,6 +19,7 @@ export default function SpecialOfferPage() {
   useEffect(() => { setMounted(true); }, []);
 
   const handleCheckout = () => {
+    // TODO: Implement Stripe checkout or payment flow
     console.log("Selected plan:", selectedPlan);
     alert("Checkout functionality coming soon!");
   };
@@ -36,7 +35,7 @@ export default function SpecialOfferPage() {
           <div className="p-10 text-center bg-gradient-to-b from-purple-50/50 to-white">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 rounded-full text-purple-700 text-xs font-bold uppercase mb-4">
               <Sparkles size={14} />
-              Personalized for you
+              Limited Time Special Offer
             </div>
             <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
               Unlock Your <span className="text-purple-600">PCOS Reset</span> Results
@@ -44,12 +43,35 @@ export default function SpecialOfferPage() {
             <p className="mt-6 text-slate-600 text-lg max-w-lg mx-auto">
               Join 28,000+ women who have transformed their hormonal health with our step-by-step method.
             </p>
+            
+            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+              <FeatureIconCard icon={<Apple className="text-green-500" />} label="Meal Plans" />
+              <FeatureIconCard icon={<Activity className="text-blue-500" />} label="Tracking" />
+              <FeatureIconCard icon={<Zap className="text-yellow-500" />} label="Energy" />
+              <FeatureIconCard icon={<Heart className="text-red-500" />} label="Support" />
+            </div>
           </div>
 
           <div className="p-8 pt-0 space-y-10">
+            {/* What's Included */}
+            <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100">
+              <h2 className="text-lg font-bold text-slate-900 mb-6 flex items-center justify-center gap-2">
+                <Star size={18} className="fill-purple-400 text-purple-400" />
+                What's Included
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
+                <IncludedItem text="Personalized PCOS Meal Plans" />
+                <IncludedItem text="Daily Symptom Tracking" />
+                <IncludedItem text="Hormone Balancing Recipes" />
+                <IncludedItem text="Community Support Group" />
+                <IncludedItem text="Weight Loss Progress Tools" />
+                <IncludedItem text="Daily Educational Tips" />
+              </div>
+            </div>
+
             {/* Pricing */}
-            <div className="bg-purple-50/30 rounded-3xl p-6 border border-purple-100 space-y-4">
-              <h2 className="text-xl font-black text-slate-900 text-center mb-2">Choose Your Path</h2>
+            <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100 space-y-4">
+              <h2 className="text-2xl font-bold text-slate-900 text-center mb-2">Choose Your Transformation</h2>
               <div className="space-y-4">
                 {PLANS.map((plan) => (
                   <PlanCard 
@@ -63,50 +85,129 @@ export default function SpecialOfferPage() {
               
               <button 
                 onClick={handleCheckout}
-                className="w-full bg-purple-600 text-white py-5 rounded-2xl font-black text-xl shadow-lg shadow-purple-200 hover:bg-purple-700 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                className="w-full bg-purple-600 text-white py-5 rounded-2xl font-black text-xl shadow-lg shadow-purple-200 hover:bg-purple-700 transition-all flex items-center justify-center gap-2"
               >
                 CLAIM MY RESULTS
                 <ChevronRight size={24} />
               </button>
 
-              <div className="flex items-center justify-center gap-4 py-2 opacity-60">
-                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-500">
-                  <Shield size={12} />
-                  SECURE
+              <p className="mt-2 text-center text-sm text-slate-500 italic">
+                Most women choose the 3-month plan for more stable metabolic adaptation.
+              </p>
+            </div>
+
+            {/* App Preview & Ratings */}
+            <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100">
+              <h3 className="text-lg font-bold text-slate-900 mb-4 text-center">
+                Personal progress journal to monitor your results
+              </h3>
+              <div className="relative max-w-sm mx-auto mb-6">
+                <img 
+                  src="/images/progress-journal.png" 
+                  alt="App interface preview" 
+                  className="w-full rounded-2xl shadow-md"
+                />
+              </div>
+              
+              {/* Ratings */}
+              <div className="text-center space-y-2">
+                <p className="text-sm font-bold text-slate-900">28,000+ five-star user ratings</p>
+                <div className="flex items-center justify-center gap-6 text-sm">
+                  <div className="flex items-center gap-1">
+                    <span className="font-bold text-slate-900">4.8</span>
+                    <span className="text-slate-500">App Store</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-bold text-slate-900">4.8</span>
+                    <span className="text-slate-500">Google Play</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-500">
-                  <Heart size={12} />
-                  PCOS SAFE
-                </div>
-                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-500">
-                  <Zap size={12} />
-                  FAST RESULTS
-                </div>
+                <p className="text-xs text-slate-500">One of the highest-rated personalized weight-loss companions</p>
               </div>
             </div>
 
             {/* Testimonials */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-bold text-slate-900 text-center">Real Stories, Real Change</h3>
-              <div className="grid gap-4">
+            <div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">Success stories from our users</h3>
+              <div className="space-y-4">
                 <TestimonialCard 
-                  author="Sarah M."
-                  text="I've finally found something that works for my PCOS. The meal plans are delicious and my energy is back! ✨"
+                  date="18 Oct"
+                  title="Simple to follow and very flexible"
+                  text="The program is easy to follow and helped me manage my PCOS-related symptoms better. I also started drinking more water, something I struggled with before, and I love that I can choose different meal options whenever I want. The daily tips are practical and easy to apply, especially the small nutrition suggestions. The best part is that I don't feel constantly hungry anymore."
+                  author="Amanda"
                 />
                 <TestimonialCard 
-                  author="Jessica L."
-                  text="Lost 12kg in 3 months and my cycles are regular for the first time in years. This method is a lifesaver. ✅"
+                  date="12 Aug"
+                  title="It helped me get back on track"
+                  text="I first tried the program earlier this year and saw noticeable progress, so I decided to return to it again. During a stressful period I gained weight quickly, but following the structured plan again helped me regain control. Based on my previous experience, I expect to reach my goal within the next several weeks."
+                  author="Nicole"
                 />
               </div>
             </div>
 
-            {/* Money Back */}
-            <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 text-center">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-slate-100">
-                <Shield className="text-purple-600" size={24} />
+            {/* Stats Banner */}
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 border border-purple-100 text-center">
+              <p className="text-2xl font-bold text-slate-900 mb-2">9 out of 10 women</p>
+              <p className="text-sm text-slate-600">reported improvements in PCOS-related symptoms</p>
+              <p className="text-xs text-slate-400 mt-3 italic">Results are not typical. Individual results may vary.</p>
+            </div>
+
+            {/* Final CTA Section */}
+            <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100 space-y-4">
+              <div className="text-center">
+                <p className="text-lg font-semibold text-slate-900 mb-2">
+                  Unlock your PCOS Reset Results today.
+                </p>
+                <p className="text-sm text-purple-600 font-medium">
+                  ✅ Special promotional offer applied
+                </p>
               </div>
-              <p className="text-lg font-bold text-slate-900 mb-1">100% Risk-Free Guarantee</p>
-              <p className="text-sm text-slate-600">If you're not seeing results within 30 days, we'll refund your entire purchase. No questions asked.</p>
+
+              {/* Pricing Repeat */}
+              <div className="space-y-3 py-4">
+                {PLANS.map((plan) => (
+                  <PlanCardCompact 
+                    key={plan.id}
+                    {...plan}
+                    isActive={selectedPlan === plan.id}
+                    onClick={() => setSelectedPlan(plan.id)}
+                  />
+                ))}
+              </div>
+
+              <button 
+                onClick={handleCheckout}
+                className="w-full bg-purple-600 text-white py-5 rounded-2xl font-black text-xl shadow-lg shadow-purple-200 hover:bg-purple-700 transition-all flex items-center justify-center gap-2"
+              >
+                CLAIM MY RESULTS
+                <ChevronRight size={24} />
+              </button>
+
+              <p className="text-xs text-slate-500 text-center leading-relaxed">
+                We've automatically applied your discount to the first subscription payment. Subscription renews automatically. Cancel anytime.
+              </p>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-center gap-2 text-sm font-semibold text-slate-700">
+                <CheckCircle2 size={16} className="text-purple-600" />
+                <span>Guaranteed Safe Checkout</span>
+              </div>
+              <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center">
+                <p className="text-sm font-bold text-slate-900 mb-1">30-Day Money-Back Guarantee</p>
+                <p className="text-xs text-slate-600">If you do not notice meaningful progress, you can request a full refund within 30 days of purchase.</p>
+              </div>
+            </div>
+
+            {/* Disclaimer */}
+            <div className="text-center space-y-3 pt-4 border-t border-slate-100">
+              <p className="text-xs text-slate-400 leading-relaxed">
+                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, app, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease.
+              </p>
+              <p className="text-xs text-slate-400">
+                © 2026 PCOS Reset Method. All rights reserved.
+              </p>
             </div>
           </div>
         </section>
@@ -116,6 +217,26 @@ export default function SpecialOfferPage() {
 }
 
 // --- Sub-components ---
+
+function FeatureIconCard({ icon, label }: { icon: React.ReactNode, label: string }) {
+  return (
+    <div className="p-4 rounded-2xl border border-slate-100 bg-white shadow-sm flex flex-col items-center gap-2">
+      <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center">
+        {icon}
+      </div>
+      <p className="text-xs font-bold text-slate-700">{label}</p>
+    </div>
+  );
+}
+
+function IncludedItem({ text }: { text: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <CheckCircle2 size={18} className="text-purple-600 shrink-0" />
+      <span className="text-sm font-medium text-slate-700">{text}</span>
+    </div>
+  );
+}
 
 function PlanCard({ title, original, price, daily, tag, isActive, onClick }: any) {
   return (
@@ -147,11 +268,48 @@ function PlanCard({ title, original, price, daily, tag, isActive, onClick }: any
   );
 }
 
-function TestimonialCard({ author, text }: { author: string, text: string }) {
+function PlanCardCompact({ title, original, price, daily, isActive, onClick }: any) {
   return (
-    <div className="bg-white rounded-2xl p-5 border border-purple-100/50 shadow-sm italic text-slate-600 text-sm leading-relaxed">
-      "{text}"
-      <div className="mt-2 not-italic font-bold text-slate-900 text-xs">— {author}</div>
+    <div 
+      onClick={onClick}
+      className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between ${
+        isActive ? 'border-purple-500 bg-purple-50/30' : 'border-slate-200 hover:border-slate-300'
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${isActive ? 'border-purple-500' : 'border-slate-200'}`}>
+          {isActive && <div className="w-2.5 h-2.5 bg-purple-500 rounded-full" />}
+        </div>
+        <div>
+          <h3 className="font-semibold text-slate-900 text-sm">{title}</h3>
+          <p className="text-xs text-slate-500">${daily} / day</p>
+        </div>
+      </div>
+      <div className="text-right">
+        <p className="text-xs text-slate-400 line-through">${original.toFixed(2)}</p>
+        <p className="text-xl font-bold text-slate-900">${price}</p>
+      </div>
+    </div>
+  );
+}
+
+function TestimonialCard({ date, title, text, author }: { date: string, title: string, text: string, author: string }) {
+  return (
+    <div className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-xs font-semibold text-slate-500">{date}</span>
+        <div className="flex gap-0.5">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} size={12} className="fill-yellow-400 text-yellow-400" />
+          ))}
+        </div>
+      </div>
+      <h4 className="font-bold text-slate-900 mb-2">{title}</h4>
+      <p className="text-sm text-slate-600 leading-relaxed mb-3">{text}</p>
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold text-slate-900">{author}</p>
+        <span className="text-xs text-purple-600 font-medium">✅ Verified Customer</span>
+      </div>
     </div>
   );
 }
