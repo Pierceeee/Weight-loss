@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 
 const categoryConfig: Record<string, { icon: string; borderColor: string; lineColor: string; selectedBg: string; selectedBorder: string }> = {
-  greens: { icon: "🥦", borderColor: "border-green-500", lineColor: "bg-green-500", selectedBg: "bg-green-600", selectedBorder: "border-green-600" },
-  "fiber-grains": { icon: "🌾", borderColor: "border-yellow-400", lineColor: "bg-yellow-400", selectedBg: "bg-yellow-600", selectedBorder: "border-yellow-600" },
-  protein: { icon: "🍗", borderColor: "border-red-500", lineColor: "bg-red-500", selectedBg: "bg-red-600", selectedBorder: "border-red-600" },
-  seafood: { icon: "🐟", borderColor: "border-blue-400", lineColor: "bg-blue-400", selectedBg: "bg-blue-600", selectedBorder: "border-blue-600" },
-  dairy: { icon: "🧀", borderColor: "border-purple-400", lineColor: "bg-purple-400", selectedBg: "bg-purple-600", selectedBorder: "border-purple-600" },
-  "fresh-fruits": { icon: "🍎", borderColor: "border-red-500", lineColor: "bg-red-500", selectedBg: "bg-red-600", selectedBorder: "border-red-600" },
+  symptoms: { icon: "🌸", borderColor: "border-pink-400", lineColor: "bg-pink-400", selectedBg: "bg-pink-600", selectedBorder: "border-pink-600" },
+  metabolism: { icon: "⚡", borderColor: "border-yellow-400", lineColor: "bg-yellow-400", selectedBg: "bg-yellow-600", selectedBorder: "border-yellow-600" },
+  nutrition: { icon: "🥗", borderColor: "border-green-500", lineColor: "bg-green-500", selectedBg: "bg-green-600", selectedBorder: "border-green-600" },
+  movement: { icon: "💪", borderColor: "border-blue-400", lineColor: "bg-blue-400", selectedBg: "bg-blue-600", selectedBorder: "border-blue-600" },
+  habits: { icon: "🧘‍♀️", borderColor: "border-purple-400", lineColor: "bg-purple-400", selectedBg: "bg-purple-600", selectedBorder: "border-purple-600" },
+  lifestyle: { icon: "🏠", borderColor: "border-orange-400", lineColor: "bg-orange-400", selectedBg: "bg-orange-600", selectedBorder: "border-orange-600" },
 };
 
 interface IngredientSelectProps {
