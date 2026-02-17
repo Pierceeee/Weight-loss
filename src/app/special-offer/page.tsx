@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle2, Timer, ChevronRight, Star, Heart, Zap, Shield, Sparkles } from "lucide-react";
+import { CheckCircle2, ChevronRight, Star, Heart, Zap, Shield, Sparkles } from "lucide-react";
 
 // --- Configuration ---
 const INITIAL_TIMER_SECONDS = 10 * 60; // 10 minutes for this variation
@@ -15,23 +15,10 @@ const PLANS = [
 
 export default function SpecialOfferPage() {
   const router = useRouter();
-  const [timeLeft, setTimeLeft] = useState(INITIAL_TIMER_SECONDS);
   const [mounted, setMounted] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("3month");
 
   useEffect(() => { setMounted(true); }, []);
-
-  useEffect(() => {
-    if (timeLeft <= 0) return;
-    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
-    return () => clearInterval(timer);
-  }, [timeLeft]);
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
 
   const handleCheckout = () => {
     console.log("Selected plan:", selectedPlan);
@@ -42,12 +29,6 @@ export default function SpecialOfferPage() {
 
   return (
     <div className="min-h-screen bg-[#FDFBFF] antialiased pb-20">
-      {/* Urgency Bar */}
-      <div className="sticky top-0 z-50 bg-purple-600 text-white py-2 px-4 flex justify-center items-center gap-3 text-sm font-bold">
-        <Timer size={16} className="animate-pulse" />
-        <span>LIMITED TIME OFFER: EXPIRES IN <span className="font-mono">{formatTime(timeLeft)}</span></span>
-      </div>
-
       <main className="max-w-2xl mx-auto px-4 mt-8">
         <section className="bg-white rounded-3xl shadow-xl shadow-purple-200/20 overflow-hidden border border-purple-100">
           

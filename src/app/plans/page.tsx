@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle2, Timer, ChevronRight, Star, Heart, Activity, Apple, Zap } from "lucide-react";
+import { CheckCircle2, ChevronRight, Star, Heart, Activity, Apple, Zap } from "lucide-react";
 
 // --- Configuration ---
 const INITIAL_TIMER_SECONDS = 15 * 60;
@@ -15,23 +15,10 @@ const PLANS = [
 
 export default function PlansPage() {
   const router = useRouter();
-  const [timeLeft, setTimeLeft] = useState(INITIAL_TIMER_SECONDS);
   const [mounted, setMounted] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("3month");
 
   useEffect(() => { setMounted(true); }, []);
-
-  useEffect(() => {
-    if (timeLeft <= 0) return;
-    const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
-    return () => clearInterval(timer);
-  }, [timeLeft]);
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
 
   const handleCheckout = () => {
     // TODO: Implement Stripe checkout or payment flow
@@ -42,13 +29,7 @@ export default function PlansPage() {
   if (!mounted) return <SkeletonLoader />;
 
   return (
-    <div className="min-h-screen bg-slate-50 antialiased pb-20">
-      {/* Urgency Bar */}
-      <div className="sticky top-0 z-50 bg-black text-white py-2 px-4 flex justify-center items-center gap-3 text-sm font-medium">
-        <Timer size={16} className="text-purple-400" />
-        <span>Reserved discount expires in <span className="text-purple-400 font-mono">{formatTime(timeLeft)}</span></span>
-      </div>
-
+    <div className="min-h-screen bg-[#FDFBFF] antialiased pb-20">
       <main className="max-w-2xl mx-auto px-4 mt-8">
         <section className="bg-white rounded-3xl shadow-xl shadow-purple-200/20 overflow-hidden border border-purple-100">
           
