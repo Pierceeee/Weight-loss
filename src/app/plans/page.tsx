@@ -193,8 +193,8 @@ export default function PlansPage() {
                 <span>Guaranteed Safe Checkout</span>
               </div>
               <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center">
-                <p className="text-sm font-bold text-slate-900 mb-1">30-Day Money-Back Guarantee</p>
-                <p className="text-xs text-slate-600">If you do not notice meaningful progress, you can request a full refund within 30 days of purchase.</p>
+                <p className="text-sm font-bold text-slate-900 mb-1">14-Day Money-Back Guarantee</p>
+                <p className="text-xs text-slate-600">If you do not notice meaningful progress, you can request a full refund within 14 days of purchase.</p>
               </div>
             </div>
 
