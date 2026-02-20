@@ -87,8 +87,16 @@ function BMIGauge({ bmi }: { bmi: number }) {
 }
 
 export function PersonalSummary() {
-  const { getUserProfile } = useQuizStore();
+  const { getUserProfile, getResponse } = useQuizStore();
   const profile = getUserProfile();
+
+  const age = (getResponse("age") as number | undefined) || (profile?.age);
+  const summaryImage = useMemo(() => {
+    if (!age || age < 35) return "/images/summary-age-25-35.png";
+    if (age < 50) return "/images/summary-age-35-50.png";
+    if (age < 65) return "/images/summary-age-50-65.png";
+    return "/images/summary-age-65-plus.png";
+  }, [age]);
 
   const bmiValue = useMemo(() => {
     if (!profile) return 22;
@@ -168,7 +176,7 @@ export function PersonalSummary() {
           {/* Right side - person image */}
           <div className="relative w-24 sm:w-36 flex-shrink-0">
             <Image
-              src="/images/personal-summary.png"
+              src={summaryImage}
               alt="Personal summary"
               width={160}
               height={220}
