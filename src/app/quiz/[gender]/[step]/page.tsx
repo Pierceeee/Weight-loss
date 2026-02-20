@@ -180,9 +180,13 @@ export default function QuizStepPage() {
 
       case "interstitial": {
         let interstitialImage = question.content?.image;
-        // Dynamically swap avatar based on user's age for motivation-2
+        let interstitialDescription = question.content?.description || "";
+        // Dynamically swap avatar and personalize copy for motivation-2
         if (question.id === "motivation-2") {
           const age = getResponse("age") as number | undefined;
+          const currentWeight = getResponse("current-weight") as number | undefined;
+          const targetWeight = getResponse("target-weight") as number | undefined;
+
           if (!age || age < 35) {
             interstitialImage = "/images/age-25-35.png";
           } else if (age < 50) {
@@ -190,11 +194,18 @@ export default function QuizStepPage() {
           } else {
             interstitialImage = "/images/age-50-65.png";
           }
+
+          // Use actual entered values
+          const displayAge = age || 30;
+          const displayCurrentWeight = currentWeight ? Math.round(currentWeight) : 68;
+          const displayTargetWeight = targetWeight ? Math.round(targetWeight) : 60;
+
+          interstitialDescription = `Women at age ${displayAge}, a gentle reminder: building consistent daily habits that help you reach and maintain a weight range of ${displayTargetWeight}kg to ${displayCurrentWeight}kg can accelerate your progress toward a stronger, healthier body.`;
         }
         return question.content ? (
           <Interstitial
             title={question.content.title}
-            description={question.content.description}
+            description={interstitialDescription}
             highlight={question.content.highlight}
             image={interstitialImage}
             benefits={question.benefits}
