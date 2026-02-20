@@ -16,7 +16,7 @@ const testimonialsRow1 = [
     stars: 5,
   },
   {
-    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😃😃🎊🙌",
+    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 59 kg! It's wonderful, thank you. 😃😃🎊🙌",
     name: "Caroline N.",
     stars: 5,
   },
@@ -31,7 +31,7 @@ const testimonialsRow1 = [
     stars: 5,
   },
   {
-    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 130lbs! It's wonderful, thank you. 😃😃🎊🙌",
+    text: "I've been using PCOS Reset Method for many years. I was really overweight and now I'm back to 59 kg! It's wonderful, thank you. 😃😃🎊🙌",
     name: "Caroline N.",
     stars: 5,
   },
@@ -39,17 +39,17 @@ const testimonialsRow1 = [
 
 const testimonialsRow2 = [
   {
-    text: "Healthy diets are a real thing! I quite literally lost over 40 lbs and I've never felt more beautiful 😃💖 Love this thing!",
+    text: "Healthy diets are a real thing! I quite literally lost over 18 kg and I've never felt more beautiful 😃💖 Love this thing!",
     name: "Nicholas H.",
     stars: 5,
   },
   {
-    text: "Honestly idk where id be if not for this. I quite literally lost over 40 lbs and I've never felt more beautiful 😃💖 Love this thing!",
+    text: "Honestly idk where id be if not for this. I quite literally lost over 18 kg and I've never felt more beautiful 😃💖 Love this thing!",
     name: "Megan W.",
     stars: 5,
   },
   {
-    text: "Couldn't do the exercises in the app due to my poor joints (too many years playing tennis) but the food is really good and I already notice my double chin becoming one again.",
+    text: "Couldn't do the exercises in the program due to my poor joints (too many years playing tennis) but the food is really good and I already notice my double chin becoming one again.",
     name: "Laura G.",
     stars: 5,
   },
@@ -59,7 +59,7 @@ const testimonialsRow2 = [
     stars: 5,
   },
   {
-    text: "If you told me a month ago that I'd be 20 pounds lighter I would've called you a liar... but I'm proof this works!",
+    text: "If you told me a month ago that I'd be 9 kg lighter I would've called you a liar... but I'm proof this works!",
     name: "Katherine B.",
     stars: 5,
   },

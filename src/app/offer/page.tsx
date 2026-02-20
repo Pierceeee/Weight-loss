@@ -136,7 +136,7 @@ export default function OfferPage() {
               <div className="relative max-w-sm mx-auto mb-6">
                 <img 
                   src="/images/progress-journal.png" 
-                  alt="App interface preview" 
+                  alt="Progress journal preview" 
                   className="w-full rounded-2xl shadow-md"
                 />
               </div>
@@ -242,7 +242,7 @@ export default function OfferPage() {
             {/* Disclaimer */}
             <div className="text-center space-y-3 pt-4 border-t border-slate-100">
               <p className="text-xs text-slate-400 leading-relaxed">
-                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, app, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease.
+                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease.
               </p>
               <p className="text-xs text-slate-400">
                 © 2026 PCOS Reset Method. All rights reserved.

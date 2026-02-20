@@ -17,6 +17,18 @@ const PLANS = [
   { id: "3month", title: "3-month plan", original: 75.49, price: 25.99, daily: 0.28, featured: true, tag: "BEST VALUE" },
 ];
 
+const TRANSFORMATIONS = [
+  { ageRange: "25-35", label: "Age 25-35", before: "/images/before-25-35.png", after: "/images/after-25-35.png", minAge: 18, maxAge: 35 },
+  { ageRange: "35-50", label: "Age 35-50", before: "/images/before-35-50.png", after: "/images/after-35-50.png", minAge: 36, maxAge: 50 },
+  { ageRange: "50-65", label: "Age 50-65", before: "/images/before-50-65.png", after: "/images/after-50-65.png", minAge: 51, maxAge: 65 },
+  { ageRange: "65+", label: "Age 65+", before: "/images/before-65-plus.png", after: "/images/after-50-65.png", minAge: 66, maxAge: 100 },
+];
+
+function getMatchingAgeIndex(age: number): number {
+  const idx = TRANSFORMATIONS.findIndex(t => age >= t.minAge && age <= t.maxAge);
+  return idx >= 0 ? idx : 0;
+}
+
 export default function OfferPage() {
   const router = useRouter();
   const { responses } = useQuizStore();
@@ -32,12 +44,15 @@ export default function OfferPage() {
                  (mounted && typeof window !== 'undefined' ? localStorage.getItem("pcos-user-name") : null) || 
                  DEFAULT_NAME;
 
-    const rawWeight = responses["current-weight"] as number || 68;
-    
+    const currentWeight = responses["current-weight"] as number || 68;
+    const targetWeight = responses["target-weight"] as number || currentWeight - (CONSERVATIVE_WEEKLY_LOSS_KG * 4);
+    const age = responses["age"] as number || 30;
+
     return {
       userName: name,
-      currentWeightKg: rawWeight,
-      targetWeight: rawWeight - (CONSERVATIVE_WEEKLY_LOSS_KG * 4),
+      currentWeightKg: currentWeight,
+      targetWeight: targetWeight,
+      age: age,
     };
   }, [responses, mounted]);
 
@@ -122,6 +137,24 @@ export default function OfferPage() {
                 <SnapshotItem label="Energy" value="Higher" />
                 <SnapshotItem label="Stress" value="Optimized" />
               </div>
+            </div>
+
+            {/* Before & After Transformations */}
+            <div>
+              <h2 className="text-xl font-bold text-slate-900 mb-2 text-center">Real Transformations</h2>
+              <p className="text-sm text-slate-500 text-center mb-6">Results from women in the PCOS Reset Method program</p>
+              <div className="grid grid-cols-2 gap-3">
+                {TRANSFORMATIONS.map((t, i) => (
+                  <BeforeAfterCard
+                    key={t.ageRange}
+                    before={t.before}
+                    after={t.after}
+                    label={t.label}
+                    isHighlighted={i === getMatchingAgeIndex(userData.age)}
+                  />
+                ))}
+              </div>
+              <p className="text-xs text-slate-400 mt-3 text-center italic">Individual results may vary. Photos are for illustrative purposes.</p>
             </div>
 
             {/* Pricing */}
@@ -259,7 +292,7 @@ export default function OfferPage() {
               </button>
 
               <p className="text-xs text-slate-500 text-center leading-relaxed">
-                We've automatically applied your discount to the first subscription payment. Please note that your subscription will renew automatically at the standard price once the selected billing period ends. If you prefer not to continue, you can cancel your subscription anytime directly within the PCOS Reset Method app.
+                We've automatically applied your discount to the first subscription payment. Please note that your subscription will renew automatically at the standard price once the selected billing period ends. If you prefer not to continue, you can cancel your subscription anytime directly within the PCOS Reset Method program.
               </p>
             </div>
 
@@ -278,7 +311,7 @@ export default function OfferPage() {
             {/* Disclaimer */}
             <div className="text-center space-y-3 pt-4 border-t border-slate-100">
               <p className="text-xs text-slate-400 leading-relaxed">
-                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, app, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease and should not replace professional medical advice or treatment. Please consult a qualified healthcare professional before making medical decisions.
+                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease and should not replace professional medical advice or treatment. Please consult a qualified healthcare professional before making medical decisions.
               </p>
               <p className="text-xs text-slate-400">
                 © 2026 PCOS Reset Method. All rights reserved.
@@ -390,6 +423,35 @@ function TestimonialCard({ date, title, text, author }: { date: string, title: s
       <div className="flex items-center justify-between">
         <p className="text-sm font-semibold text-slate-900">{author}</p>
         <span className="text-xs text-purple-600 font-medium">✅ Verified Customer</span>
+      </div>
+    </div>
+  );
+}
+
+function BeforeAfterCard({ before, after, label, isHighlighted }: { before: string, after: string, label: string, isHighlighted: boolean }) {
+  return (
+    <div className={`rounded-2xl border-2 overflow-hidden transition-all ${isHighlighted ? 'border-purple-500 ring-2 ring-purple-200 shadow-lg' : 'border-slate-100'}`}>
+      {isHighlighted && (
+        <div className="bg-purple-500 text-white text-center text-xs font-bold py-1">
+          Your Age Group
+        </div>
+      )}
+      <div className="p-3">
+        <p className="text-xs font-bold text-slate-500 text-center mb-2 uppercase tracking-wider">{label}</p>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="text-center">
+            <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-slate-100 mb-1">
+              <img src={before} alt={`Before - ${label}`} className="w-full h-full object-cover" />
+            </div>
+            <span className="text-[10px] font-bold text-slate-400 uppercase">Before</span>
+          </div>
+          <div className="text-center">
+            <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-slate-100 mb-1">
+              <img src={after} alt={`After - ${label}`} className="w-full h-full object-cover" />
+            </div>
+            <span className="text-[10px] font-bold text-purple-500 uppercase">After</span>
+          </div>
+        </div>
       </div>
     </div>
   );

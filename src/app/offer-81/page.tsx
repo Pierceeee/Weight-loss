@@ -32,12 +32,13 @@ export default function Offer81Page() {
                  (mounted && typeof window !== 'undefined' ? localStorage.getItem("pcos-user-name") : null) || 
                  DEFAULT_NAME;
 
-    const rawWeight = responses["current-weight"] as number || 68;
-    
+    const currentWeight = responses["current-weight"] as number || 68;
+    const targetWeight = responses["target-weight"] as number || currentWeight - (CONSERVATIVE_WEEKLY_LOSS_KG * 4);
+
     return {
       userName: name,
-      currentWeightKg: rawWeight,
-      targetWeight: rawWeight - (CONSERVATIVE_WEEKLY_LOSS_KG * 4),
+      currentWeightKg: currentWeight,
+      targetWeight: targetWeight,
     };
   }, [responses, mounted]);
 
@@ -233,7 +234,7 @@ export default function Offer81Page() {
               </button>
 
               <p className="text-xs text-slate-500 text-center leading-relaxed">
-                We've automatically applied your {DISCOUNT_PERCENTAGE}% exclusive discount to the first subscription payment. Subscription renews automatically. Cancel anytime directly within the app.
+                We've automatically applied your {DISCOUNT_PERCENTAGE}% exclusive discount to the first subscription payment. Subscription renews automatically. Cancel anytime directly within the program.
               </p>
             </div>
 
@@ -252,7 +253,7 @@ export default function Offer81Page() {
             {/* Disclaimer */}
             <div className="text-center space-y-3 pt-4 border-t border-slate-100">
               <p className="text-xs text-slate-400 leading-relaxed">
-                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, app, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease and should not replace professional medical advice or treatment. Please consult a qualified healthcare professional before making medical decisions.
+                <strong>DISCLAIMER:</strong> The PCOS Reset Method website, services, and products are designed to support general wellness. Our programs are not intended to diagnose, treat, cure, or prevent any disease and should not replace professional medical advice or treatment. Please consult a qualified healthcare professional before making medical decisions.
               </p>
               <p className="text-xs text-slate-400">
                 © 2026 PCOS Reset Method. All rights reserved.
