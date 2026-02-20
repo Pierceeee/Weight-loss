@@ -233,6 +233,11 @@ body {
   to { transform: rotate(0deg); }
 }
 
+@keyframes gauge-sweep-custom {
+  from { transform: rotate(-90deg); }
+  to { transform: rotate(var(--gauge-target, 0deg)); }
+}
+
 .animate-draw {
   animation: draw 2s ease-out forwards;
 }

@@ -21,33 +21,68 @@ function getActivityLabel(activityLevel: string) {
 }
 
 function BMIGauge({ bmi }: { bmi: number }) {
-  // Calculate rotation based on BMI (15 to 40 range)
+  // Map BMI to needle rotation using category-aware positioning
+  // Arc spans from -70° (left/underweight) to +70° (right/obese)
+  // Categories: <18.5 underweight | 18.5-25 normal | 25-30 overweight | 30+ obese
+  // We give each zone a proportional arc segment:
+  //   Underweight (BMI 15-18.5):  -70° to -35°
+  //   Normal      (BMI 18.5-25):  -35° to  10°
+  //   Overweight  (BMI 25-30):     10° to  40°
+  //   Obese       (BMI 30-40):     40° to  70°
   const rotation = useMemo(() => {
-    const minBMI = 15;
-    const maxBMI = 40;
-    const clampedBMI = Math.max(minBMI, Math.min(maxBMI, bmi));
-    const percentage = (clampedBMI - minBMI) / (maxBMI - minBMI);
-    return (percentage * 140) - 70; // Map to -70 to +70 degrees
+    const clampedBMI = Math.max(15, Math.min(40, bmi));
+    if (clampedBMI < 18.5) {
+      // Underweight zone: -70 to -35
+      const pct = (clampedBMI - 15) / (18.5 - 15);
+      return -70 + pct * 35;
+    } else if (clampedBMI < 25) {
+      // Normal zone: -35 to 10
+      const pct = (clampedBMI - 18.5) / (25 - 18.5);
+      return -35 + pct * 45;
+    } else if (clampedBMI < 30) {
+      // Overweight zone: 10 to 40
+      const pct = (clampedBMI - 25) / (30 - 25);
+      return 10 + pct * 30;
+    } else {
+      // Obese zone: 40 to 70
+      const pct = (clampedBMI - 30) / (40 - 30);
+      return 40 + pct * 30;
+    }
   }, [bmi]);
 
+  const animId = `gauge-${Math.round(rotation)}`;
+
   return (
-    <svg viewBox="0 0 200 120" className="w-32 h-auto mx-auto mt-3 overflow-visible">
-      {/* Background arc segments */}
-      <path d="M 35 95 A 65 65 0 0 1 75 38" fill="none" stroke="#22c55e" strokeWidth="12" strokeLinecap="round" />
-      <path d="M 78 36 A 65 65 0 0 1 100 32" fill="none" stroke="#84cc16" strokeWidth="12" strokeLinecap="round" />
-      <path d="M 103 32 A 65 65 0 0 1 135 42" fill="none" stroke="#f97316" strokeWidth="12" strokeLinecap="round" />
-      <path d="M 138 45 A 65 65 0 0 1 165 95" fill="none" stroke="#ef4444" strokeWidth="12" strokeLinecap="round" />
-      
-      {/* Needle - animated */}
-      <g 
-        className="animate-gauge-sweep"
-        style={{ transform: `rotate(${rotation}deg)` }}
-      >
-        <line x1="100" y1="100" x2="100" y2="35" stroke="#1f2937" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="100" cy="100" r="6" fill="#1f2937" />
-        <circle cx="100" cy="100" r="2" fill="#9ca3af" />
-      </g>
-    </svg>
+    <>
+      <style>{`
+        @keyframes ${animId} {
+          from { transform: rotate(-90deg); }
+          to { transform: rotate(${rotation}deg); }
+        }
+        .${animId} {
+          transform-origin: 100px 100px;
+          animation: ${animId} 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+      `}</style>
+      <svg viewBox="0 0 200 120" className="w-32 h-auto mx-auto mt-3 overflow-visible">
+        {/* Background arc segments mapped to BMI categories */}
+        {/* Underweight: green */}
+        <path d="M 35 95 A 65 65 0 0 1 75 38" fill="none" stroke="#22c55e" strokeWidth="12" strokeLinecap="round" />
+        {/* Normal: lime */}
+        <path d="M 78 36 A 65 65 0 0 1 115 33" fill="none" stroke="#84cc16" strokeWidth="12" strokeLinecap="round" />
+        {/* Overweight: orange */}
+        <path d="M 118 34 A 65 65 0 0 1 148 52" fill="none" stroke="#f97316" strokeWidth="12" strokeLinecap="round" />
+        {/* Obese: red */}
+        <path d="M 151 55 A 65 65 0 0 1 165 95" fill="none" stroke="#ef4444" strokeWidth="12" strokeLinecap="round" />
+
+        {/* Needle - animates to correct BMI position */}
+        <g className={animId}>
+          <line x1="100" y1="100" x2="100" y2="35" stroke="#1f2937" strokeWidth="3" strokeLinecap="round" />
+          <circle cx="100" cy="100" r="6" fill="#1f2937" />
+          <circle cx="100" cy="100" r="2" fill="#9ca3af" />
+        </g>
+      </svg>
+    </>
   );
 }
 
