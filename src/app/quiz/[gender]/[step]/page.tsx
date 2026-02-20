@@ -178,16 +178,29 @@ export default function QuizStepPage() {
           />
         );
 
-      case "interstitial":
+      case "interstitial": {
+        let interstitialImage = question.content?.image;
+        // Dynamically swap avatar based on user's age for motivation-2
+        if (question.id === "motivation-2") {
+          const age = getResponse("age") as number | undefined;
+          if (!age || age < 35) {
+            interstitialImage = "/images/age-25-35.png";
+          } else if (age < 50) {
+            interstitialImage = "/images/age-35-50.png";
+          } else {
+            interstitialImage = "/images/age-50-65.png";
+          }
+        }
         return question.content ? (
           <Interstitial
             title={question.content.title}
             description={question.content.description}
             highlight={question.content.highlight}
-            image={question.content.image}
+            image={interstitialImage}
             benefits={question.benefits}
           />
         ) : null;
+      }
 
       case "ingredient-select":
         return (
@@ -240,9 +253,7 @@ export default function QuizStepPage() {
               <ArrowLeft className="w-4 h-4 text-purple-700" />
             </button>
             <div className="text-center flex items-center justify-center gap-2">
-              <div className="bg-[#9333EA] p-1 rounded-md">
-                <Heart className="w-[18px] h-[18px] text-white fill-current" />
-              </div>
+              <span className="text-xl">💖</span>
               <p className="font-bold text-xl text-gray-800">PCOS Reset Method</p>
             </div>
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-medium text-purple-600">
@@ -254,9 +265,14 @@ export default function QuizStepPage() {
 
       {/* Special header for age-range question */}
       {question.id === "age-range" && (
-        <header className="w-full py-4 flex justify-center items-center bg-white border-b border-purple-100">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-xl text-gray-800">PCOS Reset Method</span>
+        <header className="w-full py-3 flex justify-center items-center bg-white border-b border-purple-100">
+          <div className="flex flex-col items-center gap-0.5">
+            <span className="text-sm sm:text-base font-semibold text-gray-800">
+              💜 Trusted by 28,000+ women
+            </span>
+            <span className="text-xs sm:text-sm font-medium text-gray-600">
+              4.8 ★ average rating
+            </span>
           </div>
         </header>
       )}
@@ -270,14 +286,15 @@ export default function QuizStepPage() {
           )}>
             {question.question && question.id === "age-range" ? (
               <div className="text-center mb-8 sm:mb-10 px-2">
-                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-                  {question.question}
+                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 leading-tight">
+                  Feel like nothing works for your PCOS?
                 </h1>
-                {question.subtitle && (
-                  <p className="text-[15px] sm:text-lg text-gray-600 font-medium">
-                    {question.subtitle}
-                  </p>
-                )}
+                <p className="text-[15px] sm:text-lg text-purple-700 font-semibold mb-2">
+                  Let&apos;s find out what YOUR body actually needs.
+                </p>
+                <p className="text-[13px] sm:text-base text-gray-500 font-medium">
+                  Get your personalized PCOS reset in 3 minutes.
+                </p>
               </div>
             ) : question.question ? (
               <div className="text-center mb-6 sm:mb-8 px-2">
