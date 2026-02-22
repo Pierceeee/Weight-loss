@@ -437,17 +437,19 @@ export default function SummaryPage() {
           </div>
         </div>
 
-        {/* CTA */}
-        <Link
-          href="/email"
-          className="flex items-center justify-center gap-2 w-full h-14 text-base font-bold rounded-xl
-                   bg-purple-600 text-white
-                   hover:bg-purple-700 hover:shadow-lg hover:shadow-purple-900/20
-                   transition-all duration-200 group"
-        >
-          Continue
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        {/* CTA - At bottom of content, users must scroll to see it */}
+        <div className="mt-8 mb-8">
+          <Link
+            href="/email"
+            className="flex items-center justify-center gap-2 w-full h-14 text-base font-bold rounded-xl
+                     bg-purple-600 text-white
+                     hover:bg-purple-700 hover:shadow-lg hover:shadow-purple-900/20
+                     transition-all duration-200 group"
+          >
+            Continue
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
       </main>
     </div>
   );

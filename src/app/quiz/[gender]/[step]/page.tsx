@@ -263,12 +263,6 @@ export default function QuizStepPage() {
   };
 
   const showFooterButton = question.type !== "single-select" && question.type !== "visual-select";
-  // For compact input types (height, weight, numeric, visual-select), show the button inline below the content
-  const inlineButton = 
-    question.type === "height-input" || 
-    question.type === "weight-input" ||
-    question.type === "numeric-input" || 
-    question.type === "visual-select";
 
   return (
     <div className={`min-h-[100dvh] flex flex-col transition-colors duration-300 ${question.id === "age-range" ? "bg-[#FAF5FF]" : "bg-[#FDFBFF]"}`}>
@@ -316,10 +310,7 @@ export default function QuizStepPage() {
 
       {/* Main content - scrollable area */}
       <main className="flex-1 overflow-y-auto">
-        <div className={cn(
-          "px-4 pt-4 sm:pt-8",
-          showFooterButton && !inlineButton ? "pb-28" : "pb-8"
-        )}>
+        <div className="px-4 pt-4 sm:pt-8 pb-8">
           <div className={cn(
             "mx-auto flex flex-col w-full",
             question.type === "visual-select" ? "max-w-2xl" : "max-w-[400px] sm:max-w-md",
@@ -356,8 +347,8 @@ export default function QuizStepPage() {
               {renderQuestionContent()}
             </div>
 
-            {/* Inline continue button — directly under the input box */}
-            {showFooterButton && inlineButton && (
+            {/* Continue button at bottom of content - users must scroll to see it */}
+            {showFooterButton && (
               <div className="mt-8 mb-4">
                 <button
                   onClick={handleNext}
@@ -371,21 +362,6 @@ export default function QuizStepPage() {
           </div>
         </div>
       </main>
-
-      {/* Fixed bottom continue button for scrollable question types */}
-      {showFooterButton && !inlineButton && (
-        <footer className="fixed bottom-0 left-0 right-0 z-20 px-4 pb-6 pt-4 bg-gradient-to-t from-white via-white/95 to-white/0">
-          <div className="max-w-md mx-auto">
-            <button
-              onClick={handleNext}
-              disabled={!canContinue()}
-              className="w-full py-3 font-semibold text-base rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:bg-purple-200 disabled:text-purple-400 disabled:cursor-not-allowed transition-colors shadow-lg shadow-purple-200"
-            >
-              Continue
-            </button>
-          </div>
-        </footer>
-      )}
     </div>
   );
 }
