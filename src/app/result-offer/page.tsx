@@ -152,21 +152,19 @@ export default function OfferPage() {
               </div>
               
               {/* Before/After Images based on age */}
-              <div className="relative flex items-end justify-center px-4 pt-4 pb-2 bg-gradient-to-b from-[#d4e4f7] to-white">
+              <div className="relative flex">
                 {/* Before */}
-                <div className="flex-1 flex justify-center">
-                  <div className="relative w-32 sm:w-40 aspect-[3/4]">
-                    <img
-                      src={TRANSFORMATIONS[getMatchingAgeIndex(userData.age)].before}
-                      alt="Before transformation"
-                      className="w-full h-full object-contain object-bottom"
-                    />
-                  </div>
+                <div className="flex-1 aspect-[3/4] overflow-hidden">
+                  <img
+                    src={TRANSFORMATIONS[getMatchingAgeIndex(userData.age)].before}
+                    alt="Before transformation"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
                 
                 {/* Arrow indicator */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                  <div className="bg-purple-100 rounded-full p-2">
+                  <div className="bg-purple-100 rounded-full p-2 shadow-sm">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-purple-500">
                       <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M15 6L21 12L15 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5"/>
@@ -175,14 +173,12 @@ export default function OfferPage() {
                 </div>
                 
                 {/* After */}
-                <div className="flex-1 flex justify-center">
-                  <div className="relative w-32 sm:w-40 aspect-[3/4]">
-                    <img
-                      src={TRANSFORMATIONS[getMatchingAgeIndex(userData.age)].after}
-                      alt="After transformation"
-                      className="w-full h-full object-contain object-bottom"
-                    />
-                  </div>
+                <div className="flex-1 aspect-[3/4] overflow-hidden">
+                  <img
+                    src={TRANSFORMATIONS[getMatchingAgeIndex(userData.age)].after}
+                    alt="After transformation"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
               </div>
 

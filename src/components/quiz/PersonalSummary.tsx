@@ -21,28 +21,22 @@ function getActivityLabel(activityLevel: string) {
 }
 
 function BMIGauge({ bmi }: { bmi: number }) {
-  // Map BMI to needle rotation
-  // Arc spans from -90° (left/underweight) to +90° (right/obese)
-  // Categories: <18.5 underweight | 18.5-25 normal | 25-30 overweight | 30+ obese
-  // Each category gets equal arc space (45°)
+  // Four equal arc zones (each 45°), needle inset 10° into each zone
+  // so the needle is always clearly inside the correct color band
   const rotation = useMemo(() => {
     const clampedBMI = Math.max(15, Math.min(40, bmi));
     if (clampedBMI < 18.5) {
-      // Underweight zone: -90° to -45° (far left, green)
-      const pct = (clampedBMI - 15) / (18.5 - 15);
-      return -90 + pct * 45;
+      const pct = (clampedBMI - 15) / 3.5;
+      return -80 + pct * 35;            // -80° to -45°
     } else if (clampedBMI < 25) {
-      // Normal zone: -45° to 0° (left-center, lime)
-      const pct = (clampedBMI - 18.5) / (25 - 18.5);
-      return -45 + pct * 45;
+      const pct = (clampedBMI - 18.5) / 6.5;
+      return -35 + pct * 25;            // -35° to -10°
     } else if (clampedBMI < 30) {
-      // Overweight zone: 0° to 45° (right-center, orange)
-      const pct = (clampedBMI - 25) / (30 - 25);
-      return pct * 45;
+      const pct = (clampedBMI - 25) / 5;
+      return 10 + pct * 25;             // +10° to +35°
     } else {
-      // Obese zone: 45° to 90° (far right, red)
-      const pct = Math.min(1, (clampedBMI - 30) / (40 - 30));
-      return 45 + pct * 45;
+      const pct = Math.min(1, (clampedBMI - 30) / 10);
+      return 55 + pct * 35;             // +55° to +90°
     }
   }, [bmi]);
 
@@ -61,17 +55,16 @@ function BMIGauge({ bmi }: { bmi: number }) {
         }
       `}</style>
       <svg viewBox="0 0 160 100" className="w-36 h-auto mx-auto mt-3 overflow-visible">
-        {/* Background arc segments mapped to BMI categories */}
-        {/* Underweight: green - far left */}
+        {/* Underweight: green  (-90° to -45°) */}
         <path d="M 15 80 A 65 65 0 0 1 34 35" fill="none" stroke="#22c55e" strokeWidth="14" strokeLinecap="round" />
-        {/* Normal: lime - left center */}
+        {/* Normal: lime  (-45° to 0°) */}
         <path d="M 38 30 A 65 65 0 0 1 80 15" fill="none" stroke="#84cc16" strokeWidth="14" strokeLinecap="round" />
-        {/* Overweight: orange - right center */}
+        {/* Overweight: orange  (0° to +45°) */}
         <path d="M 84 15 A 65 65 0 0 1 126 35" fill="none" stroke="#f97316" strokeWidth="14" strokeLinecap="round" />
-        {/* Obese: red - far right */}
+        {/* Obese: red  (+45° to +90°) */}
         <path d="M 130 40 A 65 65 0 0 1 145 80" fill="none" stroke="#ef4444" strokeWidth="14" strokeLinecap="round" />
 
-        {/* Needle - animates to correct BMI position */}
+        {/* Needle */}
         <g className={animId}>
           <line x1="80" y1="80" x2="80" y2="25" stroke="#1f2937" strokeWidth="3" strokeLinecap="round" />
           <circle cx="80" cy="80" r="6" fill="#1f2937" />
@@ -122,9 +115,9 @@ export function PersonalSummary() {
 
   return (
     <div className="max-w-sm mx-auto">
-      <div className="rounded-2xl overflow-hidden bg-white border border-purple-100 shadow-sm relative">
+      <div className="rounded-2xl bg-white border border-purple-100 shadow-sm">
         {/* BMI Section - Warm background */}
-        <div className="bg-[#FFF8DC] px-5 pt-5 pb-6 text-center">
+        <div className="bg-[#FFF8DC] rounded-t-2xl px-5 pt-5 pb-6 text-center">
           <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
             Body Mass Index (BMI)
           </p>
@@ -140,9 +133,9 @@ export function PersonalSummary() {
         </div>
 
         {/* Info items + Person image */}
-        <div className="flex items-end">
+        <div className="grid grid-cols-[1fr_120px] sm:grid-cols-[1fr_150px] items-center">
           {/* Left side - info items */}
-          <div className="flex-1 p-3 sm:p-5 space-y-3 sm:space-y-4">
+          <div className="p-3 sm:p-5 space-y-3 sm:space-y-4">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-pink-50 flex items-center justify-center flex-shrink-0">
                 <span className="text-base sm:text-lg">🌸</span>
@@ -184,13 +177,11 @@ export function PersonalSummary() {
           </div>
 
           {/* Right side - person image */}
-          <div className="relative w-32 sm:w-44 flex-shrink-0">
-            <Image
+          <div className="self-end">
+            <img
               src={summaryImage}
               alt="Personal summary"
-              width={200}
-              height={280}
-              className="object-contain object-bottom"
+              className="w-full h-auto block"
             />
           </div>
         </div>

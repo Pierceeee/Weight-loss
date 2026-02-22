@@ -101,7 +101,7 @@ export default function QuizStepPage() {
       } else {
         router.push(`/quiz/${gender}/${urlStep + 1}`);
       }
-    }, 220);
+    }, 150);
   };
 
   const handleBack = () => {
@@ -111,7 +111,7 @@ export default function QuizStepPage() {
       setIsExiting(true);
       setTimeout(() => {
         router.push(`/quiz/${gender}/${urlStep - 1}`);
-      }, 220);
+      }, 150);
     }
   };
 
@@ -120,7 +120,6 @@ export default function QuizStepPage() {
       const kgValue = Number(value);
       if (!Number.isNaN(kgValue)) {
         setResponse(question.id, kgValue);
-        // Also store the lbs version for legacy support in some components
         setResponse(`${question.id}-lbs`, Math.round(kgToLbs(kgValue)));
       }
     } else {
@@ -134,8 +133,8 @@ export default function QuizStepPage() {
         setIsExiting(true);
         setTimeout(() => {
           router.push(`/quiz/${gender}/${urlStep + 1}`);
-        }, 220);
-      }, 150);
+        }, 150);
+      }, 80);
     }
 
   };

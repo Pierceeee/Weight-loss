@@ -150,22 +150,21 @@ export default function SummaryPage() {
           </div>
           
           {/* Before/After Images with arrow */}
-          <div className="relative flex items-stretch justify-center bg-gradient-to-b from-gray-50 to-white">
+          <div className="relative flex items-end">
             {/* Before */}
-            <div className="flex-1 flex items-end justify-center px-2 pt-4 pb-2">
-              <div className="relative w-28 sm:w-36 h-40 sm:h-48">
-                <Image
-                  src={transformation.before}
-                  alt="Before transformation"
-                  fill
-                  className="object-contain object-bottom"
-                />
-              </div>
+            <div className="flex-1">
+              <Image
+                src={transformation.before}
+                alt="Before transformation"
+                width={400}
+                height={533}
+                className="w-full h-auto"
+              />
             </div>
             
             {/* Arrow indicator */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-              <div className="bg-purple-100 rounded-full p-2">
+              <div className="bg-purple-100 rounded-full p-2 shadow-sm">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-purple-500">
                   <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M15 6L21 12L15 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5"/>
@@ -174,15 +173,14 @@ export default function SummaryPage() {
             </div>
             
             {/* After */}
-            <div className="flex-1 flex items-end justify-center px-2 pt-4 pb-2">
-              <div className="relative w-28 sm:w-36 h-40 sm:h-48">
-                <Image
-                  src={transformation.after}
-                  alt="After transformation"
-                  fill
-                  className="object-contain object-bottom"
-                />
-              </div>
+            <div className="flex-1">
+              <Image
+                src={transformation.after}
+                alt="After transformation"
+                width={400}
+                height={533}
+                className="w-full h-auto"
+              />
             </div>
           </div>
 
