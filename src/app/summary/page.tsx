@@ -68,7 +68,24 @@ export default function SummaryPage() {
   const transformation = getTransformationImages();
 
   // Calculate gauge position (0-100)
-  const gaugePosition = Math.min(Math.max((bmi - 15) / 25 * 100, 0), 100);
+  // BMI ranges: Underweight (<18.5), Normal (18.5-24.9), Overweight (25-29.9), Obese (30+)
+  // Map to gauge: 0-25% = Under, 25-50% = Normal, 50-75% = Over, 75-100% = Obese
+  const getGaugePosition = (bmiValue: number) => {
+    if (bmiValue < 18.5) {
+      // Underweight: BMI 15-18.5 maps to 0-25%
+      return Math.max(0, ((bmiValue - 15) / 3.5) * 25);
+    } else if (bmiValue < 25) {
+      // Normal: BMI 18.5-25 maps to 25-50%
+      return 25 + ((bmiValue - 18.5) / 6.5) * 25;
+    } else if (bmiValue < 30) {
+      // Overweight: BMI 25-30 maps to 50-75%
+      return 50 + ((bmiValue - 25) / 5) * 25;
+    } else {
+      // Obese: BMI 30-40 maps to 75-100%
+      return Math.min(100, 75 + ((bmiValue - 30) / 10) * 25);
+    }
+  };
+  const gaugePosition = getGaugePosition(bmi);
   
   // Get BMI color
   const getBMIColor = (category: string) => {
@@ -133,10 +150,10 @@ export default function SummaryPage() {
           </div>
           
           {/* Before/After Images with arrow */}
-          <div className="relative flex items-end justify-center px-4 pt-4 pb-2 bg-gradient-to-b from-gray-50 to-white">
+          <div className="relative flex items-stretch justify-center bg-gradient-to-b from-gray-50 to-white">
             {/* Before */}
-            <div className="flex-1 flex justify-center">
-              <div className="relative w-32 sm:w-40 aspect-[3/4]">
+            <div className="flex-1 flex items-end justify-center px-2 pt-4 pb-2">
+              <div className="relative w-28 sm:w-36 h-40 sm:h-48">
                 <Image
                   src={transformation.before}
                   alt="Before transformation"
@@ -157,8 +174,8 @@ export default function SummaryPage() {
             </div>
             
             {/* After */}
-            <div className="flex-1 flex justify-center">
-              <div className="relative w-32 sm:w-40 aspect-[3/4]">
+            <div className="flex-1 flex items-end justify-center px-2 pt-4 pb-2">
+              <div className="relative w-28 sm:w-36 h-40 sm:h-48">
                 <Image
                   src={transformation.after}
                   alt="After transformation"

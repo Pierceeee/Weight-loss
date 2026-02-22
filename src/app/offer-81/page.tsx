@@ -141,9 +141,14 @@ export default function Offer81Page() {
 
             {/* App Preview & Ratings */}
             <div className="bg-purple-50/50 rounded-2xl p-6 border border-purple-100">
-              <h3 className="text-lg font-bold text-slate-900 mb-4 text-center">
-                Personal progress journal to monitor your results
-              </h3>
+              <div className="text-center mb-4">
+                <h3 className="text-lg font-bold text-slate-900">
+                  Not Another Generic Plan.
+                </h3>
+                <p className="text-base font-semibold text-purple-600 mt-1">
+                  Your AI PCOS Coach — Built Around You.
+                </p>
+              </div>
               <div className="relative max-w-sm mx-auto mb-6">
                 <img 
                   src="/images/progress-journal.png" 
@@ -154,18 +159,8 @@ export default function Offer81Page() {
               
               {/* Ratings */}
               <div className="text-center space-y-2">
-                <p className="text-sm font-bold text-slate-900">28,000+ five-star user ratings</p>
-                <div className="flex items-center justify-center gap-6 text-sm">
-                  <div className="flex items-center gap-1">
-                    <span className="font-bold text-slate-900">4.8</span>
-                    <span className="text-slate-500">App Store</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="font-bold text-slate-900">4.8</span>
-                    <span className="text-slate-500">Google Play</span>
-                  </div>
-                </div>
-                <p className="text-xs text-slate-500">One of the highest-rated personalized weight-loss companions</p>
+                <p className="text-sm font-bold text-slate-900">28,000+ women already improving their PCOS symptoms</p>
+                <p className="text-sm text-slate-600">4.8★ average experience rating</p>
               </div>
             </div>
 
