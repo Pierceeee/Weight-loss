@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
   SingleSelect,
@@ -40,6 +40,18 @@ export default function QuizStepPage() {
   } = useQuizStore();
 
   const [submissionCreated, setSubmissionCreated] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const [exitDirection, setExitDirection] = useState<"forward" | "back">("forward");
+  const [enterDirection, setEnterDirection] = useState<"forward" | "back">("forward");
+  const prevStepRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (prevStepRef.current !== null) {
+      setEnterDirection(urlStep > prevStepRef.current ? "forward" : "back");
+    }
+    prevStepRef.current = urlStep;
+    setIsExiting(false);
+  }, [urlStep]);
 
   useEffect(() => {
     setCurrentStep(step);
@@ -80,16 +92,26 @@ export default function QuizStepPage() {
   const currentValue = getResponse(question.id);
 
   const handleNext = () => {
-    if (step === totalSteps) {
-      router.push("/generating");
-    } else {
-      router.push(`/quiz/${gender}/${urlStep + 1}`);
-    }
+    if (isExiting) return;
+    setExitDirection("forward");
+    setIsExiting(true);
+    setTimeout(() => {
+      if (step === totalSteps) {
+        router.push("/generating");
+      } else {
+        router.push(`/quiz/${gender}/${urlStep + 1}`);
+      }
+    }, 220);
   };
 
   const handleBack = () => {
+    if (isExiting) return;
     if (urlStep > 0) {
-      router.push(`/quiz/${gender}/${urlStep - 1}`);
+      setExitDirection("back");
+      setIsExiting(true);
+      setTimeout(() => {
+        router.push(`/quiz/${gender}/${urlStep - 1}`);
+      }, 220);
     }
   };
 
@@ -107,8 +129,13 @@ export default function QuizStepPage() {
 
     if (question.type === "single-select" || question.type === "visual-select") {
       setTimeout(() => {
-        router.push(`/quiz/${gender}/${urlStep + 1}`);
-      }, 280);
+        if (isExiting) return;
+        setExitDirection("forward");
+        setIsExiting(true);
+        setTimeout(() => {
+          router.push(`/quiz/${gender}/${urlStep + 1}`);
+        }, 220);
+      }, 150);
     }
 
   };
@@ -245,17 +272,17 @@ export default function QuizStepPage() {
     question.type === "visual-select";
 
   return (
-    <div className={`min-h-screen flex flex-col ${question.id === "age-range" ? "bg-[#FAF5FF]" : "bg-[#FDFBFF]"}`}>
+    <div className={`min-h-[100dvh] flex flex-col transition-colors duration-300 ${question.id === "age-range" ? "bg-[#FAF5FF]" : "bg-[#FDFBFF]"}`}>
       {/* Header - only show for non-age-range questions */}
       {question.id !== "age-range" && (
-        <header className="flex-shrink-0">
+        <header className="flex-shrink-0 sticky top-0 z-10 bg-white">
           <div className="h-1 bg-[#E9D5FF]">
             <div
               className="h-full bg-[#A855F7] transition-all duration-500"
               style={{ width: `${(urlStep / totalUrlSteps) * 100}%` }}
             />
           </div>
-          <div className="relative px-4 py-3 bg-white border-b border-purple-100">
+          <div className="relative px-4 py-3 border-b border-purple-100">
             <button
               onClick={handleBack}
               className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-lg border border-purple-200 bg-white hover:bg-purple-50"
@@ -276,7 +303,7 @@ export default function QuizStepPage() {
 
       {/* Special header for age-range question */}
       {question.id === "age-range" && (
-        <header className="w-full py-3 flex justify-center items-center bg-white border-b border-purple-100">
+        <header className="flex-shrink-0 sticky top-0 z-10 w-full py-3 flex justify-center items-center bg-white border-b border-purple-100">
           <div className="flex flex-col items-center gap-0.5">
             <span className="text-sm sm:text-base font-semibold text-gray-800">
               💜 Trusted by 28,000+ women
@@ -288,12 +315,18 @@ export default function QuizStepPage() {
         </header>
       )}
 
-      {/* Main content */}
-      <main className="flex-1 flex flex-col">
-        <div className="flex-1 overflow-y-auto px-4 pt-4 sm:pt-8 pb-4">
+      {/* Main content - scrollable area */}
+      <main className="flex-1 overflow-y-auto">
+        <div className={cn(
+          "px-4 pt-4 sm:pt-8",
+          showFooterButton && !inlineButton ? "pb-28" : "pb-8"
+        )}>
           <div className={cn(
-            "mx-auto flex flex-col min-h-full justify-center w-full",
-            question.type === "visual-select" ? "max-w-2xl" : "max-w-[400px] sm:max-w-md"
+            "mx-auto flex flex-col w-full",
+            question.type === "visual-select" ? "max-w-2xl" : "max-w-[400px] sm:max-w-md",
+            isExiting 
+              ? (exitDirection === "forward" ? "quiz-slide-exit" : "quiz-slide-exit-back")
+              : (enterDirection === "forward" ? "quiz-slide-enter" : "quiz-slide-enter-back")
           )}>
             {question.question && question.id === "age-range" ? (
               <div className="text-center mb-8 sm:mb-10 px-2">
@@ -320,7 +353,7 @@ export default function QuizStepPage() {
               </div>
             ) : null}
 
-            <div className={inlineButton ? "" : "flex-1"}>
+            <div>
               {renderQuestionContent()}
             </div>
 
@@ -338,22 +371,22 @@ export default function QuizStepPage() {
             )}
           </div>
         </div>
-
-        {/* Bottom-pinned continue button for other question types (multi-select, ingredient-select, etc.) */}
-        {showFooterButton && !inlineButton && (
-          <footer className="px-4 pb-6 pt-4 sm:pt-8">
-            <div className="max-w-md mx-auto">
-              <button
-                onClick={handleNext}
-                disabled={!canContinue()}
-                className="w-full py-3 font-semibold text-base rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:bg-purple-200 disabled:text-purple-400 disabled:cursor-not-allowed transition-colors shadow-lg shadow-purple-200"
-              >
-                Continue
-              </button>
-            </div>
-          </footer>
-        )}
       </main>
+
+      {/* Fixed bottom continue button for scrollable question types */}
+      {showFooterButton && !inlineButton && (
+        <footer className="fixed bottom-0 left-0 right-0 z-20 px-4 pb-6 pt-4 bg-gradient-to-t from-white via-white/95 to-white/0">
+          <div className="max-w-md mx-auto">
+            <button
+              onClick={handleNext}
+              disabled={!canContinue()}
+              className="w-full py-3 font-semibold text-base rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:bg-purple-200 disabled:text-purple-400 disabled:cursor-not-allowed transition-colors shadow-lg shadow-purple-200"
+            >
+              Continue
+            </button>
+          </div>
+        </footer>
+      )}
     </div>
   );
 }

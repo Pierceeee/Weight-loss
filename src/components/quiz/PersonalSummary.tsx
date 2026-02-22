@@ -21,36 +21,32 @@ function getActivityLabel(activityLevel: string) {
 }
 
 function BMIGauge({ bmi }: { bmi: number }) {
-  // Map BMI to needle rotation using category-aware positioning
-  // Arc spans from -70° (left/underweight) to +70° (right/obese)
+  // Map BMI to needle rotation
+  // Arc spans from -90° (left/underweight) to +90° (right/obese)
   // Categories: <18.5 underweight | 18.5-25 normal | 25-30 overweight | 30+ obese
-  // We give each zone a proportional arc segment:
-  //   Underweight (BMI 15-18.5):  -70° to -35°
-  //   Normal      (BMI 18.5-25):  -35° to  10°
-  //   Overweight  (BMI 25-30):     10° to  40°
-  //   Obese       (BMI 30-40):     40° to  70°
+  // Each category gets equal arc space (45°)
   const rotation = useMemo(() => {
     const clampedBMI = Math.max(15, Math.min(40, bmi));
     if (clampedBMI < 18.5) {
-      // Underweight zone: -70 to -35
+      // Underweight zone: -90° to -45° (far left, green)
       const pct = (clampedBMI - 15) / (18.5 - 15);
-      return -70 + pct * 35;
+      return -90 + pct * 45;
     } else if (clampedBMI < 25) {
-      // Normal zone: -35 to 10
+      // Normal zone: -45° to 0° (left-center, lime)
       const pct = (clampedBMI - 18.5) / (25 - 18.5);
-      return -35 + pct * 45;
+      return -45 + pct * 45;
     } else if (clampedBMI < 30) {
-      // Overweight zone: 10 to 40
+      // Overweight zone: 0° to 45° (right-center, orange)
       const pct = (clampedBMI - 25) / (30 - 25);
-      return 10 + pct * 30;
+      return pct * 45;
     } else {
-      // Obese zone: 40 to 70
-      const pct = (clampedBMI - 30) / (40 - 30);
-      return 40 + pct * 30;
+      // Obese zone: 45° to 90° (far right, red)
+      const pct = Math.min(1, (clampedBMI - 30) / (40 - 30));
+      return 45 + pct * 45;
     }
   }, [bmi]);
 
-  const animId = `gauge-${Math.round(rotation)}`;
+  const animId = `gauge-bmi-${Math.round(bmi * 10)}`;
 
   return (
     <>
@@ -60,26 +56,26 @@ function BMIGauge({ bmi }: { bmi: number }) {
           to { transform: rotate(${rotation}deg); }
         }
         .${animId} {
-          transform-origin: 100px 100px;
+          transform-origin: 80px 80px;
           animation: ${animId} 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
       `}</style>
-      <svg viewBox="0 0 200 120" className="w-32 h-auto mx-auto mt-3 overflow-visible">
+      <svg viewBox="0 0 160 100" className="w-36 h-auto mx-auto mt-3 overflow-visible">
         {/* Background arc segments mapped to BMI categories */}
-        {/* Underweight: green */}
-        <path d="M 35 95 A 65 65 0 0 1 75 38" fill="none" stroke="#22c55e" strokeWidth="12" strokeLinecap="round" />
-        {/* Normal: lime */}
-        <path d="M 78 36 A 65 65 0 0 1 115 33" fill="none" stroke="#84cc16" strokeWidth="12" strokeLinecap="round" />
-        {/* Overweight: orange */}
-        <path d="M 118 34 A 65 65 0 0 1 148 52" fill="none" stroke="#f97316" strokeWidth="12" strokeLinecap="round" />
-        {/* Obese: red */}
-        <path d="M 151 55 A 65 65 0 0 1 165 95" fill="none" stroke="#ef4444" strokeWidth="12" strokeLinecap="round" />
+        {/* Underweight: green - far left */}
+        <path d="M 15 80 A 65 65 0 0 1 34 35" fill="none" stroke="#22c55e" strokeWidth="14" strokeLinecap="round" />
+        {/* Normal: lime - left center */}
+        <path d="M 38 30 A 65 65 0 0 1 80 15" fill="none" stroke="#84cc16" strokeWidth="14" strokeLinecap="round" />
+        {/* Overweight: orange - right center */}
+        <path d="M 84 15 A 65 65 0 0 1 126 35" fill="none" stroke="#f97316" strokeWidth="14" strokeLinecap="round" />
+        {/* Obese: red - far right */}
+        <path d="M 130 40 A 65 65 0 0 1 145 80" fill="none" stroke="#ef4444" strokeWidth="14" strokeLinecap="round" />
 
         {/* Needle - animates to correct BMI position */}
         <g className={animId}>
-          <line x1="100" y1="100" x2="100" y2="35" stroke="#1f2937" strokeWidth="3" strokeLinecap="round" />
-          <circle cx="100" cy="100" r="6" fill="#1f2937" />
-          <circle cx="100" cy="100" r="2" fill="#9ca3af" />
+          <line x1="80" y1="80" x2="80" y2="25" stroke="#1f2937" strokeWidth="3" strokeLinecap="round" />
+          <circle cx="80" cy="80" r="6" fill="#1f2937" />
+          <circle cx="80" cy="80" r="2.5" fill="#9ca3af" />
         </g>
       </svg>
     </>
@@ -90,25 +86,39 @@ export function PersonalSummary() {
   const { getUserProfile, getResponse } = useQuizStore();
   const profile = getUserProfile();
 
-  const age = (getResponse("age") as number | undefined) || (profile?.age);
-  const summaryImage = useMemo(() => {
-    if (!age || age < 35) return "/images/summary-age-25-35.png";
-    if (age < 50) return "/images/summary-age-35-50.png";
-    if (age < 65) return "/images/summary-age-50-65.png";
-    return "/images/summary-age-65-plus.png";
-  }, [age]);
+  // Get values directly from responses for more reliability
+  const age = (getResponse("age") as number | undefined) || profile?.age || 30;
+  const currentWeight = (getResponse("current-weight") as number | undefined) || profile?.currentWeight || 70;
+  const height = (getResponse("height") as number | undefined) || profile?.height || 165;
+  const exercisePreference = (getResponse("exercise-preference") as string | undefined) || profile?.exercisePreference || "";
+  const activityLevel = (getResponse("activity-level") as string | undefined) || profile?.activityLevel || "";
 
   const bmiValue = useMemo(() => {
-    if (!profile) return 22;
-    return calculateBMI(profile.currentWeight, profile.height);
-  }, [profile]);
+    return calculateBMI(currentWeight, height);
+  }, [currentWeight, height]);
 
   const bmiResult = useMemo(() => {
     return getBMIResult(bmiValue);
   }, [bmiValue]);
 
-  const exerciseLabel = profile ? getExerciseLabel(profile.exercisePreference) : "Moderate activity";
-  const activityLabel = profile ? getActivityLabel(profile.activityLevel) : "Average";
+  // Select image based on BMI category
+  const summaryImage = useMemo(() => {
+    switch (bmiResult.category) {
+      case "Underweight":
+        return "/images/body-type-regular.png";
+      case "Normal":
+        return "/images/body-type-regular.png";
+      case "Overweight":
+        return "/images/body-type-plump.png";
+      case "Obese":
+        return "/images/body-type-extra.png";
+      default:
+        return "/images/body-type-regular.png";
+    }
+  }, [bmiResult.category]);
+
+  const exerciseLabel = getExerciseLabel(exercisePreference);
+  const activityLabel = getActivityLabel(activityLevel);
 
   return (
     <div className="max-w-sm mx-auto">
@@ -174,12 +184,12 @@ export function PersonalSummary() {
           </div>
 
           {/* Right side - person image */}
-          <div className="relative w-24 sm:w-36 flex-shrink-0">
+          <div className="relative w-32 sm:w-44 flex-shrink-0">
             <Image
               src={summaryImage}
               alt="Personal summary"
-              width={160}
-              height={220}
+              width={200}
+              height={280}
               className="object-contain object-bottom"
             />
           </div>

@@ -139,22 +139,151 @@ export default function OfferPage() {
               </div>
             </div>
 
-            {/* Before & After Transformations */}
-            <div>
-              <h2 className="text-xl font-bold text-slate-900 mb-2 text-center">Real Transformations</h2>
-              <p className="text-sm text-slate-500 text-center mb-6">Results from women in the PCOS Reset Method program</p>
-              <div className="grid grid-cols-2 gap-3">
-                {TRANSFORMATIONS.map((t, i) => (
-                  <BeforeAfterCard
-                    key={t.ageRange}
-                    before={t.before}
-                    after={t.after}
-                    label={t.label}
-                    isHighlighted={i === getMatchingAgeIndex(userData.age)}
-                  />
-                ))}
+            {/* Before & After Transformation - Single card based on age */}
+            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+              {/* Header labels */}
+              <div className="flex border-b border-slate-100">
+                <div className="flex-1 py-3 text-center">
+                  <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">NOW</span>
+                </div>
+                <div className="flex-1 py-3 text-center">
+                  <span className="text-sm font-semibold text-purple-600 uppercase tracking-wide">YOUR GOAL</span>
+                </div>
               </div>
-              <p className="text-xs text-slate-400 mt-3 text-center italic">Individual results may vary. Photos are for illustrative purposes.</p>
+              
+              {/* Before/After Images based on age */}
+              <div className="relative flex items-end justify-center px-4 pt-4 pb-2 bg-gradient-to-b from-[#d4e4f7] to-white">
+                {/* Before */}
+                <div className="flex-1 flex justify-center">
+                  <div className="relative w-32 sm:w-40 aspect-[3/4]">
+                    <img
+                      src={TRANSFORMATIONS[getMatchingAgeIndex(userData.age)].before}
+                      alt="Before transformation"
+                      className="w-full h-full object-contain object-bottom"
+                    />
+                  </div>
+                </div>
+                
+                {/* Arrow indicator */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                  <div className="bg-purple-100 rounded-full p-2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-purple-500">
+                      <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M15 6L21 12L15 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5"/>
+                    </svg>
+                  </div>
+                </div>
+                
+                {/* After */}
+                <div className="flex-1 flex justify-center">
+                  <div className="relative w-32 sm:w-40 aspect-[3/4]">
+                    <img
+                      src={TRANSFORMATIONS[getMatchingAgeIndex(userData.age)].after}
+                      alt="After transformation"
+                      className="w-full h-full object-contain object-bottom"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Comparison Stats */}
+              <div className="flex divide-x divide-slate-100">
+                {/* Before Stats */}
+                <div className="flex-1 p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">🔥</span>
+                    <div>
+                      <p className="text-[10px] font-semibold text-slate-400 uppercase">BODY FAT</p>
+                      <p className="font-bold text-sm text-slate-900">Medium</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">🌸</span>
+                    <div className="flex-1">
+                      <p className="text-[10px] font-semibold text-slate-400 uppercase mb-1">PCOS SYMPTOMS</p>
+                      <div className="flex gap-0.5">
+                        <div className="h-1.5 flex-1 bg-orange-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-200 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">⚡</span>
+                    <div className="flex-1">
+                      <p className="text-[10px] font-semibold text-slate-400 uppercase mb-1">DAILY ENERGY</p>
+                      <div className="flex gap-0.5">
+                        <div className="h-1.5 flex-1 bg-orange-300 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-200 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-100 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-100 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">😰</span>
+                    <div className="flex-1">
+                      <p className="text-[10px] font-semibold text-slate-400 uppercase mb-1">STRESS LEVEL</p>
+                      <div className="flex gap-0.5">
+                        <div className="h-1.5 flex-1 bg-orange-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-300 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-orange-200 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* After Stats */}
+                <div className="flex-1 p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">🔥</span>
+                    <div>
+                      <p className="text-[10px] font-semibold text-slate-400 uppercase">BODY FAT</p>
+                      <p className="font-bold text-sm text-slate-900">Low</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">🌸</span>
+                    <div className="flex-1">
+                      <p className="text-[10px] font-semibold text-slate-400 uppercase mb-1">PCOS SYMPTOMS</p>
+                      <div className="flex gap-0.5">
+                        <div className="h-1.5 flex-1 bg-green-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-200 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-100 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-100 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">⚡</span>
+                    <div className="flex-1">
+                      <p className="text-[10px] font-semibold text-slate-400 uppercase mb-1">DAILY ENERGY</p>
+                      <div className="flex gap-0.5">
+                        <div className="h-1.5 flex-1 bg-green-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-400 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-300 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">😊</span>
+                    <div className="flex-1">
+                      <p className="text-[10px] font-semibold text-slate-400 uppercase mb-1">STRESS LEVEL</p>
+                      <div className="flex gap-0.5">
+                        <div className="h-1.5 flex-1 bg-green-300 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-100 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-100 rounded-full" />
+                        <div className="h-1.5 flex-1 bg-green-100 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-[10px] text-slate-400 text-center py-2 border-t border-slate-100">Individual results may vary. Photos are for illustrative purposes.</p>
             </div>
 
             {/* Pricing */}

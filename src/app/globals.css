@@ -258,3 +258,70 @@ body {
 .animate-scroll-right {
   animation: scroll-right 30s linear infinite;
 }
+
+/* Quiz page slide transitions - smooth native-feel */
+@keyframes quiz-slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(60px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes quiz-slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes quiz-slide-out-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.97);
+  }
+}
+
+@keyframes quiz-slide-out-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(40px) scale(0.97);
+  }
+}
+
+.quiz-slide-enter {
+  animation: quiz-slide-in-right 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.quiz-slide-enter-back {
+  animation: quiz-slide-in-left 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.quiz-slide-exit {
+  animation: quiz-slide-out-left 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.quiz-slide-exit-back {
+  animation: quiz-slide-out-right 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
