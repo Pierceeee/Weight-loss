@@ -223,10 +223,9 @@ export default function QuizStepPage() {
 
           // Use actual entered values
           const displayAge = age || 30;
-          const displayCurrentWeight = currentWeight ? Math.round(currentWeight) : 68;
           const displayTargetWeight = targetWeight ? Math.round(targetWeight) : 60;
 
-          interstitialDescription = `Women at age ${displayAge}, a gentle reminder: building consistent daily habits that help you reach and maintain a weight range of ${displayTargetWeight}kg to ${displayCurrentWeight}kg can accelerate your progress toward a stronger, healthier body.`;
+          interstitialDescription = `Women at age ${displayAge}, a gentle reminder: building consistent daily habits that help you reach and maintain a weight around ${displayTargetWeight}kg can accelerate your progress toward a stronger, healthier body.`;
         }
         return question.content ? (
           <Interstitial
