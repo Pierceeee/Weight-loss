@@ -94,21 +94,22 @@ export function PersonalSummary() {
     return getBMIResult(bmiValue);
   }, [bmiValue]);
 
-  // Select image based on BMI category
+  const ageRange = (getResponse("age-range") as string | undefined) || "";
+
   const summaryImage = useMemo(() => {
-    switch (bmiResult.category) {
-      case "Underweight":
-        return "/images/body-type-regular.png";
-      case "Normal":
-        return "/images/body-type-regular.png";
-      case "Overweight":
-        return "/images/body-type-plump.png";
-      case "Obese":
-        return "/images/body-type-extra.png";
+    switch (ageRange) {
+      case "18-27":
+        return "/images/age-25-35.png";
+      case "27-40":
+        return "/images/age-35-50.png";
+      case "41-50":
+        return "/images/age-50-65.png";
+      case "50+":
+        return "/images/age-65-plus.png";
       default:
-        return "/images/body-type-regular.png";
+        return "/images/age-25-35.png";
     }
-  }, [bmiResult.category]);
+  }, [ageRange]);
 
   const exerciseLabel = getExerciseLabel(exercisePreference);
   const activityLabel = getActivityLabel(activityLevel);
