@@ -262,6 +262,16 @@ export default function QuizStepPage() {
   };
 
   const showFooterButton = question.type !== "single-select" && question.type !== "visual-select";
+  
+  // Question types that typically have long content and need a fixed/sticky continue button
+  const useStickyButton = showFooterButton && (
+    question.type === "multi-select" || 
+    question.type === "ingredient-select" || 
+    question.type === "science-list" ||
+    question.type === "goal-projection" ||
+    question.type === "personal-summary" ||
+    (question.options && question.options.length > 5)
+  );
 
   return (
     <div className={`min-h-[100dvh] flex flex-col transition-colors duration-300 ${question.id === "age-range" ? "bg-[#FAF5FF]" : "bg-[#FDFBFF]"}`}>
@@ -309,7 +319,7 @@ export default function QuizStepPage() {
 
       {/* Main content - scrollable area */}
       <main className="flex-1 overflow-y-auto">
-        <div className="px-4 pt-4 sm:pt-8 pb-8">
+        <div className={cn("px-4 pt-4 sm:pt-8", useStickyButton ? "pb-24" : "pb-8")}>
           <div className={cn(
             "mx-auto flex flex-col w-full",
             question.type === "visual-select" ? "max-w-2xl" : "max-w-[400px] sm:max-w-md",
@@ -346,8 +356,8 @@ export default function QuizStepPage() {
               {renderQuestionContent()}
             </div>
 
-            {/* Continue button at bottom of content - users must scroll to see it */}
-            {showFooterButton && (
+            {/* Continue button inline - for short content */}
+            {showFooterButton && !useStickyButton && (
               <div className="mt-8 mb-4">
                 <button
                   onClick={handleNext}
@@ -361,6 +371,24 @@ export default function QuizStepPage() {
           </div>
         </div>
       </main>
+
+      {/* Fixed continue button at bottom - for long content (multi-select, ingredient-select, etc.) */}
+      {useStickyButton && (
+        <div className="flex-shrink-0 fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-white/80 pt-4 pb-6 px-4 z-20">
+          <div className={cn(
+            "mx-auto w-full",
+            question.type === "visual-select" ? "max-w-2xl" : "max-w-[400px] sm:max-w-md"
+          )}>
+            <button
+              onClick={handleNext}
+              disabled={!canContinue()}
+              className="w-full py-3 font-semibold text-base rounded-xl bg-purple-600 text-white hover:bg-purple-700 disabled:bg-purple-200 disabled:text-purple-400 disabled:cursor-not-allowed transition-colors shadow-lg shadow-purple-200"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
