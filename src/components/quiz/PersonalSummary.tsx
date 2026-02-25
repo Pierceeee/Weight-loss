@@ -7,10 +7,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 function getExerciseLabel(exercisePreference: string) {
-  if (exercisePreference === "regularly") return "Moderate activity";
-  if (exercisePreference === "occasionally") return "Light activity";
-  if (exercisePreference === "try-to-stay-active") return "Light activity";
-  return "Low activity";
+  if (exercisePreference === "regularly") return "Moderate exercise";
+  if (exercisePreference === "occasionally") return "Light exercise";
+  if (exercisePreference === "try-to-stay-active") return "Light exercise";
+  return "Low exercise";
 }
 
 function getActivityLabel(activityLevel: string) {
@@ -21,22 +21,20 @@ function getActivityLabel(activityLevel: string) {
 }
 
 function BMIGauge({ bmi }: { bmi: number }) {
-  // Four equal arc zones (each 45°), needle inset 10° into each zone
-  // so the needle is always clearly inside the correct color band
   const rotation = useMemo(() => {
     const clampedBMI = Math.max(15, Math.min(40, bmi));
     if (clampedBMI < 18.5) {
       const pct = (clampedBMI - 15) / 3.5;
-      return -80 + pct * 35;            // -80° to -45°
+      return -80 + pct * 35;
     } else if (clampedBMI < 25) {
       const pct = (clampedBMI - 18.5) / 6.5;
-      return -35 + pct * 25;            // -35° to -10°
+      return -35 + pct * 25;
     } else if (clampedBMI < 30) {
       const pct = (clampedBMI - 25) / 5;
-      return 10 + pct * 25;             // +10° to +35°
+      return 10 + pct * 25;
     } else {
       const pct = Math.min(1, (clampedBMI - 30) / 10);
-      return 55 + pct * 35;             // +55° to +90°
+      return 55 + pct * 35;
     }
   }, [bmi]);
 
@@ -54,21 +52,47 @@ function BMIGauge({ bmi }: { bmi: number }) {
           animation: ${animId} 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
       `}</style>
-      <svg viewBox="0 0 160 100" className="w-36 h-auto mx-auto mt-3 overflow-visible">
-        {/* Underweight: green  (-90° to -45°) */}
-        <path d="M 15 80 A 65 65 0 0 1 34 35" fill="none" stroke="#22c55e" strokeWidth="14" strokeLinecap="round" />
-        {/* Normal: lime  (-45° to 0°) */}
-        <path d="M 38 30 A 65 65 0 0 1 80 15" fill="none" stroke="#84cc16" strokeWidth="14" strokeLinecap="round" />
-        {/* Overweight: orange  (0° to +45°) */}
-        <path d="M 84 15 A 65 65 0 0 1 126 35" fill="none" stroke="#f97316" strokeWidth="14" strokeLinecap="round" />
-        {/* Obese: red  (+45° to +90°) */}
-        <path d="M 130 40 A 65 65 0 0 1 145 80" fill="none" stroke="#ef4444" strokeWidth="14" strokeLinecap="round" />
+      <svg viewBox="0 0 160 100" className="w-48 h-auto mx-auto mt-5 overflow-visible">
+        {/* Blue segment (Underweight) */}
+        <path 
+          d="M 15 80 A 65 65 0 0 1 34 35" 
+          fill="none" 
+          stroke="#3B82F6" 
+          strokeWidth="10" 
+          strokeLinecap="round" 
+        />
+        {/* Green segment (Normal) */}
+        <path 
+          d="M 38 30 A 65 65 0 0 1 80 15" 
+          fill="none" 
+          stroke="#22C55E" 
+          strokeWidth="10" 
+          strokeLinecap="round" 
+        />
+        {/* Yellow/Orange segment (Overweight) */}
+        <path 
+          d="M 84 15 A 65 65 0 0 1 126 35" 
+          fill="none" 
+          stroke="#F59E0B" 
+          strokeWidth="10" 
+          strokeLinecap="round" 
+        />
+        {/* Red segment (Obese) */}
+        <path 
+          d="M 130 40 A 65 65 0 0 1 145 80" 
+          fill="none" 
+          stroke="#EF4444" 
+          strokeWidth="10" 
+          strokeLinecap="round" 
+        />
 
-        {/* Needle */}
+        {/* Needle - raindrop/triangular shape */}
         <g className={animId}>
-          <line x1="80" y1="80" x2="80" y2="25" stroke="#1f2937" strokeWidth="3" strokeLinecap="round" />
-          <circle cx="80" cy="80" r="6" fill="#1f2937" />
-          <circle cx="80" cy="80" r="2.5" fill="#9ca3af" />
+          <path 
+            d="M 80 80 L 76 75 L 80 25 L 84 75 Z" 
+            fill="#1F2937"
+          />
+          <circle cx="80" cy="80" r="5" fill="#1F2937" />
         </g>
       </svg>
     </>
@@ -99,15 +123,15 @@ export function PersonalSummary() {
   const summaryImage = useMemo(() => {
     switch (ageRange) {
       case "18-27":
-        return "/images/age-25-35.png";
+        return "/images/after-25-35.png";
       case "27-40":
-        return "/images/age-35-50.png";
+        return "/images/after-35-50.png";
       case "41-50":
-        return "/images/age-50-65.png";
+        return "/images/after-50-65.png";
       case "50+":
-        return "/images/age-65-plus.png";
+        return "/images/after-50-65.png";
       default:
-        return "/images/age-25-35.png";
+        return "/images/after-25-35.png";
     }
   }, [ageRange]);
 
@@ -115,70 +139,80 @@ export function PersonalSummary() {
   const activityLabel = getActivityLabel(activityLevel);
 
   return (
-    <div className="max-w-sm mx-auto">
-      <div className="rounded-2xl bg-white border border-purple-100 shadow-sm">
-        {/* BMI Section - Warm background */}
-        <div className="bg-[#FFF8DC] rounded-t-2xl px-5 pt-5 pb-6 text-center">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
+    <div className="max-w-md mx-auto font-sans">
+      {/* Main card with shadow */}
+      <div className="relative rounded-2xl bg-white shadow-lg overflow-hidden">
+        {/* BMI Section - Pink background */}
+        <div className="bg-[#FDE8E4] px-8 pt-8 pb-6 text-center">
+          <p className="text-sm font-medium text-gray-600 uppercase tracking-wider mb-2">
             Body Mass Index (BMI)
           </p>
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-3xl font-bold text-gray-900 mb-2">
             {bmiResult.category}
           </p>
 
           <BMIGauge bmi={bmiValue} />
 
-          <p className="text-[10px] text-gray-600 mt-3 leading-relaxed px-2">
-            A healthy BMI provides a strong foundation for improving body composition and reaching your desired shape.
+          <p className="text-sm text-gray-500 mt-5 leading-relaxed max-w-[320px] mx-auto">
+            <span className="font-semibold text-gray-700">Risks of unhealthy BMI:</span>{" "}
+            High blood pressure, increased risk of heart attack, stroke, type 2 diabetes, chronic back and joint pain
           </p>
         </div>
 
-        {/* Info items + Person image */}
-        <div className="grid grid-cols-[1fr_120px] sm:grid-cols-[1fr_150px] items-center">
-          {/* Left side - info items */}
-          <div className="p-3 sm:p-5 space-y-3 sm:space-y-4">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-pink-50 flex items-center justify-center flex-shrink-0">
-                <span className="text-base sm:text-lg">🌸</span>
+        {/* Stats + Image section - White background */}
+        <div className="relative bg-white min-h-[240px]">
+          {/* Left side - stats list */}
+          <div className="py-6 pl-6 pr-[160px] space-y-6">
+            {/* PCOS Symptoms */}
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
+                <svg className="w-6 h-6 text-pink-500" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10" fillOpacity="0.3"/>
+                  <circle cx="12" cy="12" r="5"/>
+                </svg>
               </div>
               <div>
-                <p className="text-[9px] sm:text-[10px] font-semibold text-gray-400 uppercase tracking-wide">
-                  PCOS symptom indicators
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  PCOS Symptoms
                 </p>
-                <div className="flex items-center gap-1.5">
-                  <p className="font-bold text-xs sm:text-sm text-gray-900">Detected</p>
-                  <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
-                </div>
+                <p className="font-bold text-base text-gray-900">Present</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
-                <span className="text-base sm:text-lg">💪</span>
+            {/* Exercise */}
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                <svg className="w-6 h-6 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/>
+                </svg>
               </div>
               <div>
-                <p className="text-[9px] sm:text-[10px] font-semibold text-gray-400 uppercase tracking-wide">
-                  Exercise habits
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Exercise
                 </p>
-                <p className="font-bold text-xs sm:text-sm text-gray-900">{exerciseLabel}</p>
+                <p className="font-bold text-base text-gray-900">{exerciseLabel}</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
-                <span className="text-base sm:text-lg">⚡</span>
+            {/* Activity Level */}
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0">
+                <svg className="w-6 h-6 text-rose-500" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+                  <text x="12" y="17" textAnchor="middle" fontSize="8" fontWeight="bold" fill="currentColor">17</text>
+                </svg>
               </div>
               <div>
-                <p className="text-[9px] sm:text-[10px] font-semibold text-gray-400 uppercase tracking-wide">
-                  Daily activity level
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Activity Level
                 </p>
-                <p className="font-bold text-xs sm:text-sm text-gray-900">{activityLabel}</p>
+                <p className="font-bold text-base text-gray-900">{activityLabel}</p>
               </div>
             </div>
           </div>
 
-          {/* Right side - person image */}
-          <div className="self-end">
+          {/* Right side - person image positioned at bottom right */}
+          <div className="absolute right-0 bottom-0 w-[240px]">
             <img
               src={summaryImage}
               alt="Personal summary"
@@ -187,6 +221,7 @@ export function PersonalSummary() {
           </div>
         </div>
       </div>
+
     </div>
   );
 }

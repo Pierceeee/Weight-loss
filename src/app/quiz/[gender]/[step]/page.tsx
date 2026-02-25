@@ -214,11 +214,11 @@ export default function QuizStepPage() {
           const targetWeight = getResponse("target-weight") as number | undefined;
 
           if (!age || age < 35) {
-            interstitialImage = "/images/age-25-35.png";
+            interstitialImage = "/images/after-25-35.png";
           } else if (age < 50) {
-            interstitialImage = "/images/age-35-50.png";
+            interstitialImage = "/images/after-35-50.png";
           } else {
-            interstitialImage = "/images/age-50-65.png";
+            interstitialImage = "/images/after-50-65.png";
           }
 
           // Use actual entered values
