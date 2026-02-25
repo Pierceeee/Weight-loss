@@ -118,22 +118,17 @@ export function PersonalSummary() {
     return getBMIResult(bmiValue);
   }, [bmiValue]);
 
-  const ageRange = (getResponse("age-range") as string | undefined) || "";
-
   const summaryImage = useMemo(() => {
-    switch (ageRange) {
-      case "18-27":
-        return "/images/after-25-35.png";
-      case "27-40":
-        return "/images/after-35-50.png";
-      case "41-50":
-        return "/images/after-50-65.png";
-      case "50+":
-        return "/images/after-50-65.png";
-      default:
-        return "/images/after-25-35.png";
+    if (age < 35) {
+      return "/images/before-25-35.png";
+    } else if (age < 50) {
+      return "/images/before-35-50.png";
+    } else if (age < 65) {
+      return "/images/before-50-65.png";
+    } else {
+      return "/images/before-65-plus.png";
     }
-  }, [ageRange]);
+  }, [age]);
 
   const exerciseLabel = getExerciseLabel(exercisePreference);
   const activityLabel = getActivityLabel(activityLevel);
