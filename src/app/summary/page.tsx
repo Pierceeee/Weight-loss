@@ -60,7 +60,7 @@ export default function SummaryPage() {
     } else {
       return {
         before: "/images/before-65-plus.png",
-        after: "/images/summary-age-65-plus.png",
+        after: "/images/after-65-plus.png",
         label: "Age 65+"
       };
     }

@@ -18,10 +18,10 @@ const PLANS = [
 ];
 
 const TRANSFORMATIONS = [
-  { ageRange: "25-35", label: "Age 25-35", before: "/images/before-25-35.png", after: "/images/after-25-35.png", minAge: 18, maxAge: 35 },
-  { ageRange: "35-50", label: "Age 35-50", before: "/images/before-35-50.png", after: "/images/after-35-50.png", minAge: 36, maxAge: 50 },
-  { ageRange: "50-65", label: "Age 50-65", before: "/images/before-50-65.png", after: "/images/after-50-65.png", minAge: 51, maxAge: 65 },
-  { ageRange: "65+", label: "Age 65+", before: "/images/before-65-plus.png", after: "/images/after-50-65.png", minAge: 66, maxAge: 100 },
+  { ageRange: "25-35", label: "Age 25-35", before: "/images/before-25-35.png", after: "/images/after-25-35.png", minAge: 18, maxAge: 34 },
+  { ageRange: "35-50", label: "Age 35-50", before: "/images/before-35-50.png", after: "/images/after-35-50.png", minAge: 35, maxAge: 49 },
+  { ageRange: "50-65", label: "Age 50-65", before: "/images/before-50-65.png", after: "/images/after-50-65.png", minAge: 50, maxAge: 64 },
+  { ageRange: "65+", label: "Age 65+", before: "/images/before-65-plus.png", after: "/images/after-65-plus.png", minAge: 65, maxAge: 100 },
 ];
 
 function getMatchingAgeIndex(age: number): number {

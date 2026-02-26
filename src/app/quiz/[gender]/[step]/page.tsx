@@ -217,8 +217,10 @@ export default function QuizStepPage() {
             interstitialImage = "/images/after-25-35.png";
           } else if (age < 50) {
             interstitialImage = "/images/after-35-50.png";
-          } else {
+          } else if (age < 65) {
             interstitialImage = "/images/after-50-65.png";
+          } else {
+            interstitialImage = "/images/after-65-plus.png";
           }
 
           // Use actual entered values
