@@ -3,8 +3,6 @@
 import { useMemo } from "react";
 import { useQuizStore } from "@/hooks/useQuizState";
 import { calculateBMI, getBMIResult } from "@/lib/bmi";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
 
 function getExerciseLabel(exercisePreference: string) {
   if (exercisePreference === "regularly") return "Moderate exercise";
@@ -134,7 +132,7 @@ export function PersonalSummary() {
   const activityLabel = getActivityLabel(activityLevel);
 
   return (
-    <div className="max-w-lg mx-auto font-sans">
+    <div className="max-w-lg sm:max-w-2xl mx-auto font-sans">
       {/* Main card with shadow */}
       <div className="relative rounded-2xl bg-white shadow-lg overflow-hidden">
         {/* BMI Section - Pink background */}
@@ -155,64 +153,66 @@ export function PersonalSummary() {
         </div>
 
         {/* Stats + Image section - White background */}
-        <div className="relative bg-white min-h-[320px]">
-          {/* Left side - stats list */}
-          <div className="py-8 pl-6 pr-[45%] space-y-7">
+        <div className="bg-white">
+          <div className="px-6 py-8 sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(220px,45%)] sm:items-center sm:gap-6 md:grid-cols-[minmax(0,1fr)_minmax(260px,44%)] md:gap-8">
+            {/* Left side - stats list */}
+            <div className="space-y-7 min-w-0">
             {/* PCOS Symptoms */}
-            <div className="flex items-center gap-4">
+            <div className="grid grid-cols-[48px_minmax(0,1fr)] items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-pink-500" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="12" cy="12" r="10" fillOpacity="0.3"/>
                   <circle cx="12" cy="12" r="5"/>
                 </svg>
               </div>
-              <div>
-                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+              <div className="min-w-0 text-left">
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider leading-tight">
                   PCOS Symptoms
                 </p>
-                <p className="font-bold text-base text-gray-900">Present</p>
+                <p className="font-bold text-base text-gray-900 leading-tight mt-1">Present</p>
               </div>
             </div>
 
             {/* Exercise */}
-            <div className="flex items-center gap-4">
+            <div className="grid grid-cols-[48px_minmax(0,1fr)] items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/>
                 </svg>
               </div>
-              <div>
-                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+              <div className="min-w-0 text-left">
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider leading-tight">
                   Exercise
                 </p>
-                <p className="font-bold text-base text-gray-900">{exerciseLabel}</p>
+                <p className="font-bold text-base text-gray-900 leading-tight mt-1">{exerciseLabel}</p>
               </div>
             </div>
 
             {/* Activity Level */}
-            <div className="flex items-center gap-4">
+            <div className="grid grid-cols-[48px_minmax(0,1fr)] items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-rose-500" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
                   <text x="12" y="17" textAnchor="middle" fontSize="8" fontWeight="bold" fill="currentColor">17</text>
                 </svg>
               </div>
-              <div>
-                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
+              <div className="min-w-0 text-left">
+                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider leading-tight">
                   Activity Level
                 </p>
-                <p className="font-bold text-base text-gray-900">{activityLabel}</p>
+                <p className="font-bold text-base text-gray-900 leading-tight mt-1">{activityLabel}</p>
               </div>
             </div>
-          </div>
+            </div>
 
-          {/* Right side - person image positioned at bottom right */}
-          <div className="absolute right-0 bottom-0 w-[45%] max-w-[280px]">
-            <img
-              src={summaryImage}
-              alt="Personal summary"
-              className="w-full h-auto block object-contain"
-            />
+            {/* Right side - person image */}
+            <div className="mt-8 sm:mt-0 self-end justify-self-center sm:justify-self-end w-full max-w-[240px] sm:max-w-[300px] md:max-w-[360px]">
+              <img
+                src={summaryImage}
+                alt="Personal summary"
+                className="w-full h-auto block object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>

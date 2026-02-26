@@ -324,7 +324,11 @@ export default function QuizStepPage() {
         <div className={cn("px-4 pt-4 sm:pt-8", useStickyButton ? "pb-24" : "pb-8")}>
           <div className={cn(
             "mx-auto flex flex-col w-full",
-            question.type === "visual-select" ? "max-w-2xl" : "max-w-[400px] sm:max-w-md",
+            question.type === "visual-select"
+              ? "max-w-2xl"
+              : question.type === "personal-summary"
+                ? "max-w-3xl"
+                : "max-w-[400px] sm:max-w-md",
             isExiting 
               ? (exitDirection === "forward" ? "quiz-slide-exit" : "quiz-slide-exit-back")
               : (enterDirection === "forward" ? "quiz-slide-enter" : "quiz-slide-enter-back")
