@@ -134,7 +134,7 @@ export function PersonalSummary() {
   const activityLabel = getActivityLabel(activityLevel);
 
   return (
-    <div className="max-w-md mx-auto font-sans">
+    <div className="max-w-lg mx-auto font-sans">
       {/* Main card with shadow */}
       <div className="relative rounded-2xl bg-white shadow-lg overflow-hidden">
         {/* BMI Section - Pink background */}
@@ -157,7 +157,7 @@ export function PersonalSummary() {
         {/* Stats + Image section - White background */}
         <div className="relative bg-white min-h-[240px]">
           {/* Left side - stats list */}
-          <div className="py-6 pl-6 pr-[160px] space-y-6">
+          <div className="py-6 pl-6 pr-[210px] space-y-6">
             {/* PCOS Symptoms */}
             <div className="flex items-center gap-4">
               <div className="w-11 h-11 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
@@ -207,7 +207,7 @@ export function PersonalSummary() {
           </div>
 
           {/* Right side - person image positioned at bottom right */}
-          <div className="absolute right-0 bottom-0 w-[240px]">
+          <div className="absolute right-0 bottom-0 w-[200px]">
             <img
               src={summaryImage}
               alt="Personal summary"
