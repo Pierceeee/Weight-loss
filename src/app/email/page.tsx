@@ -12,7 +12,7 @@ export default function EmailCapturePage() {
   const router = useRouter();
   const { responses, sessionId } = useQuizStore();
   const [email, setEmail] = useState("");
-  const [agreed, setAgreed] = useState(false);
+  const [agreed, setAgreed] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 

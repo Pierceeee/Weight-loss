@@ -285,7 +285,7 @@ function PlanCard({ title, original, price, daily, featured, tag, isActive, onCl
   return (
     <div 
       onClick={onClick}
-      className={`relative p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${
+      className={`relative p-4 rounded-2xl border-2 transition-all cursor-pointer ${
         isActive ? 'border-purple-500 bg-purple-50/30' : 'border-slate-100 bg-white hover:border-slate-200'
       }`}
     >
@@ -294,18 +294,18 @@ function PlanCard({ title, original, price, daily, featured, tag, isActive, onCl
           {tag}
         </span>
       )}
-      <div className="flex items-center gap-4">
-        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${isActive ? 'border-purple-500' : 'border-slate-200'}`}>
+      <div className="flex items-center">
+        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${isActive ? 'border-purple-500' : 'border-slate-200'}`}>
           {isActive && <div className="w-3 h-3 bg-purple-500 rounded-full" />}
         </div>
-        <div>
-          <h3 className="font-bold text-slate-900">{title}</h3>
+        <div className="ml-3 flex-1">
+          <h3 className="font-bold text-slate-900 text-base">{title}</h3>
           <p className="text-xs text-slate-500 font-medium">${daily} / day</p>
         </div>
-      </div>
-      <div className="text-right">
-        <p className="text-xs text-slate-400 line-through">${original.toFixed(2)}</p>
-        <p className="text-2xl font-black text-slate-900">${price}</p>
+        <div className="text-right ml-3">
+          <p className="text-xs text-slate-400 line-through">${original.toFixed(2)}</p>
+          <p className="text-xl font-black text-slate-900">${price}</p>
+        </div>
       </div>
     </div>
   );
@@ -323,22 +323,22 @@ function PlanCardCompact({ title, original, price, daily, isActive, onClick }: a
   return (
     <div 
       onClick={onClick}
-      className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between ${
+      className={`p-4 rounded-xl border-2 transition-all cursor-pointer ${
         isActive ? 'border-purple-500 bg-purple-50/30' : 'border-slate-200 hover:border-slate-300'
       }`}
     >
-      <div className="flex items-center gap-3">
-        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${isActive ? 'border-purple-500' : 'border-slate-200'}`}>
+      <div className="flex items-center">
+        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${isActive ? 'border-purple-500' : 'border-slate-200'}`}>
           {isActive && <div className="w-2.5 h-2.5 bg-purple-500 rounded-full" />}
         </div>
-        <div>
+        <div className="ml-3 flex-1">
           <h3 className="font-semibold text-slate-900 text-sm">{title}</h3>
           <p className="text-xs text-slate-500">${daily} / day</p>
         </div>
-      </div>
-      <div className="text-right">
-        <p className="text-xs text-slate-400 line-through">${original.toFixed(2)}</p>
-        <p className="text-xl font-bold text-slate-900">${price}</p>
+        <div className="text-right ml-3">
+          <p className="text-xs text-slate-400 line-through">${original.toFixed(2)}</p>
+          <p className="text-xl font-bold text-slate-900">${price}</p>
+        </div>
       </div>
     </div>
   );

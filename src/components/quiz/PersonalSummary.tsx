@@ -155,12 +155,12 @@ export function PersonalSummary() {
         </div>
 
         {/* Stats + Image section - White background */}
-        <div className="relative bg-white min-h-[240px]">
+        <div className="relative bg-white min-h-[320px]">
           {/* Left side - stats list */}
-          <div className="py-6 pl-6 pr-[210px] space-y-6">
+          <div className="py-8 pl-6 pr-[45%] space-y-7">
             {/* PCOS Symptoms */}
             <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-pink-500" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="12" cy="12" r="10" fillOpacity="0.3"/>
                   <circle cx="12" cy="12" r="5"/>
@@ -176,7 +176,7 @@ export function PersonalSummary() {
 
             {/* Exercise */}
             <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/>
                 </svg>
@@ -191,7 +191,7 @@ export function PersonalSummary() {
 
             {/* Activity Level */}
             <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-rose-500" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
                   <text x="12" y="17" textAnchor="middle" fontSize="8" fontWeight="bold" fill="currentColor">17</text>
@@ -207,11 +207,11 @@ export function PersonalSummary() {
           </div>
 
           {/* Right side - person image positioned at bottom right */}
-          <div className="absolute right-0 bottom-0 w-[200px]">
+          <div className="absolute right-0 bottom-0 w-[45%] max-w-[280px]">
             <img
               src={summaryImage}
               alt="Personal summary"
-              className="w-full h-auto block"
+              className="w-full h-auto block object-contain"
             />
           </div>
         </div>
